@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--这里为true时,第一个设置为true的View获得padding  https://juejin.im/post/5948ff8fa0bb9f006bf5da29-->
+        <item name="android:fitsSystemWindows">false</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+</resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_nav_graph.xml"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.apm29.yjw.demo.ui.splash.SplashFragment"
+        android:label="闪屏页面"
+        tools:layout="@layout/splash_fragment">
+        <action
+            android:id="@+id/action_splash_fragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:clearTask="true"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_preVerifyFragment"
+            app:destination="@id/preVerifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.apm29.yjw.demo.ui.splash.LoginFragment"
+        android:label="登录页面"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_preVerifyFragment"
+            app:destination="@id/preVerifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.apm29.yjw.demo.ui.splash.MainFragment"
+        tools:layout="@layout/main_fragment" >
+        <action
+            app:clearTask="true"
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:destination="@id/loginFragment" />
+        <argument
+            android:name="isReal"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="yys"
+            android:defaultValue="0"
+            app:argType="integer"
+            />
+        <action
+            android:id="@+id/action_mainFragment_to_realNameVerifyFragment"
+            app:destination="@id/realNameVerifyFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_bottom" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment"
+        app:clearTask="true"
+        app:enterAnim="@anim/slide_in_bottom"
+        app:exitAnim="@anim/slide_out_bottom"
+        app:launchSingleTop="true" />
+    <fragment
+        android:id="@+id/realNameVerifyFragment"
+        android:name="com.apm29.yjw.demo.ui.main.RealNameVerifyFragment"
+        android:label="实名认证" />
+    <fragment
+        android:id="@+id/preVerifyFragment"
+        android:name="com.apm29.yjw.demo.ui.main.PreVerifyFragment"
+        android:label="PreVerifyFragment" >
+        <action
+            android:id="@+id/action_preVerifyFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="verifyProgress"
+            app:argType="com.apm29.yjw.demo.model.VerifyProgress"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+</navigation>

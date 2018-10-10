@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">GentleLoansDemo</string>
+
+    <string name="mine_nav_title_info">我的</string>
+    <string name="main_nav_title_main">主页</string>
+    <string name="app_icon">app_icon</string>
+
+    <string name="存储">&#xe61d;</string>
+    <string name="编辑">&#xe61e;</string>
+    <string name="存储卷">&#xe61f;</string>
+    <string name="等待">&#xe620;</string>
+    <string name="概览">&#xe621;</string>
+    <string name="公告">&#xe622;</string>
+    <string name="工单">&#xe623;</string>
+    <string name="告警">&#xe624;</string>
+    <string name="画板37">&#xe625;</string>
+    <string name="画板38">&#xe626;</string>
+    <string name="恢复备份">&#xe627;</string>
+    <string name="减去">&#xe628;</string>
+    <string name="警告">&#xe629;</string>
+    <string name="镜像">&#xe62a;</string>
+    <string name="取消">&#xe62b;</string>
+    <string name="内存">&#xe62c;</string>
+    <string name="确定">&#xe62d;</string>
+    <string name="容量管理">&#xe62e;</string>
+    <string name="删除">&#xe62f;</string>
+    <string name="日志">&#xe630;</string>
+    <string name="上线">&#xe631;</string>
+    <string name="收起">&#xe632;</string>
+    <string name="添加">&#xe633;</string>
+    <string name="提示">&#xe634;</string>
+    <string name="网络">&#xe635;</string>
+    <string name="文件">&#xe636;</string>
+    <string name="向右">&#xe637;</string>
+    <string name="文件夹展开">&#xe638;</string>
+    <string name="向右翻页">&#xe639;</string>
+    <string name="文件夹收起">&#xe63a;</string>
+    <string name="向左">&#xe63b;</string>
+    <string name="向左翻页">&#xe63c;</string>
+    <string name="消息">&#xe63d;</string>
+    <string name="应用">&#xe63e;</string>
+    <string name="用户管理">&#xe63f;</string>
+    <string name="上传">&#xe640;</string>
+    <string name="运营流程">&#xe641;</string>
+    <string name="运营分析">&#xe642;</string>
+    <string name="展开">&#xe643;</string>
+    <string name="暂停">&#xe644;</string>
+    <string name="终止">&#xe645;</string>
+    <string name="资源池">&#xe646;</string>
+    <string name="资源管理">&#xe647;</string>
+
+    <string name="login_username">11位手机号</string>
+    <string name="login_hint">登录</string>
+    <string name="login_password">6位验证码</string>
+    <string name="login_forget_hint">忘记密码?</string>
+    <string name="login_login">登录</string>
+    <string name="default_debug_sms">888888</string>
+    <string name="title_permission_dialog">警告</string>
+    <string name="resume">继续</string>
+    <string name="cancel">取消</string>
+    <string name="message_permission_rationale">您拒绝了以下权限,这将导致应用无法继续使用,请您前往应用设置中心授权以下权限后继续使用:\n\n%1$s</string>
+    <string name="app_loading_text">拼命加载中…</string>
+    <string name="user_service_title">登陆即视为同意《君可贷服务协议》</string>
+    <string name="title_warning_dialog">提醒</string>
+</resources>

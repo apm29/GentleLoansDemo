@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.Guideline
+        app:layout_constraintGuide_percent="0.3"
+        android:id="@+id/guideline_p30"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="1200dp"
+        android:layout_height="1200dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/bg_circle_primary"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_p30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerVerify"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.viewpager.widget.PagerTitleStrip
+            android:layout_width="match_parent"
+            style="@style/viewPagerTitleStrip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+        </androidx.viewpager.widget.PagerTitleStrip>
+    </androidx.viewpager.widget.ViewPager>
+
+    <include layout="@layout/toolbar_layout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

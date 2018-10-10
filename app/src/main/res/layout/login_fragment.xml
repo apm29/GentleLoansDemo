@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimaryDark"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/login_bg_bottom"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_gradient_primary2dark"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="@+id/spaceBelowCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:src="@mipmap/raw_app_icon"
+            android:transitionName="@string/app_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Space
+            android:id="@+id/spaceBelowCard"
+            app:layout_constraintTop_toBottomOf="@id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:textColor="@color/white_foreground"
+            android:shadowDx="2.0"
+            android:shadowRadius="2.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="12dp"
+            app:contentPadding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/login_hint"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutMobile"
+                    android:layout_width="match_parent"
+                    app:counterMaxLength="11"
+                    app:counterEnabled="true"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputMobile"
+                        android:layout_width="match_parent"
+                        android:inputType="phone"
+                        android:imeOptions="actionDone"
+                        android:imeActionLabel="登录"
+                        android:imeActionId="@integer/action_id_login"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/login_username"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutPass"
+                    android:layout_width="match_parent"
+                    app:counterMaxLength="6"
+                    app:counterEnabled="true"
+                    android:soundEffectsEnabled="true"
+                    app:passwordToggleEnabled="true"
+                    android:orientation="vertical"
+
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputPass"
+                        android:inputType="numberPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:imeActionLabel="登录"
+                        android:imeActionId="@integer/action_id_login"
+                        android:hint="@string/login_password"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.apm29.yjw.demo.ui.widget.CounterText
+                    android:id="@+id/tvSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:shadowColor="@color/colorAccent"
+                    android:shadowDx="2.0"
+                    android:shadowRadius="2.0"
+                    android:text="发送验证码"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Chip"
+                    android:textColor="@color/colorAccent" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnLogin"
+            app:elevation="24dp"
+            android:layout_width="96dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/login_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/white_foreground"
+            app:layout_constraintHorizontal_bias="0.76"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/selector_btn_primary"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkboxUserService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true" />
+
+            <TextView
+                android:id="@+id/textService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_service_title" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
