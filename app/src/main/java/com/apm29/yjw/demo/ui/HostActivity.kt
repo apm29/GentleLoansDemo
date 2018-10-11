@@ -3,6 +3,7 @@ package com.apm29.yjw.demo.ui
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import com.apm29.yjw.demo.arch.BaseActivity
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultActivityComponent
@@ -34,5 +35,7 @@ class HostActivity : BaseActivity<DefaultActivityViewModel>() {
         }
     }
 
-
+    override fun onSupportNavigateUp(): Boolean {
+        return findNavController(R.id.splash_host_fragment).navigateUp()||super.onSupportNavigateUp()
+    }
 }

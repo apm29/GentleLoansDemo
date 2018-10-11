@@ -23,4 +23,20 @@ class YYSVerifyViewModel :BaseViewModel(){
                         }
                 )
     }
+
+    fun mockProfile(debugMock: Boolean) {
+        mRetrofit.create(UserApi::class.java)
+                .profile()
+                .compose(getThreadSchedulers())
+                .subscribe(
+                        object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl) {
+                            override fun onNext(t: BaseBean<ProfileBean>) {
+                                if (debugMock) {
+                                    t.peekData().yys_auth = true
+                                }
+                                profile.value = t
+                            }
+                        }
+                )
+    }
 }

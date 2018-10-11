@@ -3,7 +3,10 @@ package com.apm29.yjw.demo.ui.splash
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.text.*
+import android.text.Editable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.KeyEvent
@@ -21,10 +24,9 @@ import com.apm29.yjw.demo.arch.UserManager
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
-import com.apm29.yjw.demo.model.BaseBean
 import com.apm29.yjw.demo.model.ProfileBean
 import com.apm29.yjw.demo.model.VerifyProgress
-import com.apm29.yjw.demo.ui.main.PreVerifyFragmentArgs
+import com.apm29.yjw.demo.ui.verify.PreVerifyFragmentArgs
 import com.apm29.yjw.demo.utils.getTextOrEmpty
 import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
@@ -55,11 +57,6 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
 
 
         val stringBuilder = SpannableStringBuilder(textService.text)
-//        stringBuilder.setSpan(ForegroundColorSpan(resources.getColor(R.color.colorAccent)),
-//                textService.text.indexOfFirst { it == '《' },
-//                textService.text.indexOfFirst { it == '》' }+1,
-//                SpannableString.SPAN_INCLUSIVE_INCLUSIVE
-//        )
         stringBuilder.setSpan(object :ClickableSpan(){
             override fun onClick(widget: View) {
                 showToast("没做!")
@@ -143,22 +140,25 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
                 imageViewLogo to "app_icon"
         )
         if (profile.is_real&&profile.yys_auth) {
-            val mainFragmentArgs = MainFragmentArgs.Builder()
-                    .setIsReal(if (profile.is_real) 1 else 0)
-                    .setYys(if (profile.yys_auth) 1 else 0)
-                    .build().toBundle()
             ViewCompat.setTransitionName(imageViewLogo, "app_icon")
-            findNavController().navigate(R.id.action_loginFragment_to_mainFragment, mainFragmentArgs, navOptions { clearTask = true }, extras)
+            findNavController().navigate(
+                    R.id.mainFragment,
+                    null,
+                    navOptions {
+                        clearTask =true
+                    },
+                    extras
+            )
         }else{
             val preVerifyFragmentArgs = PreVerifyFragmentArgs.Builder()
                     .setVerifyProgress(VerifyProgress(profile.is_real,profile.yys_auth))
                     .build()
                     .toBundle()
             findNavController().navigate(
-                    R.id.action_splashFragment_to_preVerifyFragment,
+                    R.id.preVerifyFragment,
                     preVerifyFragmentArgs,
                     navOptions {
-                        clearTask = true
+                        clearTask =true
                     },
                     extras
             )

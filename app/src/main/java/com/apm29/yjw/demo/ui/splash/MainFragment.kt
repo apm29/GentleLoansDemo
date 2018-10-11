@@ -34,19 +34,6 @@ class MainFragment : BaseFragment<DefaultFragmentViewModel>() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        if(MainFragmentArgs.fromBundle(arguments).isReal>0){
-            //已认证
-        }else{
-            AlertDialog.Builder(requireContext())
-                    .setCancelable(false)
-                    .setTitle(getString(R.string.title_warning_dialog))
-                    .setMessage("您还未进行实名认证,请前往实名认证页面进行验证")
-                    .setPositiveButton(getString(R.string.resume)){
-                        _,_->
-                        findNavController().navigate(R.id.action_mainFragment_to_realNameVerifyFragment)
-                    }
-                    .show()
-        }
     }
 
 

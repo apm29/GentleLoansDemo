@@ -18,5 +18,4 @@ import dagger.Component
 )
 interface DefaultActivityComponent {
     fun inject(any: HostActivity)
-    fun inject(any:SplashFragment)
 }

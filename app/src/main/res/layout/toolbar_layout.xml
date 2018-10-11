@@ -11,7 +11,7 @@
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         app:elevation="0dp"
-        app:theme="@style/ToolbarTheme"
+        android:theme="@style/ToolbarTheme"
         app:titleTextColor="@color/white_foreground"
         android:layout_height="wrap_content" />
 </com.google.android.material.appbar.AppBarLayout>

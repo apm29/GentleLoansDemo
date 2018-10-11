@@ -23,7 +23,7 @@ class ErrorHandlerImpl @Inject constructor(private val mContext: Context) : Resp
     }
 
     override fun handleResponseError(context: Context, t: Throwable): String {
-        Log.w("Catch-error", t.message)
+        Log.w("Catch-error", t.message?:"")
         t.printStackTrace()
         //这里不光是只能打印错误,还可以根据不同的错误作出不同的逻辑处理
         var msg = "未知错误"

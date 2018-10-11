@@ -1,52 +1,48 @@
 package com.apm29.yjw.demo.ui.splash
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.animation.ScaleAnimation
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.arch.UserManager
 import com.apm29.yjw.demo.di.component.AppComponent
-import com.apm29.yjw.demo.di.module.DefaultActivityModule
-import com.apm29.yjw.demo.viewmodel.DefaultActivityViewModel
+import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
+import com.apm29.yjw.demo.di.module.DefaultFragmentModule
+import com.apm29.yjw.demo.model.ProfileBean
+import com.apm29.yjw.demo.model.VerifyProgress
+import com.apm29.yjw.demo.ui.dialog.RuntimeRationale
+import com.apm29.yjw.demo.ui.verify.PreVerifyFragmentArgs
+import com.apm29.yjw.demo.utils.showToast
+import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.gentleloansdemo.R
+import com.yanzhenjie.permission.AndPermission
+import com.yanzhenjie.permission.Permission
 import kotlinx.android.synthetic.main.splash_fragment.*
 import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.delay
-import com.yanzhenjie.permission.AndPermission
-import android.text.TextUtils
-import androidx.appcompat.app.AlertDialog
-import androidx.core.view.ViewCompat
-import androidx.navigation.navOptions
-import com.apm29.yjw.demo.di.component.DaggerDefaultActivityComponent
-import com.apm29.yjw.demo.model.ProfileBean
-import com.apm29.yjw.demo.model.VerifyProgress
-import com.apm29.yjw.demo.ui.dialog.RuntimeRationale
-import com.apm29.yjw.demo.ui.main.PreVerifyFragmentArgs
-import com.apm29.yjw.demo.utils.showToast
-import com.yanzhenjie.permission.Permission
 
 
-class SplashFragment : BaseFragment<DefaultActivityViewModel>() {
+class SplashFragment : BaseFragment<DefaultFragmentViewModel>() {
     override fun setupViewLayout(savedInstanceState: Bundle?): Int {
         return R.layout.splash_fragment
     }
 
     override fun setupModel(appComponent: AppComponent) {
-        DaggerDefaultActivityComponent.builder()
-                .defaultActivityModule(DefaultActivityModule(requireActivity()))
+        DaggerDefaultFragmentComponent.builder()
+                .defaultFragmentModule(DefaultFragmentModule(this))
                 .appComponent(appComponent)
                 .build()
                 .inject(this)
     }
 
     override fun setupViews(savedInstanceState: Bundle?) {
-//        GlideApp.with(this)
-//                .load("https://raw.githubusercontent.com/bumptech/glide/master/static/glide_logo.png")
-//                .placeholder(R.mipmap.error)
-//                .into(imageView)
         imageViewLogo.animation = ScaleAnimation(1.0f, 2.0f, 1.0f, 2.0f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f).apply {
             this.duration = 2000
             this.fillAfter = true
@@ -59,7 +55,7 @@ class SplashFragment : BaseFragment<DefaultActivityViewModel>() {
 
         mViewModel.profile.observe(this, Observer {
             if (it != null) {
-                navigateToVerify(it)
+                navigateToVerify(it.peekData())
             }
         })
         mViewModel.mErrorData.observe(this, Observer {
@@ -72,19 +68,22 @@ class SplashFragment : BaseFragment<DefaultActivityViewModel>() {
                 imageViewLogo to getString(R.string.app_icon)
         )
         ViewCompat.setTransitionName(imageViewLogo, getString(R.string.app_icon))
-        if (profile.yys_auth&&profile.is_real) {
-            val mainFragmentArgs = MainFragmentArgs.Builder()
-                    .setIsReal(if (profile.is_real) 1 else 0)
-                    .setYys(if (profile.yys_auth) 1 else 0)
-                    .build().toBundle()
-            findNavController().navigate(R.id.mainFragment, mainFragmentArgs, navOptions { clearTask = true }, extras)
-        }else{
+        if (profile.yys_auth && profile.is_real) {
+            findNavController().navigate(
+                    R.id.mainFragment,
+                    null,
+                    navOptions {
+                        clearTask = true
+                    },
+                    extras
+            )
+        } else {
             val preVerifyFragmentArgs = PreVerifyFragmentArgs.Builder()
-                    .setVerifyProgress(VerifyProgress(profile.is_real,profile.yys_auth))
+                    .setVerifyProgress(VerifyProgress(profile.is_real, profile.yys_auth))
                     .build()
                     .toBundle()
             findNavController().navigate(
-                    R.id.action_splashFragment_to_preVerifyFragment,
+                    R.id.preVerifyFragment,
                     preVerifyFragmentArgs,
                     navOptions {
                         clearTask = true
@@ -104,7 +103,7 @@ class SplashFragment : BaseFragment<DefaultActivityViewModel>() {
                         delay(2000)
                         mViewModel.profileVerify()
                     }
-                    showToast("permission granted : ${it.joinToString(",")}")
+                    //showToast("permission granted : ${it.joinToString(",")}")
                 }
                 .onDenied {
                     showToast("permission denied : ${it.joinToString(",")}")

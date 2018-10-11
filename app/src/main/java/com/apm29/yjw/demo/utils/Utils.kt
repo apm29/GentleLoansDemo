@@ -15,35 +15,54 @@ import io.reactivex.schedulers.Schedulers
 /**
  * 获取全局组件库
  */
-fun Context.getAppComponent():AppComponent{
+fun Context.getAppComponent(): AppComponent {
     return (this.applicationContext as AppApplication).getAppComponent()
 }
 
-fun <T> getThreadSchedulers():ObservableTransformer<T,T>{
+fun <T> getThreadSchedulers(): ObservableTransformer<T, T> {
     return ObservableTransformer {
         return@ObservableTransformer it.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 }
 
-var toast:Toast? = null
+var toast: Toast? = null
 
 @SuppressLint("ShowToast")
-fun Context.showToast(msg:String){
-    if (toast ==null){
-        toast = Toast.makeText(this,msg,Toast.LENGTH_LONG)
+fun Context.showToast(msg: String) {
+    if (toast == null) {
+        toast = Toast.makeText(this, msg, Toast.LENGTH_LONG)
     }
     toast.also { it?.setText(msg) }?.show()
 }
 
 @SuppressLint("ShowToast")
-fun Fragment.showToast(msg: String){
-    if (toast ==null){
-        toast = Toast.makeText(this.context,msg,Toast.LENGTH_LONG)
+fun Fragment.showToast(msg: String?) {
+    if (toast == null) {
+        toast = Toast.makeText(this.context, msg, Toast.LENGTH_LONG)
     }
     toast.also { it?.setText(msg) }?.show()
 }
 
 fun TextView.getTextOrEmpty(): String {
-    return this.text?.toString()?.trim()?:""
+    return this.text?.toString()?.trim() ?: ""
+}
+
+
+data class Verify(var error: String, var success: Boolean) {
+
+    companion object {
+        fun OK(): Verify {
+            return Verify("OK", true)
+        }
+    }
+
+    fun verifyText(text: TextView): Verify {
+        if (!success) {
+            return this
+        }
+        this.error = text.hint.toString()
+        this.success = !(text.text?.toString()?.trim().isNullOrEmpty())
+        return this
+    }
 }

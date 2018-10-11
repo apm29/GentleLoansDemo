@@ -91,6 +91,7 @@
                     android:layout_width="match_parent"
                     app:counterMaxLength="11"
                     app:counterEnabled="true"
+                    android:hint="@string/login_username"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -101,7 +102,6 @@
                         android:imeActionLabel="登录"
                         android:imeActionId="@integer/action_id_login"
                         android:layout_height="wrap_content"
-                        android:hint="@string/login_username"
                         android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +113,7 @@
                     android:soundEffectsEnabled="true"
                     app:passwordToggleEnabled="true"
                     android:orientation="vertical"
-
+                    android:hint="@string/login_password"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -124,7 +124,6 @@
                         android:imeOptions="actionDone"
                         android:imeActionLabel="登录"
                         android:imeActionId="@integer/action_id_login"
-                        android:hint="@string/login_password"
                         android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 

@@ -3,8 +3,8 @@ package com.apm29.yjw.demo.model
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
-import com.apm29.yjw.demo.ui.main.RealNameVerifyFragment
-import com.apm29.yjw.demo.ui.main.YYSVerifyFragment
+import com.apm29.yjw.demo.ui.verify.RealNameVerifyFragment
+import com.apm29.yjw.demo.ui.verify.YYSVerifyFragment
 import java.lang.IllegalArgumentException
 
 class VerifyProgress(var isReal: Boolean, var isYYS: Boolean) :Parcelable{
@@ -51,8 +51,8 @@ class VerifyProgress(var isReal: Boolean, var isYYS: Boolean) :Parcelable{
 
     fun getPageType(position: Int):Class<out Fragment> {
         return when(pageTitles[position]){
-            "运营商验证"->YYSVerifyFragment::class.java
-            "实名认证"->RealNameVerifyFragment::class.java
+            "运营商验证"-> YYSVerifyFragment::class.java
+            "实名认证"-> RealNameVerifyFragment::class.java
             else -> throw IllegalArgumentException("未知的页面类型")
         }
     }

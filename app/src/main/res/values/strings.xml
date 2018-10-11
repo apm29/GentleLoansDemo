@@ -62,4 +62,11 @@
     <string name="app_loading_text">拼命加载中…</string>
     <string name="user_service_title">登陆即视为同意《君可贷服务协议》</string>
     <string name="title_warning_dialog">提醒</string>
+    <string name="hint_yys_auth">您还未进行运营商验证, \n请点击下面的验证按钮前往验证</string>
+    <string name="hint_yys_auth_pass">您已通过运营商验证, \n请点击下一步按钮完成验证</string>
+    <string name="switch_account">切换账号</string>
+    <string name="hint_real_auth" >您还未进行实名认证,\n请使用一张预留手机号与登录号码相同的银行卡\n来验证您的真实身份</string>
+    <string name="hint_real_auth_pass" >您已通过实名认证,\n请点击完成绑定前往应用</string>
+    <string name="bank">选择银行</string>
+    <string name="submit">提交</string>
 </resources>
