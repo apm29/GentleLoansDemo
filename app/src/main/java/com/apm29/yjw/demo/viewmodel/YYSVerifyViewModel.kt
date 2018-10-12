@@ -16,7 +16,7 @@ class YYSVerifyViewModel :BaseViewModel(){
                 .profile()
                 .compose(getThreadSchedulers())
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl) {
+                        object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<ProfileBean>) {
                                 profile.value = t
                             }
@@ -29,7 +29,7 @@ class YYSVerifyViewModel :BaseViewModel(){
                 .profile()
                 .compose(getThreadSchedulers())
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl) {
+                        object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<ProfileBean>) {
                                 if (debugMock) {
                                     t.peekData().yys_auth = true

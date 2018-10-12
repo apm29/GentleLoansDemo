@@ -2,7 +2,9 @@ package com.apm29.yjw.demo.di.component
 
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.di.scope.ActivityScope
-import com.apm29.yjw.demo.ui.form.FormListFragment
+import com.apm29.yjw.demo.ui.form.register.ApplicantInfoFragment
+import com.apm29.yjw.demo.ui.form.register.FamilyAssetsFragment
+import com.apm29.yjw.demo.ui.form.register.RegisterFormFragment
 import com.apm29.yjw.demo.ui.main.*
 import com.apm29.yjw.demo.ui.splash.MainFragment
 import com.apm29.yjw.demo.ui.splash.LoginFragment
@@ -32,5 +34,7 @@ interface DefaultFragmentComponent {
     fun inject(yysVerifyFragment: YYSVerifyFragment)
     fun inject(webViewFragment: WebViewFragment)
     fun inject(splashFragment: SplashFragment)
-    fun inject(formListFragment: FormListFragment)
+    fun inject(registerFormFragment: RegisterFormFragment)
+    fun inject(any:ApplicantInfoFragment)
+    fun inject(familyAssetsFragment: FamilyAssetsFragment)
 }

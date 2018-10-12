@@ -18,7 +18,7 @@ class RealNameVerifyViewModel : BaseViewModel() {
                 .bankCode()
                 .compose(getThreadSchedulers())
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<Map<String, String>>>(mErrorData, mErrorHandlerImpl) {
+                        object : ErrorHandledObserver<BaseBean<Map<String, String>>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<Map<String, String>>) {
                                 if (t.success()) {
                                     bankCodes.value = t
@@ -35,7 +35,7 @@ class RealNameVerifyViewModel : BaseViewModel() {
                 .smsCode(card, mobile, id, bankCode, name)
                 .compose(getThreadSchedulers())
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<String>>(mErrorData, mErrorHandlerImpl) {
+                        object : ErrorHandledObserver<BaseBean<String>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<String>) {
                                 smsResult.value = t
                             }
@@ -50,7 +50,7 @@ class RealNameVerifyViewModel : BaseViewModel() {
                 .bindCard(sms)
                 .compose(getThreadSchedulers())
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<String>>(mErrorData, mErrorHandlerImpl) {
+                        object : ErrorHandledObserver<BaseBean<String>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<String>) {
                                 if (t.success()) {
                                     bindResult.value = t
@@ -67,7 +67,7 @@ class RealNameVerifyViewModel : BaseViewModel() {
                 .profile()
                 .compose(getThreadSchedulers())
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl) {
+                        object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<ProfileBean>) {
                                 profile.value = t
                             }

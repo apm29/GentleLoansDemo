@@ -18,7 +18,9 @@ import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.ui.dialog.RuntimeRationale
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.demo.viewmodel.PROJECTION
+import com.apm29.yjw.gentleloansdemo.BuildConfig
 import com.apm29.yjw.gentleloansdemo.R
+import com.tencent.bugly.beta.Beta
 import com.yanzhenjie.permission.AndPermission
 import com.yanzhenjie.permission.Permission
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -44,6 +46,7 @@ class MainFragment : BaseFragment<DefaultFragmentViewModel>(){
 
     override fun initData(savedInstanceState: Bundle?) {
         requestContactPermission()
+        Beta.checkUpgrade(true,false)
     }
 
     private fun requestContactPermission() {
@@ -52,11 +55,18 @@ class MainFragment : BaseFragment<DefaultFragmentViewModel>(){
                 .permission(Manifest.permission.READ_CONTACTS)
                 .rationale(RuntimeRationale())
                 .onGranted {
+                    if (BuildConfig.DEBUG)
+                        return@onGranted
                     val query = requireContext().contentResolver.query(ContactsContract.RawContacts.CONTENT_URI, PROJECTION,
                             null, null, null)
                     query?.let {
-                        query.moveToNext()
-                        query.getString(0)
+                        _->
+                        if (query.count<=0){
+                            throw RuntimeException("没有联系人或者未获得授权")
+                        }
+                        if(query.moveToNext()) {
+                            query.getString(0)
+                        }
                     }
                     query?.close()
                     mViewModel.contact(requireContext().contentResolver)

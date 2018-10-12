@@ -48,6 +48,20 @@
     <string name="终止">&#xe645;</string>
     <string name="资源池">&#xe646;</string>
     <string name="资源管理">&#xe647;</string>
+    <string name="分享">&#xe640;</string>
+    <string name="客服">&#xe648;</string>
+    <string name="身份证">&#xe649;</string>
+    <string name="全屏">&#xe64a;</string>
+    <string name="说明">&#xe64b;</string>
+    <string name="收藏">&#xe64c;</string>
+    <string name="箭头上">&#xe64d;</string>
+    <string name="箭头右">&#xe64f;</string>
+    <string name="箭头下">&#xe650;</string>
+    <string name="扫码">&#xe651;</string>
+    <string name="选择">&#xe652;</string>
+    <string name="tab关闭">&#xe653;</string>
+    <string name="换一换">&#xe654;</string>
+    <string name="地址">&#xe65e;</string>
 
     <string name="login_username">11位手机号</string>
     <string name="login_hint">登录</string>
@@ -71,4 +85,21 @@
     <string name="submit">提交</string>
     <string name="text_apply">立即申请</string>
     <string name="quit">退出应用</string>
+    <string name="submit_registration">提交申请</string>
+    <string name="hint_gender">请输入性别</string>
+    <string name="hint_company_name">请输入单位名称</string>
+    <string name="hint_level">输入职位信息</string>
+    <string name="hint_department">请输入部门名称</string>
+    <string name="hint_year_income">请输入年收入（万元）</string>
+    <string name="hint_gjj_month">请输入公积金月缴金额</string>
+    <string name="text_unselected">未选择</string>
+    <string name="hint_term">请输入还款期限</string>
+    <string name="hint_zx_pass">请输入征信密码</string>
+    <string name="hint_zx_account">请输入征信账号</string>
+    <string name="hint_zx_verify">请输入征信验证码</string>
+    <string name="hint_gjj_pass">请输入公积金密码</string>
+    <string name="hint_gjj_account">请输入公积金账号</string>
+    <string name="hint_zw_pass">请输入政务网密码，仅限浙江地区</string>
+    <string name="hint_zw_account">请输入政务网账号，仅限浙江地区</string>
+    <string name="save_">保存</string>
 </resources>

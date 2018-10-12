@@ -13,4 +13,11 @@
 
         <item name="android:windowContentTransitions">true</item>
     </style>
+
+    <style name="button_default">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white_foreground</item>
+        <item name="android:background">@drawable/selector_btn_primary</item>
+        <item name="android:elevation">12dp</item>
+    </style>
 </resources>

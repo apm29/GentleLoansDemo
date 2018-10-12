@@ -5,8 +5,11 @@ import android.content.Context
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.AnimBuilder
 import com.apm29.yjw.demo.app.AppApplication
 import com.apm29.yjw.demo.di.component.AppComponent
+import com.apm29.yjw.demo.ui.widget.IconFontTextView
+import com.apm29.yjw.gentleloansdemo.R
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -65,4 +68,21 @@ data class Verify(var error: String, var success: Boolean) {
         this.success = !(text.text?.toString()?.trim().isNullOrEmpty())
         return this
     }
+}
+
+
+val defaultAnim :AnimBuilder.() -> Unit = {
+    enter = R.anim.slide_in_right
+    exit = R.anim.slide_out_left
+    popEnter = R.anim.slide_in_left
+    popExit = R.anim.slide_out_right
+}
+
+val genderList = arrayListOf("男","女")
+
+fun IconFontTextView.ok(){
+    this.text = context.getString(R.string.确定)
+}
+fun IconFontTextView.error(){
+    this.text = context.getString(R.string.取消)
 }

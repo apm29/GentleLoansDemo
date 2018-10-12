@@ -27,6 +27,7 @@ interface ViewModelContract {
     interface IViewModel {
         var mDisposables: CompositeDisposable
         var mErrorData: MutableLiveData<String>
+        var mLoadingData: MutableLiveData<Boolean>
 
         /**
          * called just after #IView.buildComponent(AppComponent)

@@ -3,7 +3,7 @@ package com.apm29.yjw.demo.ui.main
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
@@ -11,11 +11,10 @@ import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.model.VerifyProgress
 import com.apm29.yjw.demo.ui.verify.FORM
 import com.apm29.yjw.demo.ui.verify.PreVerifyFragmentArgs
+import com.apm29.yjw.demo.utils.defaultAnim
 import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.gentleloansdemo.R
-import com.tencent.bugly.Bugly
-import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : BaseFragment<DefaultFragmentViewModel>() {
@@ -51,7 +50,9 @@ class HomeFragment : BaseFragment<DefaultFragmentViewModel>() {
                 val profile = it.peekData()
                 if (profile.is_real && profile.yys_auth) {
                     //to apply form
-                    navController.navigate(R.id.action_mainFragment_to_formListFragment)
+                    navController.navigate(R.id.registerFormFragment,null, navOptions {
+                        anim(defaultAnim)
+                    })
                 } else {
                     val bundle = PreVerifyFragmentArgs.Builder()
                             .setVerifyProgress(VerifyProgress(profile.is_real, profile.yys_auth))

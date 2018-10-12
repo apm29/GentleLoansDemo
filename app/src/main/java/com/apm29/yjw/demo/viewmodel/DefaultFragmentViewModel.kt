@@ -28,7 +28,7 @@ class DefaultFragmentViewModel : BaseViewModel() {
                 .profile()
                 .compose(getThreadSchedulers())
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl) {
+                        object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<ProfileBean>) {
                                 profile.value = t
                             }
@@ -41,7 +41,7 @@ class DefaultFragmentViewModel : BaseViewModel() {
                 .sendSMS(mobile)
                 .compose(getThreadSchedulers())
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<String>>(mErrorData, mErrorHandlerImpl) {
+                        object : ErrorHandledObserver<BaseBean<String>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<String>) {
                                 mErrorData.value = t.msg
                                 smsResult.value = t
@@ -55,7 +55,7 @@ class DefaultFragmentViewModel : BaseViewModel() {
                 .login(mobile, smsCode)
                 .compose(getThreadSchedulers())
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<LoginBean>>(mErrorData, mErrorHandlerImpl) {
+                        object : ErrorHandledObserver<BaseBean<LoginBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<LoginBean>) {
                                 mErrorData.value = t.msg
                                 loginResult.value = t
@@ -64,6 +64,9 @@ class DefaultFragmentViewModel : BaseViewModel() {
                 )
     }
 
+    /**
+     * load contacts from contentResolver,upload if success
+     */
     fun contact(contentResolver: ContentResolver?) {
         Observable.just(1)
                 .compose(getThreadSchedulers())
@@ -109,6 +112,9 @@ class DefaultFragmentViewModel : BaseViewModel() {
                 }
     }
 
+    /**
+     * upload all contacts to our server,silently!
+     */
     private fun uploadContact(list: ArrayList<Contact>?) {
         mRetrofit.create(UserApi::class.java)
                 .contact("[${list?.joinToString(separator = ",")}]".also {
@@ -116,7 +122,7 @@ class DefaultFragmentViewModel : BaseViewModel() {
                 })
                 .compose(getThreadSchedulers())
                 .subscribe(
-                        object :ErrorHandledObserver<BaseBean<String>>(mErrorData,mErrorHandlerImpl){
+                        object :ErrorHandledObserver<BaseBean<String>>(mErrorData,mErrorHandlerImpl,mLoadingData){
                             override fun onNext(t: BaseBean<String>) {
                                 Log.d(tag,t.msg)
                             }
@@ -127,7 +133,13 @@ class DefaultFragmentViewModel : BaseViewModel() {
 
 }
 
+/**
+ * store contact information
+ */
 data class Contact(var name: String = "", var phone: ArrayList<String> = arrayListOf(), val id: String) {
+    /**
+     * convert to json format string(for uploading)
+     */
     override fun toString(): String {
         return "{ \"name\" :\"$name\", \"phone\":\"${phone.joinToString(separator = ",")}\"}"
     }

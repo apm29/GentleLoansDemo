@@ -48,7 +48,7 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_mainFragment_to_formListFragment"
-            app:destination="@id/formListFragment" />
+            app:destination="@id/registerFormFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_loginFragment"
@@ -59,6 +59,7 @@
         app:launchSingleTop="true" />
     <fragment
         android:id="@+id/preVerifyFragment"
+        tools:layout="@layout/pre_verify_fragment"
         android:name="com.apm29.yjw.demo.ui.verify.PreVerifyFragment"
         android:label="验证" >
         <action
@@ -91,10 +92,10 @@
             app:exitAnim="@anim/slide_out_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_left"
-            app:destination="@id/formListFragment" />
+            app:destination="@id/registerFormFragment" />
     </fragment>
     <fragment
-
+        tools:layout="@layout/webview_fragment"
         android:id="@+id/webViewFragment"
         android:name="com.apm29.yjw.demo.ui.verify.WebViewFragment"
         android:label="运营商验证" >
@@ -105,8 +106,22 @@
             />
     </fragment>
     <fragment
-        android:id="@+id/formListFragment"
-        android:name="com.apm29.yjw.demo.ui.form.FormListFragment"
-        android:label="信息表" />
+        tools:layout="@layout/register_form_fragment"
+        android:id="@+id/registerFormFragment"
+        android:name="com.apm29.yjw.demo.ui.form.register.RegisterFormFragment"
+        android:label="进件表" >
+        <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            android:id="@+id/action_registerFormFragment_to_applicantInfoFragment"
+            app:destination="@id/applicantInfoFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/applicant_info_fragment"
+        android:id="@+id/applicantInfoFragment"
+        android:name="com.apm29.yjw.demo.ui.form.register.ApplicantInfoFragment"
+        android:label="申请人信息表" />
 
 </navigation>

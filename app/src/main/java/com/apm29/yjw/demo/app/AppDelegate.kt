@@ -59,6 +59,7 @@ class AppDelegate(val context: Context) : App, AppLifecycle {
         strategy.isUploadProcess = processName == null || processName == packageName
         Beta.upgradeDialogLayoutId = R.layout.dialog_update_app
         Beta.initDelay = 1000*4
+        Beta.autoCheckUpgrade = false
         Bugly.init(application, if (BuildConfig.DEBUG) "ec04f8922b" else "c0d80a011b", BuildConfig.DEBUG)
     }
 

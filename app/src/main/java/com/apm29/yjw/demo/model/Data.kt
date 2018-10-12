@@ -15,7 +15,7 @@ data class BaseBean<T>(val code: Int = 200, val msg: String = "", private val da
         return data
     }
 
-    fun peekData():T{
+    fun peekData(): T {
         return data
     }
 
@@ -23,7 +23,8 @@ data class BaseBean<T>(val code: Int = 200, val msg: String = "", private val da
     fun isDataExpired(): Boolean {
         return expired
     }
-    fun expireData(){
+
+    fun expireData() {
         expired = true
     }
 }
@@ -118,3 +119,50 @@ data class LoginBean(
         @SerializedName("access_token") override var accessToken: String,
         override var userType: UserType = UserType.Common
 ) : UserLoginInfo
+
+/**
+ * 进件人信息
+ */
+data class ApplicantInfo(
+        var name: String?,
+        var idCard: String?,
+        var gender: Int,
+        var maritalStatus: Int,
+        var company: String?,
+        var department: String?,
+        var level: String?,
+        var staff: Int,
+        var yearIncome: String?,
+        var gjjMonth: String?,
+        var payType: Int,
+        var term: Int,
+        var zxAccount: String?,
+        var zxPass: String?,
+        var zxVerify: String?,
+        var gjjAccount: String?,
+        var gjjPass: String?,
+        var zwAccount: String?,
+        var zwPass: String?
+) {
+    constructor() : this(null, null, 0, 0,
+            null, null, null, 0, null,
+            null, 0, 0, null, null,null,
+            null,null,null,null)
+}
+open class Assets
+data class Estate(
+        var owner:String?,
+        var area:String?,
+        var location:String?,
+        var mortgage:Boolean?,
+        var mortgageCreditor1:String?,
+        var mortgageAmount1:String?,
+        var mortgageCreditor2:String?,
+        var mortgageAmount2:String?
+):Assets()
+
+data class Car(
+        var owner: String?,
+        var brand: String?,
+        var color: String?
+):Assets()

@@ -14,6 +14,7 @@ import javax.inject.Inject
 abstract class BaseViewModel : ViewModel(), ViewModelContract.IViewModel {
     override var mDisposables: CompositeDisposable = CompositeDisposable()
     override var mErrorData: MutableLiveData<String> =MutableLiveData()
+    override var mLoadingData: MutableLiveData<Boolean> = MutableLiveData()
     protected val tag: String
         get() = this::class.java.simpleName
 

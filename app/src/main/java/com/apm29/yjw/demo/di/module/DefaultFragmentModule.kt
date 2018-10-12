@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.demo.viewmodel.RealNameVerifyViewModel
+import com.apm29.yjw.demo.viewmodel.RegisterFormViewModel
 import com.apm29.yjw.demo.viewmodel.YYSVerifyViewModel
 import dagger.Module
 import dagger.Provides
@@ -26,5 +27,10 @@ class DefaultFragmentModule(var fragment: Fragment) {
     @Provides
     fun providesYYSVerifyViewModel(): YYSVerifyViewModel {
         return ViewModelProviders.of(fragment).get(YYSVerifyViewModel::class.java)
+    }
+
+    @Provides
+    fun providesRegisterFormViewModel(): RegisterFormViewModel {
+        return ViewModelProviders.of(fragment).get(RegisterFormViewModel::class.java)
     }
 }

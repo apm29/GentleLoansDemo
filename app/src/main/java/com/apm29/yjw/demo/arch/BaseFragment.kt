@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.transition.AutoTransition
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.ui.dialog.WarningDialog
+import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.gentleloansdemo.R
 import kotlinx.android.synthetic.main.host_activity.*
 import javax.inject.Inject
@@ -26,6 +27,7 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
         get() = this::class.java.simpleName
 
     open var observingError: Boolean = false
+    open var observingLoading: Boolean = true
     open var showToolBar: Boolean = true
 
     @Inject
@@ -62,8 +64,18 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
         super.onCreate(savedInstanceState)
         if (observingError) {
             mViewModel.mErrorData.observe(this, Observer {
-                WarningDialog.getInstance(getString(R.string.app_name), it)
-                        .show(requireFragmentManager())
+                showToast(it)
+            })
+        }
+        if (observingLoading){
+            mViewModel.mLoadingData.observe(this, Observer {
+                if (it) {
+                    WarningDialog.getInstance(getString(R.string.app_name), getString(R.string.app_loading_text))
+                            .show(requireFragmentManager())
+                }else{
+                    WarningDialog.getInstance()
+                            ?.dismiss()
+                }
             })
         }
         setupShareElementTransition()

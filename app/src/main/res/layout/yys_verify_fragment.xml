@@ -51,13 +51,12 @@
                 android:id="@+id/btnVerify"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_btn_primary"
                 android:text="验证"
-                android:textColor="@color/white_foreground"
                 app:layout_constraintBottom_toTopOf="@+id/btnDebug"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
+                style="@style/button_default"
                 app:layout_constraintTop_toBottomOf="@+id/ivWarning" />
 
             <TextView
