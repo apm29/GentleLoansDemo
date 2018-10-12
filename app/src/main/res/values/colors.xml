@@ -9,4 +9,6 @@
 
     <color name="gray_not_enabled">#a2a9b2</color>
     <color name="gray_not_enabled_dark">#737e8f</color>
+
+    <color name="dark_text_color">#222</color>
 </resources>

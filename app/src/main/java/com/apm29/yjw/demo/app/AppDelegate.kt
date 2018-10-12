@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.os.Process
 import androidx.multidex.MultiDex
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerAppComponent
@@ -15,6 +16,8 @@ import javax.inject.Inject
 import com.tencent.bugly.crashreport.CrashReport.UserStrategy
 import android.text.TextUtils
 import com.apm29.yjw.gentleloansdemo.BuildConfig
+import com.apm29.yjw.gentleloansdemo.R
+import com.tencent.bugly.beta.Beta
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
@@ -43,13 +46,19 @@ class AppDelegate(val context: Context) : App, AppLifecycle {
         Stetho.initializeWithDefaults(application)
         application.registerActivityLifecycleCallbacks(ActivityLifecycleCallBackAdapter(appComponentInjected))
         //bugly
+        initBugly(application)
+    }
+
+    private fun initBugly(application: Application) {
         // 获取当前包名
         val packageName = application.packageName
         // 获取当前进程名
-        val processName = getProcessName(android.os.Process.myPid())
+        val processName = getProcessName(Process.myPid())
         // 设置是否为上报进程
         val strategy = UserStrategy(context)
         strategy.isUploadProcess = processName == null || processName == packageName
+        Beta.upgradeDialogLayoutId = R.layout.dialog_update_app
+        Beta.initDelay = 1000*4
         Bugly.init(application, if (BuildConfig.DEBUG) "ec04f8922b" else "c0d80a011b", BuildConfig.DEBUG)
     }
 
