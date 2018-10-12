@@ -136,11 +136,13 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
 
 
     private fun navigateToVerify(profile: ProfileBean) {
+        val transitionName = getString(R.string.app_icon)
         val extras = FragmentNavigatorExtras(
-                imageViewLogo to "app_icon"
+                imageViewLogo to transitionName
         )
+        ViewCompat.setTransitionName(imageViewLogo, transitionName)
         if (profile.is_real&&profile.yys_auth) {
-            ViewCompat.setTransitionName(imageViewLogo, "app_icon")
+
             findNavController().navigate(
                     R.id.mainFragment,
                     null,

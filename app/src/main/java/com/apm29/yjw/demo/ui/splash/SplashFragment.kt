@@ -97,7 +97,12 @@ class SplashFragment : BaseFragment<DefaultFragmentViewModel>() {
     private fun requestAllPermissions() {
         AndPermission.with(this)
                 .runtime()
-                .permission(Permission.Group.CAMERA, Permission.Group.CONTACTS, Permission.Group.LOCATION, Permission.Group.STORAGE)
+                .permission(
+                        Permission.CAMERA,
+                        Permission.READ_CONTACTS,
+                        Permission.ACCESS_FINE_LOCATION,
+                        Permission.WRITE_EXTERNAL_STORAGE
+                )
                 .onGranted {
                     GlobalScope.async {
                         delay(2000)
@@ -106,7 +111,6 @@ class SplashFragment : BaseFragment<DefaultFragmentViewModel>() {
                     //showToast("permission granted : ${it.joinToString(",")}")
                 }
                 .onDenied {
-                    showToast("permission denied : ${it.joinToString(",")}")
                     val permissionNames = Permission.transformText(context, it)
                     val message = requireActivity().getString(R.string.message_permission_rationale, TextUtils.join("\n", permissionNames))
 
@@ -121,7 +125,6 @@ class SplashFragment : BaseFragment<DefaultFragmentViewModel>() {
                                             .setting()
                                             .onComeback {
                                                 // 用户从设置回来了。
-                                                showToast("come back from app setting :${it.joinToString(",")}")
                                                 requestAllPermissions()
                                             }
                                             .start()
@@ -130,7 +133,6 @@ class SplashFragment : BaseFragment<DefaultFragmentViewModel>() {
                                 }
                             }
                             .setNegativeButton(R.string.cancel) { _, _ ->
-                                showToast("request canceled")
                                 System.exit(0)
                             }
                             .show()

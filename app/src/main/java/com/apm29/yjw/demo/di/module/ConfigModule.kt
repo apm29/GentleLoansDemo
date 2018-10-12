@@ -9,9 +9,7 @@ import com.apm29.yjw.demo.model.BaseBean
 import com.apm29.yjw.gentleloansdemo.BuildConfig
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.github.simonpercic.oklog3.OkLogInterceptor
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.TypeAdapter
+import com.google.gson.*
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
@@ -56,21 +54,21 @@ class ConfigModule {
 
     @Singleton
     @Provides
-    fun providesOkHttpClientConfig(gson: Gson,application: Application): OkHttpClient {
+    fun providesOkHttpClientConfig(gson: Gson, application: Application): OkHttpClient {
         return OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.SECONDS)
-                .readTimeout(5,TimeUnit.SECONDS)
+                .readTimeout(5, TimeUnit.SECONDS)
                 .addInterceptor {
                     val oldRequest = it.request()
                     var newRequest = oldRequest
 
-                    if (!BuildConfig.BASE_URL.contains(oldRequest.url().host(),true)
-                        ||oldRequest.url().url().path.contains("/upload/test",true)
-                    ){
+                    if (!BuildConfig.BASE_URL.contains(oldRequest.url().host(), true)
+                            || oldRequest.url().url().path.contains("/upload/test", true)
+                    ) {
                         return@addInterceptor it.proceed(oldRequest)
                     }
 
-                    val token = UserManager.currentUser?.accessToken?:""
+                    val token = UserManager.currentUser?.accessToken ?: ""
                     val registrationID = ""
                     val versionCode = BuildConfig.VERSION_CODE
                     //添加公共参数
@@ -93,6 +91,9 @@ class ConfigModule {
 
                         jsonBuilder.append("\"").append("biz_content").append("\"").append(":").append(bizBuilder.toString())
                         jsonBuilder.append("}")
+
+                        printRequestBody(jsonBuilder.toString())
+
                         val requestBody = FormBody.create(MediaType.parse("Content-Type:application/json; charset=utf-8"), jsonBuilder.toString())
                         newRequest = newRequest.newBuilder()
                                 .addHeader("content-type", "application/json; charset=utf-8")
@@ -116,6 +117,7 @@ class ConfigModule {
                         OkLogInterceptor.builder()
                                 .withProtocol(true)
                                 .withResponseHeaders(true)
+                                .shortenInfoUrl(true)
                                 .withRequestContentType(true)
                                 .build()
                 )
@@ -123,9 +125,9 @@ class ConfigModule {
                 .addNetworkInterceptor {
                     val response: Response?
                     try {
-                        response= it.proceed(it.request())
+                        response = it.proceed(it.request())
                     } catch (e: Exception) {
-                        Log.w("ConfigModule","Http Error: $e")
+                        Log.w("ConfigModule", "Http Error: $e")
                         throw e
                     }
 
@@ -136,20 +138,26 @@ class ConfigModule {
                     val mediaType = response.body()?.contentType()
                     try {
                         val baseBean = gson.fromJson<BaseBean<String>>(jsonString, BaseBean::class.java)
-                        if (baseBean.code==401){
+                        if (baseBean.code == 401) {
                             throw UserInfoExpiredException(baseBean.msg)
                         }
-                    }
-                    catch (u:UserInfoExpiredException){
-                        Log.w("ConfigModule","user info isDataExpired ,redirect to login page")
+                    } catch (u: UserInfoExpiredException) {
+                        Log.w("ConfigModule", "user info isDataExpired ,redirect to login page")
                         throw u
-                    }
-                    catch (e:Exception){
+                    } catch (e: Exception) {
 
                     }
-                    return@addNetworkInterceptor response.newBuilder().body(ResponseBody.create(mediaType,jsonString?:"")).build()
+                    return@addNetworkInterceptor response.newBuilder().body(ResponseBody.create(mediaType, jsonString
+                            ?: "")).build()
                 }
                 .build()
+    }
+
+    val prettyGson = GsonBuilder().setPrettyPrinting().create()
+    val jp = JsonParser()
+    private fun printRequestBody(json: String) {
+        val jsonElement = jp.parse(json)
+        println(prettyGson.toJson(jsonElement))
     }
 
 

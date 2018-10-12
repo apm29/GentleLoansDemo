@@ -24,6 +24,12 @@ import com.apm29.yjw.gentleloansdemo.R
 import kotlinx.android.synthetic.main.pre_verify_fragment.*
 import java.lang.IllegalArgumentException
 
+/**
+ * 根据传回的destination值决定完成验证后进入那个页面
+ */
+const val MAIN = 0
+const val FORM = 1
+
 class PreVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
 
 
@@ -73,20 +79,27 @@ class PreVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
         val activity = requireActivity()
         val viewModel = ViewModelProviders.of(activity).get(CommunicateViewModel::class.java)
         val verifyProgress: VerifyProgress? = PreVerifyFragmentArgs.fromBundle(arguments).verifyProgress
+        val destination: Int? = PreVerifyFragmentArgs.fromBundle(arguments).destination
         verifyProgress?.let {
+
+            val desAction =  when(destination){
+                MAIN->R.id.action_preVerifyFragment_to_mainFragment
+                FORM->R.id.action_preVerifyFragment_to_formListFragment
+                else->throw  IllegalArgumentException("未知页面")
+            }
             viewModel.yysResult.observe(this, Observer { event ->
                 if (!event.hasBeenHandled && event.getContentIfNotHandled() == true) {
 
                     if (verifyProgress.pageCount > 1) {
                         viewPagerVerify.setCurrentItem(1, true)
                     } else {
-                        findNavController().navigate(R.id.action_preVerifyFragment_to_mainFragment)
+                        findNavController().navigate(desAction)
                     }
                 }
             })
             viewModel.realResult.observe(this, Observer { event ->
                 if (!event.hasBeenHandled && event.getContentIfNotHandled() == true) {
-                    findNavController().navigate(R.id.action_preVerifyFragment_to_mainFragment)
+                    findNavController().navigate(desAction)
                 }
             })
         }

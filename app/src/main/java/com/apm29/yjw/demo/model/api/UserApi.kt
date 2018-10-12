@@ -11,6 +11,8 @@ import retrofit2.http.POST
 
 
 
+
+
 interface UserApi {
     @POST("/v1/user/profile")
     @Headers("Content-Type: application/json; charset=utf-8")
@@ -72,4 +74,9 @@ interface UserApi {
     fun bindCard(
             @Field("code") code: String
     ): Observable<BaseBean<String>>
+
+    @FormUrlEncoded
+    @POST("/v1/user/contact")
+    fun contact(@Field("biz_content") mContactList: String): Observable<BaseBean<String>>
+
 }

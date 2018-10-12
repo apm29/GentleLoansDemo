@@ -149,6 +149,18 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="formListFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="635" />
+                            <option name="y" value="378" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="loginFragment">
                     <value>
                       <LayoutPositions>
@@ -180,18 +192,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="265" />
-                            <option name="y" value="368" />
+                            <option name="x" value="336" />
+                            <option name="y" value="415" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_mainFragment_to_loginFragment">
+                            <entry key="action_mainFragment_to_formListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_mainFragment_to_realNameVerifyFragment">
+                            <entry key="action_mainFragment_to_loginFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -206,12 +218,17 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="54" />
+                            <option name="x" value="48" />
+                            <option name="y" value="40" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_preVerifyFragment_to_formListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_preVerifyFragment_to_mainFragment">
                               <value>
                                 <LayoutPositions />
@@ -223,18 +240,6 @@
                               </value>
                             </entry>
                           </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="realNameVerifyFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="518" />
-                            <option name="y" value="368" />
-                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -275,8 +280,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="265" />
-                            <option name="y" value="12" />
+                            <option name="x" value="349" />
+                            <option name="y" value="-229" />
                           </Point>
                         </option>
                       </LayoutPositions>
