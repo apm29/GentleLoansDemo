@@ -18,7 +18,6 @@ import com.apm29.yjw.demo.model.ProfileBean
 import com.apm29.yjw.demo.model.VerifyProgress
 import com.apm29.yjw.demo.ui.dialog.RuntimeRationale
 import com.apm29.yjw.demo.ui.verify.PreVerifyFragmentArgs
-import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.gentleloansdemo.R
 import com.yanzhenjie.permission.AndPermission
@@ -98,6 +97,7 @@ class SplashFragment : BaseFragment<DefaultFragmentViewModel>() {
         AndPermission.with(this)
                 .runtime()
                 .permission(
+                        Permission.READ_PHONE_STATE,
                         Permission.CAMERA,
                         Permission.READ_CONTACTS,
                         Permission.ACCESS_FINE_LOCATION,
@@ -106,7 +106,7 @@ class SplashFragment : BaseFragment<DefaultFragmentViewModel>() {
                 .onGranted {
                     GlobalScope.async {
                         delay(2000)
-                        mViewModel.profileVerify()
+                        mViewModel.profileVerify(false)
                     }
                     //showToast("permission granted : ${it.joinToString(",")}")
                 }

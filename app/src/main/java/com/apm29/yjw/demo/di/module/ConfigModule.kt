@@ -3,6 +3,7 @@ package com.apm29.yjw.demo.di.module
 import android.app.Application
 import android.os.Build
 import android.util.Log
+import cn.jpush.android.api.JPushInterface
 import com.apm29.yjw.demo.app.exception.UserInfoExpiredException
 import com.apm29.yjw.demo.arch.UserManager
 import com.apm29.yjw.demo.model.BaseBean
@@ -69,7 +70,7 @@ class ConfigModule {
                     }
 
                     val token = UserManager.currentUser?.accessToken ?: ""
-                    val registrationID = ""
+                    val registrationID = JPushInterface.getRegistrationID(application)
                     val versionCode = BuildConfig.VERSION_CODE
                     //添加公共参数
 

@@ -2,10 +2,7 @@ package com.apm29.yjw.demo.di.module
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
-import com.apm29.yjw.demo.viewmodel.RealNameVerifyViewModel
-import com.apm29.yjw.demo.viewmodel.RegisterFormViewModel
-import com.apm29.yjw.demo.viewmodel.YYSVerifyViewModel
+import com.apm29.yjw.demo.viewmodel.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -32,5 +29,10 @@ class DefaultFragmentModule(var fragment: Fragment) {
     @Provides
     fun providesRegisterFormViewModel(): RegisterFormViewModel {
         return ViewModelProviders.of(fragment).get(RegisterFormViewModel::class.java)
+    }
+
+    @Provides
+    fun providesDefaultListViewModel(): DefaultListViewModel {
+        return ViewModelProviders.of(fragment).get(DefaultListViewModel::class.java)
     }
 }

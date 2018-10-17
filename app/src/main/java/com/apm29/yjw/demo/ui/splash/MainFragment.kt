@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.TextUtils
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
@@ -16,6 +18,8 @@ import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.ui.dialog.RuntimeRationale
+import com.apm29.yjw.demo.utils.showToast
+import com.apm29.yjw.demo.viewmodel.CommunicateViewModel
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.demo.viewmodel.PROJECTION
 import com.apm29.yjw.gentleloansdemo.BuildConfig
@@ -47,6 +51,15 @@ class MainFragment : BaseFragment<DefaultFragmentViewModel>(){
     override fun initData(savedInstanceState: Bundle?) {
         requestContactPermission()
         Beta.checkUpgrade(true,false)
+
+
+        val communicateViewModel = ViewModelProviders.of(requireActivity()).get(CommunicateViewModel::class.java)
+        communicateViewModel.pushJsonData.observe(requireActivity(), Observer {
+            //推送点击统一处理
+            it.getContentIfNotHandled()?.apply {
+                showToast(this)
+            }
+        })
     }
 
     private fun requestContactPermission() {
@@ -55,8 +68,10 @@ class MainFragment : BaseFragment<DefaultFragmentViewModel>(){
                 .permission(Manifest.permission.READ_CONTACTS)
                 .rationale(RuntimeRationale())
                 .onGranted {
-                    if (BuildConfig.DEBUG)
+                    if (BuildConfig.DEBUG) {
+                        hideLoading()
                         return@onGranted
+                    }
                     val query = requireContext().contentResolver.query(ContactsContract.RawContacts.CONTENT_URI, PROJECTION,
                             null, null, null)
                     query?.let {

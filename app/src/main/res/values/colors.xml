@@ -11,4 +11,7 @@
     <color name="gray_not_enabled_dark">#737e8f</color>
 
     <color name="dark_text_color">#222</color>
+
+    <color name="light_gray_background">#f3f3f3</color>
+    <color name="gray_editLayout_disable_bg" >#d1d1d1</color>
 </resources>

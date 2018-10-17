@@ -11,17 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
-
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+
             <LinearLayout
-                android:background="@drawable/bg_ripple"
                 android:id="@+id/layoutName"
-                android:padding="12dp"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:id="@+id/okName"
@@ -30,7 +27,7 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:text="姓名"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -42,10 +39,7 @@
             </LinearLayout>
             <LinearLayout
                 android:background="@drawable/bg_ripple"
-                android:padding="12dp"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -53,7 +47,7 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:text="身份证号"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -65,12 +59,7 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/layoutGender"
-                android:background="@drawable/bg_ripple"
-                android:layout_width="match_parent"
-                android:padding="12dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -78,7 +67,7 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:text="性别"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -96,12 +85,7 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/layoutMarital"
-                android:background="@drawable/bg_ripple"
-                android:layout_width="match_parent"
-                android:padding="12dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -109,7 +93,7 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:text="婚姻状况"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -127,11 +111,7 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/layoutCompany"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:padding="12dp"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -140,31 +120,21 @@
                 <TextView
                     android:text="单位"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_company_name"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                    style="@style/EditLayoutStyle">
+                    <com.google.android.material.textfield.TextInputEditText 
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layoutDepartment"
-                android:padding="12dp"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -173,31 +143,21 @@
                 <TextView
                     android:text="部门"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_department"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                    style="@style/EditLayoutStyle">
+                    <com.google.android.material.textfield.TextInputEditText 
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:padding="12dp"
                 android:id="@+id/layoutLevel"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -206,21 +166,15 @@
                 <TextView
                     android:text="职位"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_level"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_height="wrap_content">
+                    style="@style/EditLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -228,12 +182,7 @@
 
             <LinearLayout
                 android:id="@+id/layoutStaff"
-                android:background="@drawable/bg_ripple"
-                android:layout_width="match_parent"
-                android:padding="12dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -241,7 +190,7 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:text="编制"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -261,12 +210,8 @@
 
 
             <LinearLayout
-                android:padding="12dp"
                 android:id="@+id/layoutYearIncome"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -275,37 +220,27 @@
                 <TextView
                     android:text="年收入"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_year_income"
                     app:boxBackgroundMode="none"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content">
+                    style="@style/EditLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:text="万元"
                     android:layout_marginStart="12dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
                 android:padding="12dp"
-                android:id="@+id/layoutGjjMonth"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -314,27 +249,20 @@
                 <TextView
                     android:text="公积金月缴"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_gjj_month"
-                    app:boxBackgroundMode="none"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content">
+                    style="@style/EditLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:text="    元"
                     android:layout_marginStart="12dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -342,12 +270,7 @@
 
             <LinearLayout
                 android:id="@+id/layoutPayType"
-                android:background="@drawable/bg_ripple"
-                android:layout_width="match_parent"
-                android:padding="12dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -355,11 +278,11 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:text="还款方式"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:id="@+id/tvPayType"
+                    android:id="@+id/tvRepaymentType"
                     android:text="@string/text_unselected"
                     android:paddingEnd="12dp"
                     android:layout_width="0dp"
@@ -375,12 +298,8 @@
 
 
             <LinearLayout
-                android:padding="12dp"
                 android:id="@+id/layoutTerm"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -389,38 +308,28 @@
                 <TextView
                     android:text="还款期限"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_term"
                     app:boxBackgroundMode="none"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content">
+                    style="@style/EditLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:text="    月"
                     android:layout_marginStart="12dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
-                android:padding="12dp"
                 android:id="@+id/layoutZxAccount"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -429,32 +338,22 @@
                 <TextView
                     android:text="征信密码"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_zx_account"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_height="wrap_content">
+                    style="@style/EditLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:padding="12dp"
                 android:id="@+id/layoutZxPass"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -463,32 +362,22 @@
                 <TextView
                     android:text="征信密码"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_zx_pass"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_height="wrap_content">
+                    style="@style/EditLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:padding="12dp"
                 android:id="@+id/layoutZxVerify"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -497,31 +386,21 @@
                 <TextView
                     android:text="征信验证码"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_zx_verify"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_height="wrap_content">
+                    style="@style/EditLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
             <LinearLayout
-                android:padding="12dp"
                 android:id="@+id/layoutGjjAccount"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -530,31 +409,21 @@
                 <TextView
                     android:text="公积金账号"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_gjj_account"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_height="wrap_content">
+                    style="@style/EditLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
             <LinearLayout
-                android:padding="12dp"
                 android:id="@+id/layoutGjjPass"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -563,32 +432,22 @@
                 <TextView
                     android:text="公积金密码"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_gjj_pass"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                    style="@style/EditLayoutStyle">
+                    <com.google.android.material.textfield.TextInputEditText 
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:padding="12dp"
                 android:id="@+id/layoutZwAccount"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -597,31 +456,21 @@
                 <TextView
                     android:text="政务网账号"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_zw_account"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_height="wrap_content">
+                    style="@style/EditLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
             <LinearLayout
-                android:padding="12dp"
                 android:id="@+id/layoutZwPass"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                style="@style/SliceLayoutHorizontal">
                 <com.apm29.yjw.demo.ui.widget.IconFontTextView
                     android:text="@string/确定"
                     android:layout_marginEnd="16dp"
@@ -630,21 +479,15 @@
                 <TextView
                     android:text="政务网密码"
                     android:layout_marginEnd="16dp"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    style="@style/SliceTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
                     android:hint="@string/hint_zw_pass"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edit_outline"
-                    android:layout_height="wrap_content">
+                    style="@style/EditLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:layout_height="wrap_content" />
+                        style="@style/EditContentStyle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>

@@ -5,7 +5,6 @@ import android.content.Context
 import android.net.ParseException
 import android.util.Log
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.apm29.yjw.demo.app.exception.UserInfoExpiredException
 import com.apm29.yjw.demo.arch.UserManager
 import com.apm29.yjw.gentleloansdemo.BuildConfig
@@ -38,9 +37,9 @@ class ErrorHandlerImpl @Inject constructor(private val mContext: Context) : Resp
         } else if (t is UserInfoExpiredException) {
             msg = t.message?:msg
             if (context is Activity) {
-                UserManager.toLogin(context.findNavController(R.id.splash_host_fragment))
+                UserManager.toLogin(context.findNavController(R.id.app_host_fragment))
             }else if (context is AppApplication){
-                val findNavController = ActivityManager.currentActivity?.findNavController(R.id.splash_host_fragment)
+                val findNavController = ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
                 if (findNavController!=null) {
                     UserManager.toLogin(findNavController)
                 }

@@ -79,10 +79,12 @@
     <string name="hint_yys_auth">您还未进行运营商验证, \n请点击下面的验证按钮前往验证</string>
     <string name="hint_yys_auth_pass">您已通过运营商验证, \n请点击下一步按钮完成验证</string>
     <string name="switch_account">切换账号</string>
-    <string name="hint_real_auth" >您还未进行实名认证,\n请使用一张预留手机号与登录号码相同的银行卡\n来验证您的真实身份</string>
-    <string name="hint_real_auth_pass" >您已通过实名认证,\n请点击完成绑定前往应用</string>
+    <string name="hint_real_auth">您还未进行实名认证,\n请使用一张预留手机号与登录号码相同的银行卡\n来验证您的真实身份</string>
+    <string name="hint_real_auth_pass">您已通过实名认证,\n请点击完成绑定前往应用</string>
     <string name="bank">选择银行</string>
     <string name="submit">提交</string>
+    <string name="confirm">确定</string>
+    <string name="save_">保存</string>
     <string name="text_apply">立即申请</string>
     <string name="quit">退出应用</string>
     <string name="submit_registration">提交申请</string>
@@ -101,5 +103,25 @@
     <string name="hint_gjj_account">请输入公积金账号</string>
     <string name="hint_zw_pass">请输入政务网密码，仅限浙江地区</string>
     <string name="hint_zw_account">请输入政务网账号，仅限浙江地区</string>
-    <string name="save_">保存</string>
+    <string name="debug_bank_sms">000000</string>
+    <string name="text_uneditable_hint"> 一不可编辑一 </string>
+    <string name="hint_name">请输入姓名</string>
+    <string name="hint_id_card">请输入身份证</string>
+    <string name="hint_marital">请选择婚姻状况</string>
+    <string name="hint_staff">请选择编制</string>
+    <string name="hint_pey_type">请选择还款方式</string>
+    <string name="text_logout">退出登录</string>
+    <string name="text_loan_log">贷款记录</string>
+    <string name="text_personal_info">个人信息</string>
+    <string name="text_about_us">关于我们</string>
+    <string name="text_version">版本号</string>
+    <string name="text_empty_list">空空如也..</string>
+    <string name="text_easter_egg">没事别乱点,会出Bug</string>
+
+
+    <string name="about_us">公司介绍\n
+        <h>\t\t浙江君磊资产管理有限公司始建于2016年11月07日，是专注于基金/证券/期货/投资行业的民营企业公司，公司坐落于美丽的浙江省杭州，以始终坚持“诚信为本、客户至上、互惠互利，开拓创新”为企业宗旨，本着“本质为本、专业执着、精益求精”的经营销售理念，力求给客户提供全方位优质服务。君磊资管，你身边的金融服务专家，全新服务体验，银行团队全程服务，规范经营，健康发展，致力于打造用户一站式的融资体验。
+            \n</h>
+        联系我们：0571-86809823\n
+    </string>
 </resources>

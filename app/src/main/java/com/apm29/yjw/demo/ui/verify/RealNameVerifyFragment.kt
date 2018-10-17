@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.real_name_verify_fragment.*
 
 class RealNameVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
 
-    override var observingError: Boolean = true
     override fun setupViewLayout(savedInstanceState: Bundle?): Int {
         return R.layout.real_name_verify_fragment
     }
@@ -72,7 +71,7 @@ class RealNameVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
         }
 
         btnSubmit.setOnClickListener {
-            Verify.OK().verifyText(etSms).apply {
+            Verify.ok().verifyText(etSms).apply {
                 if (!success) {
                     showToast(error)
                     return@setOnClickListener
@@ -84,7 +83,7 @@ class RealNameVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
     }
 
     private fun verifyInput(): Verify {
-        return Verify.OK()
+        return Verify.ok()
                 .verifyText(etCard)
                 .verifyText(etId)
                 .verifyText(etName)
@@ -110,7 +109,7 @@ class RealNameVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
             if (it.success()) {
                 tvSend.count(60)
                 if (BuildConfig.DEBUG) {
-                    etSms.setText("000000")
+                    etSms.setText(getString(R.string.debug_bank_sms))
                 }
             }
             mViewModel.mErrorData.value = it.msg
@@ -120,7 +119,7 @@ class RealNameVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
                 tvSend.count(60)
                 mViewModel.profileVerify()
             }
-            mViewModel.mErrorData.value = it.msg
+//            mViewModel.mErrorData.value = it.msg
         })
 
         mViewModel.profile.observe(this, Observer {

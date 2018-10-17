@@ -2,7 +2,6 @@ package com.apm29.yjw.demo.arch
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.BounceInterpolator
@@ -10,15 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.transition.AutoTransition
 import com.apm29.yjw.demo.di.component.AppComponent
-import com.apm29.yjw.demo.ui.dialog.WarningDialog
+import com.apm29.yjw.demo.ui.dialog.LoadingDialog
 import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.gentleloansdemo.R
-import kotlinx.android.synthetic.main.host_activity.*
 import javax.inject.Inject
 
 abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), ViewModelContract.IView {
@@ -26,8 +23,9 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
     val tagFragment: String
         get() = this::class.java.simpleName
 
-    open var observingError: Boolean = false
+    open var observingError: Boolean = true
     open var observingLoading: Boolean = true
+    open var observingToast: Boolean = true
     open var showToolBar: Boolean = true
 
     @Inject
@@ -70,12 +68,15 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
         if (observingLoading){
             mViewModel.mLoadingData.observe(this, Observer {
                 if (it) {
-                    WarningDialog.getInstance(getString(R.string.app_name), getString(R.string.app_loading_text))
-                            .show(requireFragmentManager())
+                    showLoading()
                 }else{
-                    WarningDialog.getInstance()
-                            ?.dismiss()
+                    hideLoading()
                 }
+            })
+        }
+        if (observingToast){
+            mViewModel.mToastData.observe(this, Observer {
+                showToast(it.getContentIfNotHandled())
             })
         }
         setupShareElementTransition()
@@ -113,12 +114,12 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
         mViewModel.buildupComponent(appComponent)
     }
 
-    override fun showLoading() {
-        WarningDialog.getInstance(getString(R.string.app_name), getString(R.string.app_loading_text))
-                .show(requireFragmentManager())
+    @Synchronized
+    override  fun showLoading() {
+        LoadingDialog.show()
     }
-
+    @Synchronized
     override fun hideLoading() {
-        WarningDialog.getInstance()?.dismiss()
+        LoadingDialog.dismiss()
     }
 }

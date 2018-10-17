@@ -5,6 +5,8 @@ import com.apm29.yjw.demo.di.scope.ActivityScope
 import com.apm29.yjw.demo.ui.form.register.ApplicantInfoFragment
 import com.apm29.yjw.demo.ui.form.register.FamilyAssetsFragment
 import com.apm29.yjw.demo.ui.form.register.RegisterFormFragment
+import com.apm29.yjw.demo.ui.list.base.BaseListFragment
+import com.apm29.yjw.demo.ui.list.LoanLogListFragment
 import com.apm29.yjw.demo.ui.main.*
 import com.apm29.yjw.demo.ui.splash.MainFragment
 import com.apm29.yjw.demo.ui.splash.LoginFragment
@@ -37,4 +39,7 @@ interface DefaultFragmentComponent {
     fun inject(registerFormFragment: RegisterFormFragment)
     fun inject(any:ApplicantInfoFragment)
     fun inject(familyAssetsFragment: FamilyAssetsFragment)
+    fun inject(loanLogListFragment: LoanLogListFragment)
+    fun inject(personalInfoFragment: PersonalInfoFragment)
+    fun inject(aboutUsFragment: AboutUsFragment)
 }

@@ -7,10 +7,11 @@
     <fragment
         android:id="@+id/homeNavFragment"
         android:name="com.apm29.yjw.demo.ui.main.HomeFragment"
-        android:label="HomeFragment">
+        android:label="Home">
     </fragment>
     <fragment
         android:id="@+id/mineNavFragment"
+        android:label = "我的"
         android:name="com.apm29.yjw.demo.ui.main.MineFragment">
     </fragment>
 </navigation>

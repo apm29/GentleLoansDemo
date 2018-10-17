@@ -57,13 +57,13 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
 
 
         val stringBuilder = SpannableStringBuilder(textService.text)
-        stringBuilder.setSpan(object :ClickableSpan(){
+        stringBuilder.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
                 showToast("没做!")
             }
         },
                 textService.text.indexOfFirst { it == '《' },
-                textService.text.indexOfFirst { it == '》' }+1,
+                textService.text.indexOfFirst { it == '》' } + 1,
                 SpannableString.SPAN_INCLUSIVE_INCLUSIVE
         )
         textService.text = stringBuilder
@@ -141,26 +141,26 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
                 imageViewLogo to transitionName
         )
         ViewCompat.setTransitionName(imageViewLogo, transitionName)
-        if (profile.is_real&&profile.yys_auth) {
+        if (profile.is_real && profile.yys_auth) {
 
             findNavController().navigate(
                     R.id.mainFragment,
                     null,
                     navOptions {
-                        clearTask =true
+                        clearTask = true
                     },
                     extras
             )
-        }else{
+        } else {
             val preVerifyFragmentArgs = PreVerifyFragmentArgs.Builder()
-                    .setVerifyProgress(VerifyProgress(profile.is_real,profile.yys_auth))
+                    .setVerifyProgress(VerifyProgress(profile.is_real, profile.yys_auth))
                     .build()
                     .toBundle()
             findNavController().navigate(
                     R.id.preVerifyFragment,
                     preVerifyFragmentArgs,
                     navOptions {
-                        clearTask =true
+                        clearTask = true
                     },
                     extras
             )
@@ -172,7 +172,8 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
         println("view = [$view], actionId = [$actionId], action = [$action]")
         return if (actionId == resources.getInteger(R.integer.action_id_login)
                 || actionId == EditorInfo.IME_ACTION_GO
-                || actionId == EditorInfo.IME_ACTION_DONE) {
+                || actionId == EditorInfo.IME_ACTION_DONE
+        ) {
             doLogin()
             true
         } else {

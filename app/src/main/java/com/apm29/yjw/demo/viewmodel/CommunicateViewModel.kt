@@ -13,6 +13,13 @@ class CommunicateViewModel:ViewModel() {
         realResult.value = Event(true)
     }
 
+    fun onPushClick(json:String){
+        pushJsonData.value = Event(json)
+    }
+
     val yysResult:MutableLiveData<Event<Boolean>> = MutableLiveData()
     val realResult:MutableLiveData<Event<Boolean>> = MutableLiveData()
+
+
+    val pushJsonData:MutableLiveData<Event<String>> = MutableLiveData()
 }

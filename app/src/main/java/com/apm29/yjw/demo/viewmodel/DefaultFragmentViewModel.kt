@@ -6,14 +6,13 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.apm29.yjw.demo.app.ErrorHandledObserver
 import com.apm29.yjw.demo.arch.BaseViewModel
-import com.apm29.yjw.demo.model.BaseBean
-import com.apm29.yjw.demo.model.LoginBean
-import com.apm29.yjw.demo.model.ProfileBean
 import com.apm29.yjw.demo.model.api.UserApi
-import com.apm29.yjw.demo.utils.getThreadSchedulers
+import com.apm29.yjw.demo.utils.subscribeErrorHandled
+import com.apm29.yjw.demo.utils.threadAutoSwitch
 import com.apm29.yjw.gentleloansdemo.BuildConfig
-import com.google.gson.Gson
 import io.reactivex.Observable
+import java.lang.IllegalArgumentException
+import com.apm29.yjw.demo.model.*
 
 
 class DefaultFragmentViewModel : BaseViewModel() {
@@ -23,25 +22,21 @@ class DefaultFragmentViewModel : BaseViewModel() {
     var loginResult: MutableLiveData<BaseBean<LoginBean>> = MutableLiveData()
     var profile: MutableLiveData<BaseBean<ProfileBean>> = MutableLiveData()
 
-    fun profileVerify() {
+    fun profileVerify(refresh:Boolean  = true) {
         mRetrofit.create(UserApi::class.java)
                 .profile()
-                .compose(getThreadSchedulers())
-                .subscribe(
-                        object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
-                            override fun onNext(t: BaseBean<ProfileBean>) {
-                                profile.value = t
-                            }
-                        }
-                )
+                .threadAutoSwitch()
+                .subscribeErrorHandled(mErrorData, mErrorHandlerImpl, if (refresh) mLoadingData else null) {
+                    profile.value = it
+                }
     }
 
     fun sendLoginVerifySMS(mobile: String) {
         mRetrofit.create(UserApi::class.java)
                 .sendSMS(mobile)
-                .compose(getThreadSchedulers())
+                .threadAutoSwitch()
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<String>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
+                        object : ErrorHandledObserver<BaseBean<String>>(mErrorData, mErrorHandlerImpl, mLoadingData) {
                             override fun onNext(t: BaseBean<String>) {
                                 mErrorData.value = t.msg
                                 smsResult.value = t
@@ -53,9 +48,9 @@ class DefaultFragmentViewModel : BaseViewModel() {
     fun doLogin(mobile: String, smsCode: String) {
         mRetrofit.create(UserApi::class.java)
                 .login(mobile, smsCode)
-                .compose(getThreadSchedulers())
+                .threadAutoSwitch()
                 .subscribe(
-                        object : ErrorHandledObserver<BaseBean<LoginBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
+                        object : ErrorHandledObserver<BaseBean<LoginBean>>(mErrorData, mErrorHandlerImpl, mLoadingData) {
                             override fun onNext(t: BaseBean<LoginBean>) {
                                 mErrorData.value = t.msg
                                 loginResult.value = t
@@ -69,7 +64,7 @@ class DefaultFragmentViewModel : BaseViewModel() {
      */
     fun contact(contentResolver: ContentResolver?) {
         Observable.just(1)
-                .compose(getThreadSchedulers())
+                .threadAutoSwitch()
                 .map {
                     val list: ArrayList<Contact> = arrayListOf()
                     contentResolver?.let { cr ->
@@ -120,18 +115,65 @@ class DefaultFragmentViewModel : BaseViewModel() {
                 .contact("[${list?.joinToString(separator = ",")}]".also {
                     println(it)
                 })
-                .compose(getThreadSchedulers())
-                .subscribe(
-                        object :ErrorHandledObserver<BaseBean<String>>(mErrorData,mErrorHandlerImpl,mLoadingData){
-                            override fun onNext(t: BaseBean<String>) {
-                                Log.d(tag,t.msg)
+                .threadAutoSwitch()
+                .subscribeErrorHandled(mErrorData, mErrorHandlerImpl, mLoadingData) {
+                    Log.d(tag, it.msg)
+                }
+    }
+
+    /**
+     * 支付宝淘宝验证
+     */
+    fun preVerifyForAlibaba(channelCode: String) {
+        mRetrofit.create(UserApi::class.java)
+                .profile()
+                .threadAutoSwitch()
+                .subscribeErrorHandled(mErrorData, mErrorHandlerImpl, null) {
+
+                    val profile = it.peekData()
+                    when (channelCode) {
+                        ALIPAY_CHANNEL_CODE -> {
+                            if (profile.alipay_status) {
+                                mToastData.value = Event("支付宝已验证")
+                                return@subscribeErrorHandled
                             }
                         }
-                )
+                        TAOBAO_CHANNEL_CODE -> {
+                            if (profile.taobao_status) {
+                                mToastData.value = Event("淘宝宝已验证")
+                                return@subscribeErrorHandled
+                            }
+                        }
+                        else -> {
+                            throw IllegalArgumentException("不支持的ChannelCode")
+                        }
+                    }
+                    magicBoxData.value = DataMagicBox(
+                            profile.idCardNo ?: "",
+                            profile.mobile ?: "",
+                            profile.realName ?: "",
+                            channelCode
+                    )
+
+                }
     }
+
+    fun uploadAlipayResult(mobile: String, taskId: String, type: Int) {
+        mRetrofit.create(UserApi::class.java)
+                .alipay(mobile, taskId, type)
+                .threadAutoSwitch()
+                .subscribeErrorHandled(mErrorData, mErrorHandlerImpl, mLoadingData) {
+                    Log.d(tag, it.msg)
+                }
+    }
+
+    val magicBoxData: MutableLiveData<DataMagicBox> = MutableLiveData()
 
 
 }
+
+const val ALIPAY_CHANNEL_CODE = "005004"
+const val TAOBAO_CHANNEL_CODE = "005003"
 
 /**
  * store contact information

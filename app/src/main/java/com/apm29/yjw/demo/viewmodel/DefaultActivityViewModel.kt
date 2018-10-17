@@ -7,6 +7,7 @@ import com.apm29.yjw.demo.model.BaseBean
 import com.apm29.yjw.demo.model.ProfileBean
 import com.apm29.yjw.demo.model.api.UserApi
 import com.apm29.yjw.demo.utils.getThreadSchedulers
+import com.apm29.yjw.demo.utils.threadAutoSwitch
 
 open class DefaultActivityViewModel : BaseViewModel() {
     var profile: MutableLiveData<ProfileBean> = MutableLiveData()
@@ -14,7 +15,7 @@ open class DefaultActivityViewModel : BaseViewModel() {
     fun profileVerify() {
         mRetrofit.create(UserApi::class.java)
                 .profile()
-                .compose(getThreadSchedulers())
+                .threadAutoSwitch()
                 .subscribe(
                         object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<ProfileBean>) {

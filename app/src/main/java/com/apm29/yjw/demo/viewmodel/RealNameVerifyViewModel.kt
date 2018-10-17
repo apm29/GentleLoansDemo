@@ -8,6 +8,7 @@ import com.apm29.yjw.demo.model.ProfileBean
 import com.apm29.yjw.demo.model.api.CommonApi
 import com.apm29.yjw.demo.model.api.UserApi
 import com.apm29.yjw.demo.utils.getThreadSchedulers
+import com.apm29.yjw.demo.utils.threadAutoSwitch
 
 class RealNameVerifyViewModel : BaseViewModel() {
 
@@ -16,7 +17,7 @@ class RealNameVerifyViewModel : BaseViewModel() {
     fun bankCode() {
         mRetrofit.create(CommonApi::class.java)
                 .bankCode()
-                .compose(getThreadSchedulers())
+                .threadAutoSwitch()
                 .subscribe(
                         object : ErrorHandledObserver<BaseBean<Map<String, String>>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<Map<String, String>>) {
@@ -33,7 +34,7 @@ class RealNameVerifyViewModel : BaseViewModel() {
     fun sendBankSms(card: String, id: String, name: String, mobile: String, bankCode: String) {
         mRetrofit.create(UserApi::class.java)
                 .smsCode(card, mobile, id, bankCode, name)
-                .compose(getThreadSchedulers())
+                .threadAutoSwitch()
                 .subscribe(
                         object : ErrorHandledObserver<BaseBean<String>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<String>) {
@@ -48,7 +49,7 @@ class RealNameVerifyViewModel : BaseViewModel() {
     fun bindCard(sms: String) {
         mRetrofit.create(UserApi::class.java)
                 .bindCard(sms)
-                .compose(getThreadSchedulers())
+                .threadAutoSwitch()
                 .subscribe(
                         object : ErrorHandledObserver<BaseBean<String>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<String>) {
@@ -65,7 +66,7 @@ class RealNameVerifyViewModel : BaseViewModel() {
     fun profileVerify() {
         mRetrofit.create(UserApi::class.java)
                 .profile()
-                .compose(getThreadSchedulers())
+                .threadAutoSwitch()
                 .subscribe(
                         object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<ProfileBean>) {

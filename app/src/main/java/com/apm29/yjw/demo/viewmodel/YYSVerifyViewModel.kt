@@ -7,6 +7,7 @@ import com.apm29.yjw.demo.model.BaseBean
 import com.apm29.yjw.demo.model.ProfileBean
 import com.apm29.yjw.demo.model.api.UserApi
 import com.apm29.yjw.demo.utils.getThreadSchedulers
+import com.apm29.yjw.demo.utils.threadAutoSwitch
 
 class YYSVerifyViewModel :BaseViewModel(){
     var profile: MutableLiveData<BaseBean<ProfileBean>> = MutableLiveData()
@@ -14,7 +15,7 @@ class YYSVerifyViewModel :BaseViewModel(){
     fun profileVerify() {
         mRetrofit.create(UserApi::class.java)
                 .profile()
-                .compose(getThreadSchedulers())
+                .threadAutoSwitch()
                 .subscribe(
                         object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<ProfileBean>) {
@@ -27,7 +28,7 @@ class YYSVerifyViewModel :BaseViewModel(){
     fun mockProfile(debugMock: Boolean) {
         mRetrofit.create(UserApi::class.java)
                 .profile()
-                .compose(getThreadSchedulers())
+                .threadAutoSwitch()
                 .subscribe(
                         object : ErrorHandledObserver<BaseBean<ProfileBean>>(mErrorData, mErrorHandlerImpl,mLoadingData) {
                             override fun onNext(t: BaseBean<ProfileBean>) {

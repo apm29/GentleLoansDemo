@@ -46,7 +46,7 @@ class HomeFragment : BaseFragment<DefaultFragmentViewModel>() {
         super.initData(savedInstanceState)
         mViewModel.profile.observe(this, Observer {
             if (it.success()) {
-                val navController = requireActivity().findNavController(R.id.splash_host_fragment)
+                val navController = requireActivity().findNavController(R.id.app_host_fragment)
                 val profile = it.peekData()
                 if (profile.is_real && profile.yys_auth) {
                     //to apply form

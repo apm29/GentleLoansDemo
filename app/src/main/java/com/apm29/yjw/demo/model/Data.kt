@@ -2,6 +2,8 @@ package com.apm29.yjw.demo.model
 
 import com.apm29.yjw.demo.arch.UserLoginInfo
 import com.apm29.yjw.demo.arch.UserType
+import com.apm29.yjw.demo.viewmodel.ALIPAY_CHANNEL_CODE
+import com.apm29.yjw.demo.viewmodel.TAOBAO_CHANNEL_CODE
 import com.google.gson.annotations.SerializedName
 
 data class BaseBean<T>(val code: Int = 200, val msg: String = "", private val data: T) {
@@ -135,7 +137,7 @@ data class ApplicantInfo(
         var yearIncome: String?,
         var gjjMonth: String?,
         var payType: Int,
-        var term: Int,
+        var term: String?,
         var zxAccount: String?,
         var zxPass: String?,
         var zxVerify: String?,
@@ -146,7 +148,7 @@ data class ApplicantInfo(
 ) {
     constructor() : this(null, null, 0, 0,
             null, null, null, 0, null,
-            null, 0, 0, null, null,null,
+            null, 0, null, null, null,null,
             null,null,null,null)
 }
 open class Assets
@@ -159,10 +161,65 @@ data class Estate(
         var mortgageAmount1:String?,
         var mortgageCreditor2:String?,
         var mortgageAmount2:String?
-):Assets()
+):Assets(){
+    constructor():this(
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+    )
+}
 
 data class Car(
         var owner: String?,
         var brand: String?,
         var color: String?
 ):Assets()
+
+
+data class LoanLog(
+        @SerializedName("total_amount") var totalAmount:String?,
+        @SerializedName("interest_rate")var interestRate:String?,
+        @SerializedName("term")var term:String?,
+        @SerializedName("repayment_type")var repaymentType:Int?,
+        @SerializedName("repayment_type_comment")var repaymentTypeComment:String?,
+        @SerializedName("actual_time")var actualTime:String?,
+        @SerializedName("rest_amount")var restAmount:Double?,
+        @SerializedName("total_interest")var totalInterest:Double?,
+        @SerializedName("total_fine")var totalFine:Double?,
+        @SerializedName("total_overdue")var totalOverdue:Double?,
+        @SerializedName("bank_name")var bankName:String?,
+        var id:String?,
+        var status:Int?
+){
+    constructor():this(
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+    )
+}
+
+
+data class DataMagicBox(
+        var idCardNo: String, var mobile: String,var realName: String,var channelCode: String
+){
+    val type:Int = when (channelCode){
+        ALIPAY_CHANNEL_CODE->0
+        TAOBAO_CHANNEL_CODE->1
+        else->-1
+    }
+}

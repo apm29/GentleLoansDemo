@@ -1,6 +1,7 @@
 package com.apm29.yjw.demo.model.api
 
 import com.apm29.yjw.demo.model.BaseBean
+import com.apm29.yjw.demo.model.LoanLog
 import com.apm29.yjw.demo.model.LoginBean
 import com.apm29.yjw.demo.model.ProfileBean
 import io.reactivex.Observable
@@ -8,9 +9,6 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Headers
 import retrofit2.http.POST
-
-
-
 
 
 interface UserApi {
@@ -79,4 +77,28 @@ interface UserApi {
     @POST("/v1/user/contact")
     fun contact(@Field("biz_content") mContactList: String): Observable<BaseBean<String>>
 
+
+    /**
+     * 贷款记录
+     */
+    @FormUrlEncoded
+    @POST("/v1/user/application_history")
+    fun applicationHistory(
+            @Field("page") page:Int
+    ):Observable<BaseBean<List<LoanLog>>>
+
+    /**
+     *
+     * @param mobile 登录的手机号
+     * @param taskId 认证的任务id
+     * @param type 1支付宝2淘宝
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/mohe/alipay")
+    fun alipay(
+            @Field("mobile") mobile: String,
+            @Field("task_id") taskId: String,
+            @Field("type") type: Int
+    ): Observable<BaseBean<String>>
 }

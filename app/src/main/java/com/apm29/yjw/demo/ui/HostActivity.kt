@@ -1,13 +1,17 @@
 package com.apm29.yjw.demo.ui
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import cn.jpush.android.api.JPushInterface
 import com.apm29.yjw.demo.arch.BaseActivity
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultActivityComponent
 import com.apm29.yjw.demo.di.module.DefaultActivityModule
+import com.apm29.yjw.demo.viewmodel.CommunicateViewModel
 import com.apm29.yjw.demo.viewmodel.DefaultActivityViewModel
 import com.apm29.yjw.gentleloansdemo.R
 
@@ -36,6 +40,19 @@ class HostActivity : BaseActivity<DefaultActivityViewModel>() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return findNavController(R.id.splash_host_fragment).navigateUp()||super.onSupportNavigateUp()
+        return findNavController(R.id.app_host_fragment).navigateUp()||super.onSupportNavigateUp()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.extras.let {
+            val json = it?.getString(JPushInterface.EXTRA_EXTRA)
+            val communicateViewModel = ViewModelProviders.of(this).get(CommunicateViewModel::class.java)
+            communicateViewModel.onPushClick(json?:"")
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

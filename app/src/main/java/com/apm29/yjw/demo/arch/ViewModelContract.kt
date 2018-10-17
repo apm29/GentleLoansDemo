@@ -1,9 +1,11 @@
 package com.apm29.yjw.demo.arch
 
 import android.os.Bundle
+import android.util.EventLog
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.MutableLiveData
 import com.apm29.yjw.demo.di.component.AppComponent
+import com.apm29.yjw.demo.model.Event
 import io.reactivex.disposables.CompositeDisposable
 
 interface ViewModelContract {
@@ -28,6 +30,7 @@ interface ViewModelContract {
         var mDisposables: CompositeDisposable
         var mErrorData: MutableLiveData<String>
         var mLoadingData: MutableLiveData<Boolean>
+        var mToastData: MutableLiveData<Event<String>>
 
         /**
          * called just after #IView.buildComponent(AppComponent)

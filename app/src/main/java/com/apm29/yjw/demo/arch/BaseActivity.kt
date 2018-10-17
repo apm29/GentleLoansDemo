@@ -1,15 +1,11 @@
 package com.apm29.yjw.demo.arch
 
-import android.app.NotificationManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.apm29.yjw.demo.app.FragmentLifecycleCallBackAdapter
 import com.apm29.yjw.demo.di.component.AppComponent
-import com.apm29.yjw.demo.ui.dialog.WarningDialog
 import javax.inject.Inject
 import androidx.appcompat.app.AppCompatDelegate
-import com.apm29.yjw.gentleloansdemo.R
 
 
 abstract class BaseActivity<VM : ViewModelContract.IViewModel> : AppCompatActivity(), ViewModelContract.IView {
@@ -32,12 +28,12 @@ abstract class BaseActivity<VM : ViewModelContract.IViewModel> : AppCompatActivi
         super.onCreate(savedInstanceState)
         setContentView(setupViewLayout(savedInstanceState))
         setupViews(savedInstanceState)
-        if (observingError) {
-            mViewModel.mErrorData.observe(this, Observer {
-                WarningDialog.getInstance(getString(R.string.app_name), it)
-                        .show(supportFragmentManager)
-            })
-        }
+//        if (observingError) {
+//            mViewModel.mErrorData.observe(this, Observer {
+//                LoadingDialog.getInstance()
+//                        ?.show()
+//            })
+//        }
 
     }
 

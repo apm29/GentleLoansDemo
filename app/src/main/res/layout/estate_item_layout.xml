@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_foreground"
+    android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierTitle"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tvOwner,tvArea,tvMortgage1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierSuffix"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="unitArea"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray_background"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvEstateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:text="房产信息" />
+
+        <com.apm29.yjw.demo.ui.widget.IconFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/减去" />
+
+    </LinearLayout>
+
+
+    <com.apm29.yjw.demo.ui.widget.IconFontTextView
+        android:id="@+id/okOwner"
+        style="@style/SliceTitleStyle.Ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/remove" />
+
+    <TextView
+        android:id="@+id/tvOwner"
+        style="@style/SliceTitleStyle.Header"
+        android:text="房产所有人"
+        app:layout_constraintBaseline_toBaselineOf="@id/okOwner"
+        app:layout_constraintStart_toEndOf="@id/okOwner" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etOwner"
+        style="@style/EditLayoutStyle"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvOwner"
+        app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+        app:layout_constraintStart_toEndOf="@id/barrierTitle"
+        app:layout_constraintTop_toTopOf="@id/tvOwner">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditContentStyle"
+            android:hint="请输入房产所有人" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.apm29.yjw.demo.ui.widget.IconFontTextView
+        android:id="@+id/okArea"
+        style="@style/SliceTitleStyle.Ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/okOwner" />
+
+    <TextView
+        android:id="@+id/tvArea"
+        style="@style/SliceTitleStyle.Header"
+        android:text="房产面积"
+        app:layout_constraintBaseline_toBaselineOf="@id/okArea"
+        app:layout_constraintStart_toEndOf="@id/okArea" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etArea"
+        style="@style/EditLayoutStyle"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvArea"
+        app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+        app:layout_constraintStart_toEndOf="@id/barrierTitle"
+        app:layout_constraintTop_toTopOf="@id/tvArea">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditContentStyle"
+            android:hint="请输入房产面积" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/unitArea"
+        style="@style/SliceContent.SuffixUnit"
+        android:text="平"
+        app:layout_constraintBaseline_toBaselineOf="@id/okArea"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.apm29.yjw.demo.ui.widget.IconFontTextView
+        android:id="@+id/okLocation"
+        style="@style/SliceTitleStyle.Ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/okArea" />
+
+    <TextView
+        android:id="@+id/tvLocation"
+        style="@style/SliceTitleStyle.Header"
+        android:text="房产地址"
+        app:layout_constraintBaseline_toBaselineOf="@id/okLocation"
+        app:layout_constraintStart_toEndOf="@id/okLocation" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etLocation"
+        style="@style/EditLayoutStyle"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvLocation"
+        app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+        app:layout_constraintStart_toEndOf="@id/barrierTitle"
+        app:layout_constraintTop_toTopOf="@id/tvLocation">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditContentStyle"
+            android:hint="请输入房产地址" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.apm29.yjw.demo.ui.widget.IconFontTextView
+        android:id="@+id/okMortgageStatus"
+        style="@style/SliceTitleStyle.Ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/okLocation" />
+
+    <TextView
+        android:id="@+id/tvMortgageStatus"
+        style="@style/SliceTitleStyle.Header"
+        android:text="抵押情况"
+        app:layout_constraintBaseline_toBaselineOf="@id/okMortgageStatus"
+        app:layout_constraintStart_toEndOf="@id/okMortgageStatus" />
+
+    <TextView
+        android:id="@+id/pickerMortgage"
+        style="@style/SliceContent.Picker"
+        android:drawableEnd="@mipmap/down_arrow"
+        android:drawablePadding="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/tvMortgageStatus"
+        app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+        app:layout_constraintStart_toStartOf="@id/barrierTitle"
+        app:layout_constraintTop_toTopOf="@id/tvMortgageStatus" />
+
+    <com.apm29.yjw.demo.ui.widget.IconFontTextView
+        android:id="@+id/okMortgage1"
+        style="@style/SliceTitleStyle.Ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/okMortgageStatus" />
+
+    <TextView
+        android:id="@+id/tvMortgage1"
+        style="@style/SliceTitleStyle.Header"
+        android:text="抵押债权人1"
+        app:layout_constraintBaseline_toBaselineOf="@id/okMortgage1"
+        app:layout_constraintStart_toEndOf="@id/okMortgage1" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etMortgage1"
+        style="@style/EditLayoutStyle"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvMortgage1"
+        app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+        app:layout_constraintStart_toEndOf="@id/barrierTitle"
+        app:layout_constraintTop_toTopOf="@id/tvMortgage1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditContentStyle"
+            android:hint="请输入抵押债权人1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.apm29.yjw.demo.ui.widget.IconFontTextView
+        android:id="@+id/okMortgageValue1"
+        style="@style/SliceTitleStyle.Ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/okMortgage1" />
+
+    <TextView
+        android:id="@+id/tvMortgageValue1"
+        style="@style/SliceTitleStyle.Header"
+        android:text="抵押金额"
+        app:layout_constraintBaseline_toBaselineOf="@id/okMortgageValue1"
+        app:layout_constraintStart_toEndOf="@id/okMortgageValue1" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etMortgageValue1"
+        style="@style/EditLayoutStyle"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvMortgageValue1"
+        app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+        app:layout_constraintStart_toEndOf="@id/barrierTitle"
+        app:layout_constraintTop_toTopOf="@id/tvMortgageValue1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditContentStyle"
+            android:hint="请输入抵押金额" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/unitMortgageValue1"
+        style="@style/SliceContent.SuffixUnit"
+        android:text="元"
+        app:layout_constraintBaseline_toBaselineOf="@id/okMortgageValue1"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.apm29.yjw.demo.ui.widget.IconFontTextView
+        android:id="@+id/okMortgage2"
+        style="@style/SliceTitleStyle.Ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/okMortgageValue1" />
+
+    <TextView
+        android:id="@+id/tvMortgage2"
+        style="@style/SliceTitleStyle.Header"
+        android:text="抵押债权人2"
+        app:layout_constraintBaseline_toBaselineOf="@id/okMortgage2"
+        app:layout_constraintStart_toEndOf="@id/okMortgage2" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etMortgage2"
+        style="@style/EditLayoutStyle"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvMortgage2"
+        app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+        app:layout_constraintStart_toEndOf="@id/barrierTitle"
+        app:layout_constraintTop_toTopOf="@id/tvMortgage2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditContentStyle"
+            android:hint="请输入抵押债权人2" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.apm29.yjw.demo.ui.widget.IconFontTextView
+        android:id="@+id/okMortgageValue2"
+        style="@style/SliceTitleStyle.Ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/okMortgage2" />
+
+    <TextView
+        android:id="@+id/tvMortgageValue2"
+        style="@style/SliceTitleStyle.Header"
+        android:text="抵押金额"
+        app:layout_constraintBaseline_toBaselineOf="@id/okMortgageValue2"
+        app:layout_constraintStart_toEndOf="@id/okMortgageValue2" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etMortgageValue2"
+        style="@style/EditLayoutStyle"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvMortgageValue2"
+        app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+        app:layout_constraintStart_toEndOf="@id/barrierTitle"
+        app:layout_constraintTop_toTopOf="@id/tvMortgageValue2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditContentStyle"
+            android:hint="请输入抵押金额" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/unitMortgageValue2"
+        style="@style/SliceContent.SuffixUnit"
+        android:text="元"
+        app:layout_constraintBaseline_toBaselineOf="@id/okMortgageValue2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_mortgages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="etMortgageValue1,tvMortgageStatus,tvMortgage1,okMortgageValue2,okMortgage2,tvMortgageValue2,unitMortgageValue2,pickerMortgage,tvMortgageValue1,okMortgageValue1,etMortgage2,okMortgage1,etMortgageValue2,unitMortgageValue1,etMortgage1,tvMortgage2,okMortgageStatus" />
+</androidx.constraintlayout.widget.ConstraintLayout>

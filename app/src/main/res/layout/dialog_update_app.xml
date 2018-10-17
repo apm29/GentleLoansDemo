@@ -17,6 +17,7 @@
         android:layout_margin="12dp"
         app:cardElevation="12dp"
         app:contentPadding="12dp"
+        app:contentPaddingTop="0dp"
         app:cardBackgroundColor="@color/white_foreground"
         >
 
@@ -37,6 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:cardCornerRadius="30dp"
+                android:layout_marginTop="12dp"
                 app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@id/guideline_p30"
@@ -47,8 +49,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottieAnimationView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="@id/guideline_p30"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,18 +64,21 @@
             <TextView
                 android:id="@+id/tvTitle"
                 android:tag="beta_title"
+                tools:text="客户端测试1.3.0.35"
                 android:textColor="@color/white_foreground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                app:layout_constrainedWidth="true"
+                android:maxLines="10"
                 app:layout_constraintBottom_toBottomOf="@+id/guideline_p30"
                 app:layout_constraintEnd_toStartOf="@+id/lottieAnimationView"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="title" />
+                />
 
             <TextView
                 android:textColor="@color/dark_text_color"
@@ -124,10 +129,11 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="12dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="12dp"
                 android:tag="beta_cancel_button"
-                android:text="取消"
+                android:text="@string/cancel"
                 android:textColor="@color/colorAccent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView5"
@@ -141,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:tag="beta_confirm_button"
-                android:text="确定"
+                android:padding="12dp"
+                android:text="@string/confirm"
                 android:layout_marginTop="12dp"
                 android:textColor="@color/colorAccent"
                 app:layout_constraintBottom_toBottomOf="parent"

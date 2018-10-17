@@ -19,7 +19,7 @@ class FragmentLifecycleCallBackAdapter(private val appComponent: AppComponent): 
     private val TAG = FragmentLifecycleCallBackAdapter::class.java.simpleName
 
     override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentViewCreated  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentViewCreated  ${f::class.java.simpleName}")
         super.onFragmentViewCreated(fm, f, v, savedInstanceState)
     }
 
@@ -29,7 +29,7 @@ class FragmentLifecycleCallBackAdapter(private val appComponent: AppComponent): 
     }
 
     override fun onFragmentAttached(fm: FragmentManager, f: Fragment, context: Context) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentAttached  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentAttached  ${f::class.java.simpleName}")
         super.onFragmentAttached(fm, f, context)
         if (f is ViewModelContract.IView){
             f.buildupComponent(appComponent)
@@ -37,57 +37,57 @@ class FragmentLifecycleCallBackAdapter(private val appComponent: AppComponent): 
     }
 
     override fun onFragmentViewDestroyed(fm: FragmentManager, f: Fragment) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentViewDestroyed  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentViewDestroyed  ${f::class.java.simpleName}")
         super.onFragmentViewDestroyed(fm, f)
     }
 
     override fun onFragmentDetached(fm: FragmentManager, f: Fragment) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentDetached  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentDetached  ${f::class.java.simpleName}")
         super.onFragmentDetached(fm, f)
     }
 
     override fun onFragmentActivityCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentActivityCreated   ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentActivityCreated   ${f::class.java.simpleName}")
         super.onFragmentActivityCreated(fm, f, savedInstanceState)
     }
 
     override fun onFragmentStopped(fm: FragmentManager, f: Fragment) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentStopped  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentStopped  ${f::class.java.simpleName}")
         super.onFragmentStopped(fm, f)
     }
 
     override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentResumed  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentResumed  ${f::class.java.simpleName}")
         super.onFragmentResumed(fm, f)
     }
 
     override fun onFragmentPreAttached(fm: FragmentManager, f: Fragment, context: Context) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentPreAttached  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentPreAttached  ${f::class.java.simpleName}")
         super.onFragmentPreAttached(fm, f, context)
     }
 
     override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentDestroyed  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentDestroyed  ${f::class.java.simpleName}")
         super.onFragmentDestroyed(fm, f)
     }
 
     override fun onFragmentSaveInstanceState(fm: FragmentManager, f: Fragment, outState: Bundle) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentSaveInstanceState  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentSaveInstanceState  ${f::class.java.simpleName}")
         super.onFragmentSaveInstanceState(fm, f, outState)
     }
 
     override fun onFragmentStarted(fm: FragmentManager, f: Fragment) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentStarted  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentStarted  ${f::class.java.simpleName}")
         super.onFragmentStarted(fm, f)
     }
 
     override fun onFragmentPreCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentPreCreated   ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentPreCreated   ${f::class.java.simpleName}")
         super.onFragmentPreCreated(fm, f, savedInstanceState)
     }
 
     override fun onFragmentPaused(fm: FragmentManager, f: Fragment) {
-        println("FragmentLifecycleCallBackAdapter.onFragmentPaused  ${f::class.java.simpleName}")
+        //println("FragmentLifecycleCallBackAdapter.onFragmentPaused  ${f::class.java.simpleName}")
         super.onFragmentPaused(fm, f)
     }
 }

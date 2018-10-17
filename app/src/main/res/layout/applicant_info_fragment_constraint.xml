@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:background="@color/white_foreground"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierTitle"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="tvGjjMonth,tvMarital,tvName,tvIdCard,tvGender,tvCompany,tvDepartment,tvLevel,tvStaff,tvYearIncome,tvRepaymentType,tvTerm,tvZxAccount,tvZxPass,tvZxVerify,tvGjjAccount,tvGjjPass,tvZwAccount,tvZwPass"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierSuffix"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                app:barrierDirection="start"
+                app:constraint_referenced_ids="arrowGender,arrowMarital,arrowStaff,unitYearIncome,unitGjj,arrowPayType,unitTerm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okName"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titlePersonal" />
+
+            <TextView
+                android:id="@+id/tvName"
+                style="@style/SliceTitleStyle.Header"
+                android:text="姓名"
+                app:layout_constraintBaseline_toBaselineOf="@id/okName"
+                app:layout_constraintLeft_toRightOf="@id/okName" />
+
+            <TextView
+                android:id="@+id/etName"
+                style="@style/SliceContent.Text"
+                android:text="圣诞节上课"
+                android:hint="@string/hint_name"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvName"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okIdCard"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okName" />
+
+            <TextView
+                android:id="@+id/tvIdCard"
+                style="@style/SliceTitleStyle.Header"
+                android:text="身份证号"
+                app:layout_constraintBaseline_toBaselineOf="@id/okIdCard"
+                app:layout_constraintStart_toEndOf="@id/okIdCard" />
+
+            <TextView
+                android:id="@+id/etIdCard"
+                style="@style/SliceContent.Text"
+                android:text="330681199112151718"
+                android:hint="@string/hint_id_card"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvIdCard"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okGender"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okIdCard" />
+
+            <TextView
+                android:id="@+id/tvGender"
+                style="@style/SliceTitleStyle.Header"
+                android:text="性别"
+                app:layout_constraintBaseline_toBaselineOf="@id/okGender"
+                app:layout_constraintStart_toEndOf="@id/okGender" />
+
+            <TextView
+                android:id="@+id/pickerGender"
+                android:hint="@string/hint_gender"
+                style="@style/SliceContent.Picker"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvGender"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/arrowGender"
+                style="@style/SliceContent.SuffixArrow"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvGender"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okMarital"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okGender" />
+
+            <TextView
+                android:id="@+id/tvMarital"
+                style="@style/SliceTitleStyle.Header"
+                android:text="婚姻状况"
+                app:layout_constraintBaseline_toBaselineOf="@id/okMarital"
+                app:layout_constraintStart_toEndOf="@id/okMarital" />
+
+            <TextView
+                android:id="@+id/pickerMarital"
+                style="@style/SliceContent.Picker"
+                android:hint="@string/hint_marital"
+                android:layout_width="0dp"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvMarital"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/arrowMarital"
+                style="@style/SliceContent.SuffixArrow"
+                app:layout_constraintBaseline_toBaselineOf="@id/pickerMarital"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okCompany"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@id/titleJob" />
+
+            <TextView
+                android:id="@+id/tvCompany"
+                style="@style/SliceTitleStyle.Header"
+                android:text="单位"
+                app:layout_constraintBaseline_toBaselineOf="@id/okCompany"
+                app:layout_constraintStart_toEndOf="@id/okCompany" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etCompany"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_company_name"
+                app:layout_constraintBottom_toBottomOf="@id/tvCompany"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvCompany">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okDepartment"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okCompany" />
+
+            <TextView
+                android:id="@+id/tvDepartment"
+                style="@style/SliceTitleStyle.Header"
+                android:text="部门"
+                app:layout_constraintBaseline_toBaselineOf="@id/okDepartment"
+                app:layout_constraintStart_toEndOf="@id/okDepartment" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etDepartment"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_department"
+
+                app:layout_constraintBottom_toBottomOf="@id/tvDepartment"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvDepartment">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okLevel"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okDepartment" />
+
+            <TextView
+                android:id="@+id/tvLevel"
+                style="@style/SliceTitleStyle.Header"
+                android:text="职位"
+                app:layout_constraintBaseline_toBaselineOf="@id/okLevel"
+                app:layout_constraintStart_toEndOf="@id/okLevel" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etLevel"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_level"
+                app:layout_constraintBottom_toBottomOf="@id/tvLevel"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvLevel">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okStaff"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okLevel" />
+
+            <TextView
+                android:id="@+id/tvStaff"
+                style="@style/SliceTitleStyle.Header"
+                android:text="编制"
+                app:layout_constraintBaseline_toBaselineOf="@id/okStaff"
+                app:layout_constraintStart_toEndOf="@id/okStaff" />
+
+            <TextView
+                android:id="@+id/pickerStaff"
+                style="@style/SliceContent.Picker"
+                android:hint="@string/hint_staff"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvStaff"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/arrowStaff"
+                style="@style/SliceContent.SuffixArrow"
+                app:layout_constraintBaseline_toBaselineOf="@id/pickerStaff"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okYearIncome"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okStaff" />
+
+            <TextView
+                android:id="@+id/tvYearIncome"
+                style="@style/SliceTitleStyle.Header"
+                android:text="年收入"
+                app:layout_constraintBaseline_toBaselineOf="@id/okYearIncome"
+                app:layout_constraintStart_toEndOf="@id/okYearIncome" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etYearIncome"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_year_income"
+                app:layout_constraintBottom_toBottomOf="@id/tvYearIncome"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvYearIncome">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/unitYearIncome"
+                style="@style/SliceContent.SuffixUnit"
+                android:text="万元"
+                app:layout_constraintBottom_toBottomOf="@id/tvYearIncome"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvYearIncome" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okGjjMonth"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okYearIncome" />
+
+            <TextView
+                android:id="@+id/tvGjjMonth"
+                style="@style/SliceTitleStyle.Header"
+                android:text="公积金月缴"
+                app:layout_constraintBaseline_toBaselineOf="@id/okGjjMonth"
+                app:layout_constraintStart_toEndOf="@id/okGjjMonth" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etGjjMonth"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_gjj_month"
+                app:layout_constraintBottom_toBottomOf="@id/tvGjjMonth"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvGjjMonth">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/unitGjj"
+                style="@style/SliceContent.SuffixUnit"
+                android:text="元"
+                app:layout_constraintBottom_toBottomOf="@id/tvGjjMonth"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvGjjMonth" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okPayType"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okGjjMonth" />
+
+            <TextView
+                android:id="@+id/tvRepaymentType"
+                style="@style/SliceTitleStyle.Header"
+                android:text="还款方式"
+                app:layout_constraintBaseline_toBaselineOf="@id/okPayType"
+                app:layout_constraintStart_toEndOf="@id/okPayType" />
+
+            <TextView
+                android:id="@+id/pickerPayType"
+                style="@style/SliceContent.Picker"
+                android:hint="@string/hint_pey_type"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvRepaymentType"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/arrowPayType"
+                style="@style/SliceContent.SuffixArrow"
+                app:layout_constraintBaseline_toBaselineOf="@id/pickerPayType"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okTerm"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okPayType" />
+
+            <TextView
+                android:id="@+id/tvTerm"
+                style="@style/SliceTitleStyle.Header"
+                android:text="还款期限"
+                app:layout_constraintBaseline_toBaselineOf="@id/okTerm"
+                app:layout_constraintStart_toEndOf="@id/okTerm" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etTerm"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_term"
+                app:boxBackgroundMode="none"
+                app:layout_constraintBottom_toBottomOf="@id/tvTerm"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toEndOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvTerm">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/unitTerm"
+                style="@style/SliceContent.SuffixUnit"
+                android:text="月"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvTerm"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okZxAccount"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okTerm" />
+
+            <TextView
+                android:id="@+id/tvZxAccount"
+                style="@style/SliceTitleStyle.Header"
+                android:text="征信账号"
+                app:layout_constraintBaseline_toBaselineOf="@id/okZxAccount"
+                app:layout_constraintStart_toEndOf="@id/okZxAccount" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etZxAccount"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_zx_account"
+                app:layout_constraintBottom_toBottomOf="@id/tvZxAccount"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvZxAccount">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/OkZxPass"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okZxAccount" />
+
+            <TextView
+                android:id="@+id/tvZxPass"
+                style="@style/SliceTitleStyle.Header"
+                android:text="征信密码"
+                app:layout_constraintBaseline_toBaselineOf="@id/OkZxPass"
+                app:layout_constraintStart_toEndOf="@id/OkZxPass" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etZxPass"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_zx_pass"
+                app:layout_constraintBottom_toBottomOf="@id/tvZxPass"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvZxPass">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okZxVerify"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/OkZxPass" />
+
+            <TextView
+                android:id="@+id/tvZxVerify"
+                style="@style/SliceTitleStyle.Header"
+                android:text="征信验证码"
+                app:layout_constraintBaseline_toBaselineOf="@id/okZxVerify"
+                app:layout_constraintStart_toEndOf="@id/okZxVerify" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etZxVerify"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_zx_verify"
+                app:layout_constraintBottom_toBottomOf="@id/tvZxVerify"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvZxVerify">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okGjjAccount"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okZxVerify" />
+
+            <TextView
+                android:id="@+id/tvGjjAccount"
+                style="@style/SliceTitleStyle.Header"
+                android:text="公积金账号"
+                app:layout_constraintBaseline_toBaselineOf="@id/okGjjAccount"
+                app:layout_constraintStart_toEndOf="@id/okGjjAccount" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etGjjAccount"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_gjj_account"
+                app:layout_constraintBottom_toBottomOf="@id/tvGjjAccount"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+                app:layout_constraintStart_toEndOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvGjjAccount">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okGjjPass"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okGjjAccount" />
+
+            <TextView
+                android:id="@+id/tvGjjPass"
+                style="@style/SliceTitleStyle.Header"
+                android:text="公积金密码"
+                app:layout_constraintBaseline_toBaselineOf="@id/okGjjPass"
+                app:layout_constraintStart_toEndOf="@id/okGjjPass" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etGjjPass"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_gjj_pass"
+                app:layout_constraintBottom_toBottomOf="@id/tvGjjPass"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvGjjPass">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okZwAccount"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okGjjPass" />
+
+            <TextView
+                android:id="@+id/tvZwAccount"
+                style="@style/SliceTitleStyle.Header"
+                android:text="政务网账号"
+                app:layout_constraintBaseline_toBaselineOf="@id/okZwAccount"
+                app:layout_constraintStart_toEndOf="@id/okZwAccount" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etZwAccount"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_zw_account"
+                app:layout_constraintBottom_toBottomOf="@id/tvZwAccount"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvZwAccount">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okZwPass"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okZwAccount" />
+
+            <TextView
+                android:id="@+id/tvZwPass"
+                style="@style/SliceTitleStyle.Header"
+                android:text="政务网密码"
+                app:layout_constraintBaseline_toBaselineOf="@id/okZwPass"
+                app:layout_constraintStart_toEndOf="@id/okZwPass" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etZwPass"
+                style="@style/EditLayoutStyle"
+                android:hint="@string/hint_zw_pass"
+                app:layout_constraintBottom_toBottomOf="@id/tvZwPass"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@id/tvZwPass">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/btnSave"
+                style="@style/button_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:text="@string/save_"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okZwPass" />
+
+            <View
+                style="@style/EditDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okName" />
+
+            <View
+                style="@style/EditDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okIdCard" />
+
+            <View
+                style="@style/EditDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okGender" />
+
+            <TextView
+                android:id="@+id/titleJob"
+                style="@style/SlicePartTitle"
+                android:text="职业状况"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okMarital" />
+
+            <TextView
+                android:id="@+id/titlePersonal"
+                style="@style/SlicePartTitle"
+                android:text="个人信息"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

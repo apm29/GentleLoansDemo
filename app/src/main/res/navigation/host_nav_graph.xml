@@ -49,6 +49,27 @@
         <action
             android:id="@+id/action_mainFragment_to_formListFragment"
             app:destination="@id/registerFormFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_loanLogListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/loanLogListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_personalInfoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/personalInfoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_aboutUsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/aboutUsFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_loginFragment"
@@ -117,11 +138,38 @@
             app:popEnterAnim="@anim/slide_in_left"
             android:id="@+id/action_registerFormFragment_to_applicantInfoFragment"
             app:destination="@id/applicantInfoFragment" />
+        <action
+            android:id="@+id/action_registerFormFragment_to_familyAssetsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/familyAssetsFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/applicant_info_fragment"
         android:id="@+id/applicantInfoFragment"
         android:name="com.apm29.yjw.demo.ui.form.register.ApplicantInfoFragment"
         android:label="申请人信息表" />
+    <fragment
+        android:id="@+id/loanLogListFragment"
+        android:name="com.apm29.yjw.demo.ui.list.LoanLogListFragment"
+        tools:layout = "@layout/base_list_fragment"
+        android:label="贷款记录" />
+    <fragment
+        android:id="@+id/personalInfoFragment"
+        android:name="com.apm29.yjw.demo.ui.main.PersonalInfoFragment"
+        tools:layout = "@layout/personal_info_fragment"
+        android:label="个人信息" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.apm29.yjw.demo.ui.main.AboutUsFragment"
+        tools:layout = "@layout/about_us_fragment"
+        android:label="关于我们" />
+    <fragment
+        android:id="@+id/familyAssetsFragment"
+        android:name="com.apm29.yjw.demo.ui.form.register.FamilyAssetsFragment"
+        tools:layout = "@layout/family_assets_fragment"
+        android:label="家庭财产" />
 
 </navigation>

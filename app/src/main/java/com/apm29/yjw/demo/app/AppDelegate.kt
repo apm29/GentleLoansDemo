@@ -1,7 +1,5 @@
 package com.apm29.yjw.demo.app
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Process
@@ -15,6 +13,8 @@ import com.tencent.bugly.Bugly
 import javax.inject.Inject
 import com.tencent.bugly.crashreport.CrashReport.UserStrategy
 import android.text.TextUtils
+import cn.fraudmetrix.octopus.aspirit.main.OctopusManager
+import cn.jpush.android.api.JPushInterface
 import com.apm29.yjw.gentleloansdemo.BuildConfig
 import com.apm29.yjw.gentleloansdemo.R
 import com.tencent.bugly.beta.Beta
@@ -47,6 +47,20 @@ class AppDelegate(val context: Context) : App, AppLifecycle {
         application.registerActivityLifecycleCallbacks(ActivityLifecycleCallBackAdapter(appComponentInjected))
         //bugly
         initBugly(application)
+        //Jpush
+        initJPush(application)
+        //数据魔盒初始化
+        initMagicBox(application)
+
+    }
+
+    private fun initMagicBox(application: Application) {
+        OctopusManager.getInstance().init(application, "youzd_mohe", "cf6d1c6894cc4386a31968dd17e7500b");
+    }
+
+    private fun initJPush(application: Application) {
+        JPushInterface.setDebugMode(BuildConfig.DEBUG)
+        JPushInterface.init(application)
     }
 
     private fun initBugly(application: Application) {
@@ -98,7 +112,3 @@ class AppDelegate(val context: Context) : App, AppLifecycle {
     }
 }
 
-@SuppressLint("StaticFieldLeak")
-object ActivityManager {
-    var currentActivity: Activity? = null
-}

@@ -10,19 +10,19 @@ import io.reactivex.disposables.Disposable
 abstract class ErrorHandledObserver<T>(
         private val errorData: MutableLiveData<String>,
         private val responseErrorHandler: ResponseErrorHandler,
-        private val mLoadingData: MutableLiveData<Boolean>
+        private val mLoadingData: MutableLiveData<Boolean>?
 ) : Observer<T> {
     val handler =Handler(Looper.getMainLooper())
     val context: Context = responseErrorHandler.getContext()
     override fun onComplete() {
         handler.post {
-            mLoadingData.value = false
+            mLoadingData?.value = false
         }
     }
 
     override fun onSubscribe(d: Disposable) {
         handler.post {
-            mLoadingData.value = true
+            mLoadingData?.value = true
         }
     }
 
@@ -30,7 +30,7 @@ abstract class ErrorHandledObserver<T>(
 
     override fun onError(e: Throwable) {
         handler.post {
-            mLoadingData.value = false
+            mLoadingData?.value = false
         }
         val error = responseErrorHandler.handleResponseError(context, e)
         errorMsg(error)
