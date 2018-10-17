@@ -6,7 +6,7 @@ import com.apm29.yjw.demo.ui.list.VH
 import com.apm29.yjw.demo.ui.list.base.BaseEmptyAdapter
 import com.apm29.yjw.gentleloansdemo.R
 
-class LoanLogAdapter(list: List<LoanLog>, bindOp: (VH, LoanLog) -> Unit) : BaseEmptyAdapter<LoanLog, VH>(list = list,bindOp = bindOp) {
+class LoanLogAdapter(list: List<LoanLog>, bindOp: (VH, LoanLog,Int) -> Unit) : BaseEmptyAdapter<LoanLog, VH>(list = list,bindOp = bindOp) {
     override fun createEmptyHolder(inflate: View): VH {
         return VH(inflate)
     }

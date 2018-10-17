@@ -118,10 +118,15 @@
     <string name="text_empty_list">空空如也..</string>
     <string name="text_easter_egg">没事别乱点,会出Bug</string>
 
-
+    <string name="text_estate">房产信息</string>
+    <string name="text_car">车产信息</string>
     <string name="about_us">公司介绍\n
         <h>\t\t浙江君磊资产管理有限公司始建于2016年11月07日，是专注于基金/证券/期货/投资行业的民营企业公司，公司坐落于美丽的浙江省杭州，以始终坚持“诚信为本、客户至上、互惠互利，开拓创新”为企业宗旨，本着“本质为本、专业执着、精益求精”的经营销售理念，力求给客户提供全方位优质服务。君磊资管，你身边的金融服务专家，全新服务体验，银行团队全程服务，规范经营，健康发展，致力于打造用户一站式的融资体验。
             \n</h>
         联系我们：0571-86809823\n
     </string>
+
+    <string name="apply_info_form_notice">本人保证上述内容真实、合法、有效，如有问题，本人愿承担相应的法律责任（包括不限于民事责任及刑事责任等）。</string>
+
+    <string name="hint_add">点击添加新项</string>
 </resources>

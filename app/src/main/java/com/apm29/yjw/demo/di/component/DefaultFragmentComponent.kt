@@ -2,10 +2,10 @@ package com.apm29.yjw.demo.di.component
 
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.di.scope.ActivityScope
+import com.apm29.yjw.demo.ui.form.information.*
 import com.apm29.yjw.demo.ui.form.register.ApplicantInfoFragment
 import com.apm29.yjw.demo.ui.form.register.FamilyAssetsFragment
 import com.apm29.yjw.demo.ui.form.register.RegisterFormFragment
-import com.apm29.yjw.demo.ui.list.base.BaseListFragment
 import com.apm29.yjw.demo.ui.list.LoanLogListFragment
 import com.apm29.yjw.demo.ui.main.*
 import com.apm29.yjw.demo.ui.splash.MainFragment
@@ -42,4 +42,11 @@ interface DefaultFragmentComponent {
     fun inject(loanLogListFragment: LoanLogListFragment)
     fun inject(personalInfoFragment: PersonalInfoFragment)
     fun inject(aboutUsFragment: AboutUsFragment)
+    fun inject(applicantInfoManagerFragment: ApplicantInfoManagerFragment)
+    fun inject(personalInfoFromFragment: PersonalInfoFromFragment)
+    fun inject(contactsInfoFormFragment: ContactsInfoFormFragment)
+    fun inject(loanUsageInfoFromFragment: LoanUsageInfoFromFragment)
+    fun inject(assetsInfoFromFragment: AssetsInfoFromFragment)
+    fun inject(jobInfoFromFragment: JobInfoFromFragment)
+    fun inject(imageInfoFromFragment: ImageInfoFromFragment)
 }

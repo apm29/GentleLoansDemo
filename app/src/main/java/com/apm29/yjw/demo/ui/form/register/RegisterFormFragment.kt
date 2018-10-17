@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import cn.fraudmetrix.octopus.aspirit.bean.OctopusParam
 import cn.fraudmetrix.octopus.aspirit.main.OctopusManager
 import com.apm29.yjw.demo.app.ActivityManager
@@ -42,12 +41,10 @@ class RegisterFormFragment : BaseFragment<DefaultFragmentViewModel>(){
 
         val navController = ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
         layoutApplicantInfo.setOnClickListener {
-            tvApplicantInfo.isEnabled = false
             navController?.navigate(R.id.action_registerFormFragment_to_applicantInfoFragment)
         }
 
         layoutAssetsInfo.setOnClickListener {
-            tvApplicantInfo.isEnabled = false
             navController?.navigate(R.id.action_registerFormFragment_to_familyAssetsFragment)
         }
 
@@ -57,6 +54,11 @@ class RegisterFormFragment : BaseFragment<DefaultFragmentViewModel>(){
         layoutTaobao.setOnClickListener {
             mViewModel.preVerifyForAlibaba(TAOBAO_CHANNEL_CODE)
         }
+
+        btnSubmitApplication.setOnClickListener {
+            navController?.navigate(R.id.action_registerFormFragment_to_applicantInfoManagerFragment)
+        }
+
     }
 
     override fun initData(savedInstanceState: Bundle?) {

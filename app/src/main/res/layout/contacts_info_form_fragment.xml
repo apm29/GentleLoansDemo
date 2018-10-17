@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include layout="@layout/toolbar_layout"/>
+    <androidx.core.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@color/white_foreground"
+               android:orientation="vertical">
+
+               <androidx.constraintlayout.widget.Barrier
+                   android:id="@+id/barrierTitle1"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:barrierDirection="end"
+                   app:constraint_referenced_ids="tvName1,tvCompany"
+                   app:layout_constraintStart_toStartOf="parent" />
+
+               <androidx.constraintlayout.widget.Barrier
+                   android:id="@+id/barrierSuffix1"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:barrierDirection="start"
+                   app:constraint_referenced_ids="ivContact1"
+                   app:layout_constraintEnd_toEndOf="parent" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okName1"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/titleContact1" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okRelationship1"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okName1" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okCompany1"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okPhone1" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okPhone1"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okRelationship1" />
+
+               <TextView
+                   android:id="@+id/tvName1"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="姓名"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okName1"
+                   app:layout_constraintStart_toEndOf="@+id/okName1" />
+
+               <ImageView
+                   android:id="@+id/ivContact1"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="12dp"
+                   android:src="@mipmap/contact"
+                   app:layout_constraintBottom_toBottomOf="@+id/etPhone1"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="@+id/etPhone1" />
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etName1"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvName1"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix1"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                   app:layout_constraintTop_toTopOf="@+id/tvName1">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+                       android:hint="请输入直系亲属姓名" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etPhone1"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvPhone1"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix1"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                   app:layout_constraintTop_toTopOf="@+id/tvPhone1">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+
+                       android:hint="请输入直系亲属电话" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <TextView
+                   android:id="@+id/tvRelationship1"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="关系"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okRelationship1"
+                   app:layout_constraintStart_toEndOf="@+id/okRelationship1" />
+
+               <TextView
+                   android:id="@+id/pickerRelationship1"
+                   style="@style/SliceContent.Picker"
+                   android:layout_weight="1"
+                   android:drawableEnd="@mipmap/down_arrow"
+                   android:drawablePadding="12dp"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/tvRelationship1"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix1"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle1" />
+
+               <TextView
+                   android:id="@+id/tvPhone1"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="电话"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okPhone1"
+                   app:layout_constraintStart_toEndOf="@+id/okPhone1" />
+
+               <TextView
+                   android:id="@+id/tvCompany"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="工作单位"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okCompany1"
+                   app:layout_constraintStart_toEndOf="@+id/okCompany1" />
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etComapny"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvCompany"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix1"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                   app:layout_constraintTop_toTopOf="@+id/tvCompany">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+                       android:hint="请输入直系亲属工作单位" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <TextView
+                   android:id="@+id/titleContact1"
+                   style="@style/SlicePartTitle"
+                   android:text="直系亲属信息"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+           </androidx.constraintlayout.widget.ConstraintLayout>
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@color/white_foreground"
+               android:orientation="vertical">
+
+               <androidx.constraintlayout.widget.Barrier
+                   android:id="@+id/barrierTitle2"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:barrierDirection="end"
+                   app:constraint_referenced_ids="tvName2,tvCompany2"
+                   app:layout_constraintStart_toStartOf="parent" />
+
+               <androidx.constraintlayout.widget.Barrier
+                   android:id="@+id/barrierSuffix2"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:barrierDirection="start"
+                   app:constraint_referenced_ids="ivContact2"
+                   app:layout_constraintEnd_toEndOf="parent" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okName2"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/titleContact2" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okRelationship2"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okName2" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okCompany2"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okPhone2" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okPhone2"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okRelationship2" />
+
+               <TextView
+                   android:id="@+id/tvName2"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="姓名"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okName2"
+                   app:layout_constraintStart_toEndOf="@+id/okName2" />
+
+               <ImageView
+                   android:id="@+id/ivContact2"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="12dp"
+                   android:src="@mipmap/contact"
+                   app:layout_constraintBottom_toBottomOf="@+id/etPhone2"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="@+id/etPhone2" />
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etName2"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvName2"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix2"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle2"
+                   app:layout_constraintTop_toTopOf="@+id/tvName2">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+                       android:hint="请输入直系亲属姓名" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etPhone2"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvPhone2"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix2"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle2"
+                   app:layout_constraintTop_toTopOf="@+id/tvPhone2">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+
+                       android:hint="请输入直系亲属电话" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <TextView
+                   android:id="@+id/tvRelationship2"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="关系"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okRelationship2"
+                   app:layout_constraintStart_toEndOf="@+id/okRelationship2" />
+
+               <TextView
+                   android:id="@+id/pickerRelationship2"
+                   style="@style/SliceContent.Picker"
+                   android:layout_weight="1"
+                   android:drawableEnd="@mipmap/down_arrow"
+                   android:drawablePadding="12dp"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/tvRelationship2"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix2"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle2" />
+
+               <TextView
+                   android:id="@+id/tvPhone2"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="电话"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okPhone2"
+                   app:layout_constraintStart_toEndOf="@+id/okPhone2" />
+
+               <TextView
+                   android:id="@+id/tvCompany2"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="工作单位"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okCompany2"
+                   app:layout_constraintStart_toEndOf="@+id/okCompany2" />
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etCompany2"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvCompany2"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix2"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle2"
+                   app:layout_constraintTop_toTopOf="@+id/tvCompany2">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+                       android:hint="请输入直系亲属工作单位" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <TextView
+                   android:id="@+id/titleContact2"
+                   style="@style/SlicePartTitle"
+                   android:text="直系亲属信息"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+           </androidx.constraintlayout.widget.ConstraintLayout>
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@color/white_foreground"
+               android:orientation="vertical">
+
+               <androidx.constraintlayout.widget.Barrier
+                   android:id="@+id/barrierTitle3"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:barrierDirection="end"
+                   app:constraint_referenced_ids="tvName3,tvCompany3"
+                   app:layout_constraintStart_toStartOf="parent" />
+
+               <androidx.constraintlayout.widget.Barrier
+                   android:id="@+id/barrierSuffix3"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:barrierDirection="start"
+                   app:constraint_referenced_ids="ivContact3"
+                   app:layout_constraintEnd_toEndOf="parent" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okName3"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/titleContact3" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okRelationship3"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okName3" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okCompany3"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okPhone3" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okPhone3"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okRelationship3" />
+
+               <TextView
+                   android:id="@+id/tvName3"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="姓名"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okName3"
+                   app:layout_constraintStart_toEndOf="@+id/okName3" />
+
+               <ImageView
+                   android:id="@+id/ivContact3"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="12dp"
+                   android:src="@mipmap/contact"
+                   app:layout_constraintBottom_toBottomOf="@+id/etPhone3"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="@+id/etPhone3" />
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etName3"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvName3"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix3"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle3"
+                   app:layout_constraintTop_toTopOf="@+id/tvName3">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+                       android:hint="请输入直系亲属姓名" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etPhone3"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvPhone3"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix3"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle3"
+                   app:layout_constraintTop_toTopOf="@+id/tvPhone3">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+
+                       android:hint="请输入直系亲属电话" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <TextView
+                   android:id="@+id/tvRelationship3"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="关系"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okRelationship3"
+                   app:layout_constraintStart_toEndOf="@+id/okRelationship3" />
+
+               <TextView
+                   android:id="@+id/pickerRelationship3"
+                   style="@style/SliceContent.Picker"
+                   android:layout_weight="1"
+                   android:drawableEnd="@mipmap/down_arrow"
+                   android:drawablePadding="12dp"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/tvRelationship3"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix3"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle3" />
+
+               <TextView
+                   android:id="@+id/tvPhone3"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="电话"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okPhone3"
+                   app:layout_constraintStart_toEndOf="@+id/okPhone3" />
+
+               <TextView
+                   android:id="@+id/tvCompany3"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="工作单位"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okCompany3"
+                   app:layout_constraintStart_toEndOf="@+id/okCompany3" />
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etCompany3"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvCompany3"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix3"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle3"
+                   app:layout_constraintTop_toTopOf="@+id/tvCompany3">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+                       android:hint="请输入直系亲属工作单位" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <TextView
+                   android:id="@+id/titleContact3"
+                   style="@style/SlicePartTitle"
+                   android:text="直系亲属信息"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+           </androidx.constraintlayout.widget.ConstraintLayout>
+       </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

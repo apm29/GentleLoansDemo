@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.personal_info_fragment.*
 class PersonalInfoFragment:BaseFragment<DefaultFragmentViewModel>() {
 
 
-    private val mHandler:Handler  = Handler()
     var mCount = 0
     override fun setupViewLayout(savedInstanceState: Bundle?): Int {
         return R.layout.personal_info_fragment

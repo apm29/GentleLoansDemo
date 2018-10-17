@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_foreground"
+    app:cardBackgroundColor="@color/white_foreground"
+    app:cardCornerRadius="16dp"
+    android:layout_margin="6dp"
+    app:contentPaddingBottom="12dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierTitle1"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="tvBrand"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierSuffix1"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            app:barrierDirection="start"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <include layout="@layout/assets_header" />
+
+        <com.apm29.yjw.demo.ui.widget.IconFontTextView
+            android:id="@+id/okBrand"
+            style="@style/SliceTitleStyle.Ok"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/remove" />
+
+        <TextView
+            android:id="@+id/tvBrand"
+            style="@style/SliceTitleStyle.Header"
+            android:text="车辆品牌"
+            app:layout_constraintBaseline_toBaselineOf="@id/okBrand"
+            app:layout_constraintStart_toEndOf="@id/okBrand" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etBrand"
+            style="@style/EditLayoutStyle"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/tvBrand"
+            app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
+            app:layout_constraintStart_toEndOf="@id/barrierTitle1"
+            app:layout_constraintTop_toTopOf="@id/tvBrand">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/EditContentStyle"
+                android:hint="请输入车辆品牌" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.apm29.yjw.demo.ui.widget.IconFontTextView
+            android:id="@+id/okLicense"
+            style="@style/SliceTitleStyle.Ok"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/okBrand" />
+
+        <TextView
+            android:id="@+id/tvLicense"
+            style="@style/SliceTitleStyle.Header"
+            android:text="车辆牌照"
+            app:layout_constraintBaseline_toBaselineOf="@id/okLicense"
+            app:layout_constraintStart_toEndOf="@id/okLicense" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etLicense"
+            style="@style/EditLayoutStyle"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/tvLicense"
+            app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
+            app:layout_constraintStart_toEndOf="@id/barrierTitle1"
+            app:layout_constraintTop_toTopOf="@id/tvLicense">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/EditContentStyle"
+                android:hint="请输入车辆牌照" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.apm29.yjw.demo.ui.widget.IconFontTextView
+            android:id="@+id/okColor"
+            style="@style/SliceTitleStyle.Ok"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/okLicense" />
+
+        <TextView
+            android:id="@+id/tvColor"
+            style="@style/SliceTitleStyle.Header"
+            android:text="车辆颜色"
+            app:layout_constraintBaseline_toBaselineOf="@id/okColor"
+            app:layout_constraintStart_toEndOf="@id/okColor" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etColor"
+            style="@style/EditLayoutStyle"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/tvColor"
+            app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
+            app:layout_constraintStart_toEndOf="@id/barrierTitle1"
+            app:layout_constraintTop_toTopOf="@id/tvColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/EditContentStyle"
+                android:hint="请输入车辆颜色" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="removeLayout,remove,tvColor,etColor,tvLicense,okColor,etBrand,okBrand,etLicense,tvBrand,okLicense" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

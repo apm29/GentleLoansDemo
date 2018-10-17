@@ -2,9 +2,7 @@ package com.apm29.yjw.demo.ui.form.register
 
 import android.os.Bundle
 import android.view.View
-import android.widget.CheckBox
 import android.widget.TextView
-import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.Group
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +13,10 @@ import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.model.Car
 import com.apm29.yjw.demo.model.Estate
-import com.apm29.yjw.demo.ui.list.base.BaseEmptyAdapter
-import com.apm29.yjw.demo.ui.list.base.EMPTY_TYPE
+import com.apm29.yjw.demo.ui.list.adapter.AssetsAdapter
+import com.apm29.yjw.demo.utils.mortgageList
+import com.apm29.yjw.demo.utils.setupOneOptPicker
+import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.demo.viewmodel.RegisterFormViewModel
 import com.apm29.yjw.gentleloansdemo.R
 import com.google.android.material.textfield.TextInputLayout
@@ -35,149 +35,127 @@ class FamilyAssetsFragment : BaseFragment<RegisterFormViewModel>() {
                 .inject(this)
     }
 
-    private var dataEstate: List<Estate> = arrayListOf()
-    private var dataCar: List<Car> = arrayListOf()
+
+
+
     override fun setupViews(savedInstanceState: Bundle?) {
         swipeRefresh.setOnRefreshListener {
             mViewModel.assets()
+        }
+
+        btnSave.setOnClickListener {
+            showToast("saved:\n ${estateAdapter.list.size} \n ${carAdapter.list.size}")
         }
     }
 
     override fun initData(savedInstanceState: Bundle?) {
         mViewModel.assets()
 
-        mViewModel.estateData.observe(this, Observer {
-            dataEstate = it
-            setupList()
-        })
-        mViewModel.carData.observe(this, Observer {
-            dataCar = it
-            setupList()
+        mViewModel.assetsData.observe(this, Observer {
+            setupList(it.first,it.second)
         })
     }
+    private fun bindEstateOperation(holder: AssetsHolder, estate: Estate, position: Int) {
+        holder.tvEstateTitle?.text = getString(R.string.text_estate)
+        holder.pickerMortgage?.setupOneOptPicker(mortgageList, 1) { select, _, _ ->
+            estate.mortgage = select == 0
+            holder.groupMortgages?.visibility = if(estate.mortgage == true) View.VISIBLE else View.GONE
+        }
+        holder.groupMortgages?.visibility = if(estate.mortgage == true) View.VISIBLE else View.GONE
+        holder.pickerMortgage?.text =  if(estate.mortgage == true) mortgageList[0] else mortgageList[1]
+    }
 
-    private fun setupList() {
-        listEstate.layoutManager = LinearLayoutManager(requireContext())
-        listCar.layoutManager = LinearLayoutManager(requireContext())
 
-        listEstate.adapter = AssetsAdapter(
+
+
+    private fun bindCarOperation(holder: AssetsHolder, car: Car, position: Int) {
+        holder.tvEstateTitle?.text = getString(R.string.text_car)
+    }
+
+    lateinit var estateAdapter:AssetsAdapter<Estate>
+
+    lateinit var carAdapter:AssetsAdapter<Car>
+
+    private fun setupList(dataEstate:List<Estate>,dataCar:List<Car>) {
+        estateAdapter = AssetsAdapter(
                 list = dataEstate,
                 layoutRes = R.layout.estate_item_layout,
                 clickAdd = {
+                    tvEstateTitle.requestFocus()
                     Estate()
                 },
-                bindOp = { h, e ->
-                    h.tvEstateTitle?.text = "房产信息"
-
-                }
+                bindOp = ::bindEstateOperation
         )
+        carAdapter = AssetsAdapter(
+                list = dataCar,
+                layoutRes = R.layout.car_item_layout,
+                clickAdd = {
+                    tvCarTitle.requestFocus()
+                    Car()
+                },
+                bindOp = ::bindCarOperation
+        )
+        listEstate.layoutManager = LinearLayoutManager(requireContext())
+        listCar.layoutManager = LinearLayoutManager(requireContext())
+        listEstate.adapter = estateAdapter
+        listCar.adapter = carAdapter
     }
 
     override fun hideLoading() {
         super.hideLoading()
         swipeRefresh.isRefreshing = false
     }
-}
 
-class AssetsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    //empty / estate / car 三个公用ViewHolder view都需要为nullable
-    var tvEstateTitle:TextView? = itemView.findViewById(R.id.tvEstateTitle)
+    class AssetsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        //empty / estate / car 三个公用ViewHolder view都需要为nullable
 
-    var okOwner:TextView? = itemView.findViewById(R.id.okOwner)
-    var tvOwner:TextView? = itemView.findViewById(R.id.tvOwner)
-    var etOwner:TextInputLayout? = itemView.findViewById(R.id.etOwner)
+        //------------------------------------------------------
+        var tvEstateTitle: TextView? = itemView.findViewById(R.id.tvEstateTitle)
 
-    var okArea:TextView? = itemView.findViewById(R.id.okArea)
-    var tvArea:TextView? = itemView.findViewById(R.id.tvArea)
-    var etArea:TextInputLayout? = itemView.findViewById(R.id.etArea)
+        var okOwner: TextView? = itemView.findViewById(R.id.okOwner)
+        var tvOwner: TextView? = itemView.findViewById(R.id.tvOwner)
+        var etOwner: TextInputLayout? = itemView.findViewById(R.id.etOwner)
 
-    var okLocation:TextView? = itemView.findViewById(R.id.okLocation)
-    var tvLocation:TextView? = itemView.findViewById(R.id.tvLocation)
-    var etLocation:TextInputLayout? = itemView.findViewById(R.id.etLocation)
+        var okArea: TextView? = itemView.findViewById(R.id.okArea)
+        var tvArea: TextView? = itemView.findViewById(R.id.tvArea)
+        var etArea: TextInputLayout? = itemView.findViewById(R.id.etArea)
 
-    var okMortgageStatus:TextView? = itemView.findViewById(R.id.okMortgageStatus)
-    var tvMortgageStatus:TextView? = itemView.findViewById(R.id.tvMortgageStatus)
-    var pickerMortgage:TextView? = itemView.findViewById(R.id.pickerMortgage)
+        var okLocation: TextView? = itemView.findViewById(R.id.okLocation)
+        var tvLocation: TextView? = itemView.findViewById(R.id.tvLocation)
+        var etLocation: TextInputLayout? = itemView.findViewById(R.id.etLocation)
 
-    var okMortgage1:TextView? = itemView.findViewById(R.id.okMortgage1)
-    var tvMortgage1:TextView? = itemView.findViewById(R.id.tvMortgage1)
-    var etMortgage1:TextInputLayout? = itemView.findViewById(R.id.etMortgage1)
+        var okMortgageStatus: TextView? = itemView.findViewById(R.id.okMortgageStatus)
+        var tvMortgageStatus: TextView? = itemView.findViewById(R.id.tvMortgageStatus)
+        var pickerMortgage: TextView? = itemView.findViewById(R.id.pickerMortgage)
 
-    var okMortgage2:TextView? = itemView.findViewById(R.id.okMortgage2)
-    var tvMortgage2:TextView? = itemView.findViewById(R.id.tvMortgage2)
-    var etMortgage2:TextInputLayout? = itemView.findViewById(R.id.etMortgage2)
+        var okMortgage1: TextView? = itemView.findViewById(R.id.okMortgage1)
+        var tvMortgage1: TextView? = itemView.findViewById(R.id.tvMortgage1)
+        var etMortgage1: TextInputLayout? = itemView.findViewById(R.id.etMortgage1)
 
-    var groupMortgages:Group? = itemView.findViewById(R.id.group_mortgages)
+        var okMortgage2: TextView? = itemView.findViewById(R.id.okMortgage2)
+        var tvMortgage2: TextView? = itemView.findViewById(R.id.tvMortgage2)
+        var etMortgage2: TextInputLayout? = itemView.findViewById(R.id.etMortgage2)
+
+        var groupMortgages: Group? = itemView.findViewById(R.id.group_mortgages)
+        //------------------------------------------------------
+        var okBrand: TextView? = itemView.findViewById(R.id.okBrand)
+        var tvBrand: TextView? = itemView.findViewById(R.id.tvBrand)
+        var etBrand: TextInputLayout? = itemView.findViewById(R.id.etBrand)
+
+        var okColor: TextView? = itemView.findViewById(R.id.okColor)
+        var tvColor: TextView? = itemView.findViewById(R.id.tvColor)
+        var etColor: TextInputLayout? = itemView.findViewById(R.id.etColor)
+
+        var okLicense: TextView? = itemView.findViewById(R.id.okLicense)
+        var tvLicense: TextView? = itemView.findViewById(R.id.tvLicense)
+        var etLicense: TextInputLayout? = itemView.findViewById(R.id.etLicense)
 
 
-}
-
-class AssetsAdapter<T>(
-        list: List<T>,
-        private val editable: Boolean = true,
-        @LayoutRes private val layoutRes: Int,
-        private val clickAdd: (View) -> T,
-        private val clickRemove: ((View, Int) -> Unit)? = null,
-        bindOp: (AssetsHolder, T) -> Unit
-) : BaseEmptyAdapter<T, AssetsHolder>(
-        list = list,
-        emptyRes = R.layout.add_item_layout,
-        bindOp = bindOp
-) {
-    override fun createEmptyHolder(inflate: View): AssetsHolder {
-        val addView:View? = inflate.findViewById(R.id.add)
-        addView?.setOnClickListener {
-            val startSize = list.size
-            val add = clickAdd(it)
-            if (list is MutableList){
-                list.add(add)
-            }
-            val endSize = list.size
-            if (startSize < endSize) {
-                notifyItemRangeChanged(startSize, endSize)
-            }
-        }
-        return AssetsHolder(inflate)
-    }
-
-    override fun createBaseHolder(viewType: Int, view: View): AssetsHolder {
-        return AssetsHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: AssetsHolder, position: Int) {
-        if (position in 0 until list.size) {
-            val data = list[position]
-            bindOp(holder, data)
-            val removeView:View? = holder.itemView.findViewById(R.id.remove)
-            removeView?.setOnClickListener {
-                if (list is MutableList){
-                    val currentIndex = holder.adapterPosition
-                    list.removeAt(currentIndex)
-                    println("$currentIndex item removed")
-                    notifyItemRemoved(currentIndex)
-                    clickRemove?.invoke(it, currentIndex)
-                }
-            }
-        }
-    }
-
-    override fun layout(): Int {
-        return layoutRes
-    }
-
-    override fun getItemCount(): Int {
-        return if (editable) list.size + 1 else list.size
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return if (editable) {
-            when {
-                list.isEmpty() -> EMPTY_TYPE
-                position == list.size -> EMPTY_TYPE
-                else -> super.getItemViewType(position)
-            }
-        } else {
-            0
-        }
+        //------------------------------------------------------
+        var removeIcon: TextView? = itemView.findViewById(R.id.removeIcon)
+        var groupAll: Group? = itemView.findViewById(R.id.groupAll)
     }
 }
+
+
+

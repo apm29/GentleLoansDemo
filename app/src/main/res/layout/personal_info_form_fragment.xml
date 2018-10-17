@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/white_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierTitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="tvName,tvRegResident,tvResidencePhone,tvMail,tvAddress,tvPhone1,tvId,tvMarital,tvPhone2"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/titlePersonal"
+                style="@style/SlicePartTitle"
+                android:text="个人信息"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/okMarital"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/titleRegResident"
+                android:text="户口信息"
+                style="@style/SlicePartTitle"/>
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/etRegResident"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/titleResident"
+                android:text="住宅信息"
+                style="@style/SlicePartTitle"/>
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okName"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titlePersonal" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okPhone1"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/okName" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okRegResident"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleRegResident" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okMarital"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/okMail" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okAddress"
+                style="@style/SliceTitleStyle.Ok"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titleResident" />
+
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+
+                android:id="@+id/okResidencePhone"
+                style="@style/SliceTitleStyle.Ok"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etAddress" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okMail"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/okId" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okPhone2"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/okPhone1" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                android:id="@+id/okId"
+                style="@style/SliceTitleStyle.Ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/okPhone2" />
+
+            <TextView
+                android:id="@+id/tvName"
+                style="@style/SliceTitleStyle.Header"
+                android:text="姓名"
+                app:layout_constraintBaseline_toBaselineOf="@+id/okName"
+                app:layout_constraintStart_toEndOf="@+id/okName" />
+
+            <TextView
+                android:id="@+id/tvPhone1"
+                style="@style/SliceTitleStyle.Header"
+                android:text="手机号1"
+                app:layout_constraintBaseline_toBaselineOf="@+id/okPhone1"
+                app:layout_constraintStart_toEndOf="@+id/okPhone1" />
+
+            <TextView
+                android:id="@+id/tvRegResident"
+                style="@style/SliceTitleStyle.Header"
+                android:text="户口地址"
+                app:layout_constraintBaseline_toBaselineOf="@+id/okRegResident"
+                app:layout_constraintStart_toEndOf="@+id/okRegResident" />
+
+            <TextView
+                android:id="@+id/tvMarital"
+                style="@style/SliceTitleStyle.Header"
+                android:text="婚姻状况"
+                app:layout_constraintBaseline_toBaselineOf="@+id/okMarital"
+                app:layout_constraintStart_toEndOf="@+id/okMarital" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                style="@style/SliceTitleStyle.Header"
+                android:text="住宅地址"
+                app:layout_constraintStart_toEndOf="@id/okAddress"
+                app:layout_constraintBaseline_toBaselineOf="@id/okAddress"
+                tools:layout_editor_absoluteX="34dp"
+                tools:layout_editor_absoluteY="375dp" />
+
+            <TextView
+                android:id="@+id/tvId"
+                style="@style/SliceTitleStyle.Header"
+                android:text="身份证号码"
+                app:layout_constraintBaseline_toBaselineOf="@+id/okId"
+                app:layout_constraintStart_toEndOf="@+id/okId" />
+
+            <TextView
+                android:id="@+id/tvMail"
+                style="@style/SliceTitleStyle.Header"
+                android:text="邮箱"
+                app:layout_constraintBaseline_toBaselineOf="@+id/okMail"
+                app:layout_constraintStart_toEndOf="@+id/okMail" />
+
+            <TextView
+                app:layout_constraintBaseline_toBaselineOf="@id/okResidencePhone"
+                app:layout_constraintStart_toEndOf="@id/okResidencePhone"
+                android:id="@+id/tvResidencePhone"
+                style="@style/SliceTitleStyle.Header"
+                android:text="住宅电话"
+                tools:layout_editor_absoluteX="34dp"
+                tools:layout_editor_absoluteY="455dp" />
+
+            <TextView
+                android:id="@+id/tvPhone2"
+                style="@style/SliceTitleStyle.Header"
+                android:text="手机号2"
+                app:layout_constraintBaseline_toBaselineOf="@+id/okPhone2"
+                app:layout_constraintStart_toEndOf="@+id/okPhone2" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etName"
+                style="@style/EditLayoutStyle"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toTopOf="@+id/tvName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditContentStyle"
+                    android:hint="请输入姓名" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etPhone1"
+                style="@style/EditLayoutStyle"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPhone1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toTopOf="@+id/tvPhone1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditContentStyle"
+                    android:hint="请输入手机号1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etPhone2"
+                style="@style/EditLayoutStyle"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPhone2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toTopOf="@+id/tvPhone2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditContentStyle"
+                    android:hint="请输入手机号2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etId"
+                style="@style/EditLayoutStyle"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toTopOf="@+id/tvId">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditContentStyle"
+                    android:hint="请输入身份证号码" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etMail"
+                style="@style/EditLayoutStyle"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvMail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toTopOf="@+id/tvMail">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditContentStyle"
+                    android:hint="请输入邮箱" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etResidencePhone"
+                style="@style/EditLayoutStyle"
+                android:layout_height="44dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvResidencePhone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toTopOf="@+id/tvResidencePhone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditContentStyle"
+                    android:hint="请输入住宅电话" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/pickerMarital"
+                style="@style/SliceContent.Picker"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@mipmap/down_arrow"
+                android:drawablePadding="12dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:layout_constraintBottom_toBottomOf="@+id/tvMarital"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toTopOf="@+id/tvMarital" />
+
+            <TextView
+                android:id="@+id/pickerRegResident"
+                style="@style/SliceContent.Picker"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@mipmap/down_arrow"
+                android:drawablePadding="12dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:layout_constraintBottom_toBottomOf="@+id/tvRegResident"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toTopOf="@+id/tvRegResident" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etRegResident"
+                style="@style/EditLayoutStyle"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toBottomOf="@+id/pickerRegResident">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditContentStyle"
+                    android:hint="请输入户口详细地址" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/pickerAddress"
+                style="@style/SliceContent.Picker"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@mipmap/down_arrow"
+                android:drawablePadding="12dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toTopOf="@+id/tvAddress" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etAddress"
+                style="@style/EditLayoutStyle"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintTop_toBottomOf="@id/okAddress">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditContentStyle"
+                    android:hint="请输入住宅详细地址" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                app:layout_constraintTop_toBottomOf="@id/okResidencePhone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/btnSave"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                style="@style/button_default"
+                android:text="@string/save_"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -19,7 +19,7 @@ class LoanLogListFragment: BaseListFragment<LoanLog, VH, LoanLogAdapter>() {
 
     override fun setupAdapter(): LoanLogAdapter {
         return LoanLogAdapter(data){
-            holder,data->
+            holder,data,_->
             holder.tvTime?.text = data.actualTime
             holder.tvPayType?.text = if (data.repaymentType==0)"等额本息" else "先息后本"
             holder.tvPayTypeComment?.text = data.repaymentTypeComment

@@ -2,8 +2,6 @@ package com.apm29.yjw.demo.model
 
 import com.apm29.yjw.demo.arch.UserLoginInfo
 import com.apm29.yjw.demo.arch.UserType
-import com.apm29.yjw.demo.viewmodel.ALIPAY_CHANNEL_CODE
-import com.apm29.yjw.demo.viewmodel.TAOBAO_CHANNEL_CODE
 import com.google.gson.annotations.SerializedName
 
 data class BaseBean<T>(val code: Int = 200, val msg: String = "", private val data: T) {
@@ -162,6 +160,13 @@ data class Estate(
         var mortgageCreditor2:String?,
         var mortgageAmount2:String?
 ):Assets(){
+
+    init {
+        if (mortgage==null){
+            mortgage = false
+        }
+    }
+
     constructor():this(
             null,
             null,
@@ -175,10 +180,16 @@ data class Estate(
 }
 
 data class Car(
-        var owner: String?,
+        var license: String?,
         var brand: String?,
         var color: String?
-):Assets()
+):Assets(){
+    constructor():this(
+            null,
+            null,
+            null
+    )
+}
 
 
 data class LoanLog(
@@ -214,12 +225,3 @@ data class LoanLog(
 }
 
 
-data class DataMagicBox(
-        var idCardNo: String, var mobile: String,var realName: String,var channelCode: String
-){
-    val type:Int = when (channelCode){
-        ALIPAY_CHANNEL_CODE->0
-        TAOBAO_CHANNEL_CODE->1
-        else->-1
-    }
-}

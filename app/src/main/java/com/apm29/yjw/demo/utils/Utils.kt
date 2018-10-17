@@ -2,9 +2,12 @@ package com.apm29.yjw.demo.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.AnimBuilder
@@ -12,7 +15,6 @@ import com.apm29.yjw.demo.app.AppApplication
 import com.apm29.yjw.demo.app.ErrorHandledObserver
 import com.apm29.yjw.demo.app.ResponseErrorHandler
 import com.apm29.yjw.demo.di.component.AppComponent
-import com.apm29.yjw.demo.model.BaseBean
 import com.apm29.yjw.demo.ui.widget.IconFontTextView
 import com.apm29.yjw.gentleloansdemo.R
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
@@ -178,21 +180,33 @@ fun TextInputLayout.setText(text: String?) {
 fun TextInputLayout.setText(@StringRes text: Int) {
     this.editText?.setText(text)
 }
+fun clearAllFocus(itemView: View) {
+    if (itemView is ViewGroup){
+        itemView.children.forEach {
+            clearAllFocus(it)
+        }
+    }else{
+        itemView.clearFocus()
+    }
+}
 
-
+val mortgageList = arrayListOf( "已抵押","未抵押")
 val genderList = arrayListOf("男", "女")
 val maritalList = arrayListOf("未婚", "已婚", "离异", "丧偶")
 val staffList = arrayListOf("事业", "企业", "公务员")
 val payTypeList = arrayListOf("先息后本", "等额本息")
 
-fun TextView.setupPicker(list: ArrayList<String>) {
+fun TextView.setupOneOptPicker(list: ArrayList<String>, defaultSelection: Int = -1, selectedOp: ((Int,String,View) -> Unit)? = null) {
     val pickerViewOption = OptionsPickerBuilder(context, OnOptionsSelectListener { options1, _, _, _ ->
         val tx = (list[options1])
         this.text = tx
+        selectedOp?.invoke(options1,list[options1],this)
     }).build<String>()
 
+    if (defaultSelection >= 0) {
+        pickerViewOption.setSelectOptions(defaultSelection)
+    }
     pickerViewOption.setPicker(list)
-
     this.setOnClickListener {
         pickerViewOption.show()
     }

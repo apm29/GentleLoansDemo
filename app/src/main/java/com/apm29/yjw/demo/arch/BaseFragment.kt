@@ -1,6 +1,8 @@
 package com.apm29.yjw.demo.arch
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +29,7 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
     open var observingLoading: Boolean = true
     open var observingToast: Boolean = true
     open var showToolBar: Boolean = true
-
+    val mHandler:Handler = Handler(Looper.getMainLooper())
     @Inject
     lateinit var mViewModel: VM
 

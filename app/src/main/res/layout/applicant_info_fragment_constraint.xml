@@ -20,7 +20,7 @@
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/barrierTitle"
+                android:id="@+id/barrierTitle1"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 app:barrierDirection="end"
@@ -29,7 +29,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/barrierSuffix"
+                android:id="@+id/barrierSuffix1"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 app:barrierDirection="start"
@@ -56,8 +56,8 @@
                 android:text="圣诞节上课"
                 android:hint="@string/hint_name"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvName"
-                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.apm29.yjw.demo.ui.widget.IconFontTextView
@@ -79,8 +79,8 @@
                 android:text="330681199112151718"
                 android:hint="@string/hint_id_card"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvIdCard"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle" />
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1" />
 
             <com.apm29.yjw.demo.ui.widget.IconFontTextView
                 android:id="@+id/okGender"
@@ -100,8 +100,8 @@
                 android:hint="@string/hint_gender"
                 style="@style/SliceContent.Picker"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvGender"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle" />
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1" />
 
             <com.apm29.yjw.demo.ui.widget.IconFontTextView
                 android:id="@+id/arrowGender"
@@ -128,8 +128,8 @@
                 android:hint="@string/hint_marital"
                 android:layout_width="0dp"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvMarital"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle" />
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1" />
 
             <com.apm29.yjw.demo.ui.widget.IconFontTextView
                 android:id="@+id/arrowMarital"
@@ -156,8 +156,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_company_name"
                 app:layout_constraintBottom_toBottomOf="@id/tvCompany"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvCompany">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -183,8 +183,8 @@
                 android:hint="@string/hint_department"
 
                 app:layout_constraintBottom_toBottomOf="@id/tvDepartment"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvDepartment">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -208,8 +208,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_level"
                 app:layout_constraintBottom_toBottomOf="@id/tvLevel"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvLevel">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -234,8 +234,8 @@
                 style="@style/SliceContent.Picker"
                 android:hint="@string/hint_staff"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvStaff"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle" />
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1" />
 
             <com.apm29.yjw.demo.ui.widget.IconFontTextView
                 android:id="@+id/arrowStaff"
@@ -262,8 +262,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_year_income"
                 app:layout_constraintBottom_toBottomOf="@id/tvYearIncome"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvYearIncome">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -295,8 +295,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_gjj_month"
                 app:layout_constraintBottom_toBottomOf="@id/tvGjjMonth"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvGjjMonth">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -328,8 +328,8 @@
                 style="@style/SliceContent.Picker"
                 android:hint="@string/hint_pey_type"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvRepaymentType"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle" />
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1" />
 
             <com.apm29.yjw.demo.ui.widget.IconFontTextView
                 android:id="@+id/arrowPayType"
@@ -356,8 +356,8 @@
                 android:hint="@string/hint_term"
                 app:boxBackgroundMode="none"
                 app:layout_constraintBottom_toBottomOf="@id/tvTerm"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toEndOf="@id/barrierTitle"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toEndOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvTerm">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -388,8 +388,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_zx_account"
                 app:layout_constraintBottom_toBottomOf="@id/tvZxAccount"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvZxAccount">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -413,8 +413,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_zx_pass"
                 app:layout_constraintBottom_toBottomOf="@id/tvZxPass"
-                app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toStartOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvZxPass">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -439,8 +439,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_zx_verify"
                 app:layout_constraintBottom_toBottomOf="@id/tvZxVerify"
-                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvZxVerify">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -464,8 +464,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_gjj_account"
                 app:layout_constraintBottom_toBottomOf="@id/tvGjjAccount"
-                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
-                app:layout_constraintStart_toEndOf="@id/barrierTitle"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toEndOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvGjjAccount">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -490,8 +490,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_gjj_pass"
                 app:layout_constraintBottom_toBottomOf="@id/tvGjjPass"
-                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvGjjPass">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -516,8 +516,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_zw_account"
                 app:layout_constraintBottom_toBottomOf="@id/tvZwAccount"
-                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvZwAccount">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
@@ -541,8 +541,8 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_zw_pass"
                 app:layout_constraintBottom_toBottomOf="@id/tvZwPass"
-                app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
-                app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
+                app:layout_constraintStart_toStartOf="@id/barrierTitle1"
                 app:layout_constraintTop_toTopOf="@id/tvZwPass">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />

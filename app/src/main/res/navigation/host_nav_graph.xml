@@ -145,6 +145,13 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_left"
             app:destination="@id/familyAssetsFragment" />
+        <action
+            android:id="@+id/action_registerFormFragment_to_applicantInfoManagerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/applicantInfoManagerFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/applicant_info_fragment"
@@ -171,5 +178,83 @@
         android:name="com.apm29.yjw.demo.ui.form.register.FamilyAssetsFragment"
         tools:layout = "@layout/family_assets_fragment"
         android:label="家庭财产" />
+    <fragment
+        android:id="@+id/applicantInfoManagerFragment"
+        android:name="com.apm29.yjw.demo.ui.form.information.ApplicantInfoManagerFragment"
+        tools:layout = "@layout/applicant_info_manager_fragment"
+        android:label="个人信息表" >
+        <action
+            android:id="@+id/action_applicantInfoManagerFragment_to_personalInfoFromFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/personalInfoFromFragment" />
+        <action
+            android:id="@+id/action_applicantInfoManagerFragment_to_contactsInfoFormFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/contactsInfoFormFragment" />
+        <action
+            android:id="@+id/action_applicantInfoManagerFragment_to_loanUsageInfoFromFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/loanUsageInfoFromFragment" />
+        <action
+            android:id="@+id/action_applicantInfoManagerFragment_to_assetsInfoFromFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/assetsInfoFromFragment" />
+        <action
+            android:id="@+id/action_applicantInfoManagerFragment_to_jobInfoFromFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/jobInfoFromFragment" />
+        <action
+            android:id="@+id/action_applicantInfoManagerFragment_to_imageInfoFromFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/imageInfoFromFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalInfoFromFragment"
+        android:name="com.apm29.yjw.demo.ui.form.information.PersonalInfoFromFragment"
+        tools:layout = "@layout/personal_info_form_fragment"
+        android:label="个人信息" />
+    <fragment
+        android:id="@+id/contactsInfoFormFragment"
+        android:name="com.apm29.yjw.demo.ui.form.information.ContactsInfoFormFragment"
+        tools:layout = "@layout/contacts_info_form_fragment"
+        android:label="联系人信息" />
+    <fragment
+        android:id="@+id/loanUsageInfoFromFragment"
+        android:name="com.apm29.yjw.demo.ui.form.information.LoanUsageInfoFromFragment"
+        tools:layout = "@layout/loan_usage_info_form_fragment"
+        android:label="借款用途" />
+    <fragment
+        android:id="@+id/assetsInfoFromFragment"
+        android:name="com.apm29.yjw.demo.ui.form.information.AssetsInfoFromFragment"
+        tools:layout = "@layout/assets_info_form_fragment"
+        android:label="资产信息" />
+    <fragment
+        android:id="@+id/jobInfoFromFragment"
+        android:name="com.apm29.yjw.demo.ui.form.information.JobInfoFromFragment"
+        tools:layout = "@layout/job_info_form_fragment"
+        android:label="职业信息" />
+    <fragment
+        android:id="@+id/imageInfoFromFragment"
+        android:name="com.apm29.yjw.demo.ui.form.information.ImageInfoFromFragment"
+        tools:layout = "@layout/image_info_form_fragment"
+        android:label="照片信息" />
 
 </navigation>

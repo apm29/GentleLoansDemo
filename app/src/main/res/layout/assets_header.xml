@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/remove"
+    android:layout_width="match_parent"
+    android:background="@color/light_gray_background"
+    android:layout_height="wrap_content"
+    tools:showIn="@layout/estate_item_layout">
+
+    <LinearLayout
+        android:id="@+id/removeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_assets_top_title"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvEstateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="@color/white_foreground"
+            android:paddingEnd="12dp"
+            tools:text="房产信息" />
+
+        <com.apm29.yjw.demo.ui.widget.IconFontTextView
+            android:id="@+id/removeIcon"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/减去" />
+
+    </LinearLayout>
+</FrameLayout>

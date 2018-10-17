@@ -5,6 +5,8 @@ import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import com.apm29.yjw.demo.ui.verify.RealNameVerifyFragment
 import com.apm29.yjw.demo.ui.verify.YYSVerifyFragment
+import com.apm29.yjw.demo.viewmodel.ALIPAY_CHANNEL_CODE
+import com.apm29.yjw.demo.viewmodel.TAOBAO_CHANNEL_CODE
 import java.lang.IllegalArgumentException
 
 class VerifyProgress(var isReal: Boolean, var isYYS: Boolean) :Parcelable{
@@ -70,4 +72,14 @@ class VerifyProgress(var isReal: Boolean, var isYYS: Boolean) :Parcelable{
 
 
 
+}
+
+data class DataMagicBox(
+        var idCardNo: String, var mobile: String,var realName: String,var channelCode: String
+){
+    val type:Int = when (channelCode){
+        ALIPAY_CHANNEL_CODE ->0
+        TAOBAO_CHANNEL_CODE ->1
+        else->-1
+    }
 }

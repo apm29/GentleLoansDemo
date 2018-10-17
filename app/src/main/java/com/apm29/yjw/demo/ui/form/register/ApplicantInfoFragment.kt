@@ -28,10 +28,10 @@ class ApplicantInfoFragment : BaseFragment<RegisterFormViewModel>() {
 
     override fun setupViews(savedInstanceState: Bundle?) {
         //条件选择器
-        pickerGender.setupPicker(genderList)
-        pickerMarital.setupPicker(maritalList)
-        pickerStaff.setupPicker(staffList)
-        pickerPayType.setupPicker(payTypeList)
+        pickerGender.setupOneOptPicker(genderList)
+        pickerMarital.setupOneOptPicker(maritalList)
+        pickerStaff.setupOneOptPicker(staffList)
+        pickerPayType.setupOneOptPicker(payTypeList)
 
         etCompany.disabled()
 

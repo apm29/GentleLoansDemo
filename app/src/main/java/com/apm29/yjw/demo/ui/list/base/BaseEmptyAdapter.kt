@@ -12,7 +12,7 @@ const val EMPTY_TYPE = 200
 abstract class BaseEmptyAdapter<T, VH : RecyclerView.ViewHolder>(
         val list: List<T>,
         var emptyRes:Int = R.layout.empty_item_layout,
-        val bindOp: (VH, T) -> Unit
+        val bindOp: (VH, T,Int) -> Unit
 ) : RecyclerView.Adapter<VH>() {
 
 
@@ -42,7 +42,7 @@ abstract class BaseEmptyAdapter<T, VH : RecyclerView.ViewHolder>(
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         if (position in 0 until list.size) {
-            bindOp(holder, list[position])
+            bindOp(holder, list[holder.adapterPosition],holder.adapterPosition)
         }
     }
 

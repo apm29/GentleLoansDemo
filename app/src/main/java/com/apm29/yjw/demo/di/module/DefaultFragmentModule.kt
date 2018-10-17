@@ -35,4 +35,9 @@ class DefaultFragmentModule(var fragment: Fragment) {
     fun providesDefaultListViewModel(): DefaultListViewModel {
         return ViewModelProviders.of(fragment).get(DefaultListViewModel::class.java)
     }
+
+    @Provides
+    fun providesInformationFormViewModel(): InformationFormViewModel {
+        return ViewModelProviders.of(fragment).get(InformationFormViewModel::class.java)
+    }
 }

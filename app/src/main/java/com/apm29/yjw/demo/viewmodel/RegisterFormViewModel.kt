@@ -5,6 +5,10 @@ import com.apm29.yjw.demo.arch.BaseViewModel
 import com.apm29.yjw.demo.model.ApplicantInfo
 import com.apm29.yjw.demo.model.Car
 import com.apm29.yjw.demo.model.Estate
+import com.apm29.yjw.demo.utils.subscribeErrorHandled
+import com.apm29.yjw.demo.utils.threadAutoSwitch
+import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 
 class RegisterFormViewModel : BaseViewModel() {
 
@@ -20,16 +24,24 @@ class RegisterFormViewModel : BaseViewModel() {
         )
     }
 
-    val estateData: MutableLiveData<List<Estate>> = MutableLiveData()
-    val carData: MutableLiveData<List<Car>> = MutableLiveData()
+    val assetsData: MutableLiveData<Pair<List<Estate>,List<Car>>> = MutableLiveData()
 
     fun assets() {
         //mock
-        val list = arrayListOf<Estate>()
-        for (i in 1..3) {
-            list.add(Estate())
-        }
-        estateData.value = list
+        Observable.just(1)
+                .map {
+                    val list = arrayListOf<Estate>()
+                    for (i in 1..2) {
+                        list.add(Estate())
+                    }
+                    list
+                }
+                .delay(2000,TimeUnit.MILLISECONDS)
+                .threadAutoSwitch()
+                .subscribeErrorHandled(mErrorData,mErrorHandlerImpl,mLoadingData){
+                    assetsData.value = it to arrayListOf()
+                }
+
     }
 
 }
