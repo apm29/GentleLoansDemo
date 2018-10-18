@@ -14,6 +14,7 @@
        <LinearLayout
            android:orientation="vertical"
            android:layout_width="match_parent"
+           android:gravity="center_horizontal"
            android:layout_height="wrap_content">
            <androidx.constraintlayout.widget.ConstraintLayout
                android:layout_width="match_parent"
@@ -346,6 +347,7 @@
                <com.apm29.yjw.demo.ui.widget.IconFontTextView
                    android:id="@+id/okRelationship3"
                    style="@style/SliceTitleStyle.Ok"
+                   android:visibility="gone"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toBottomOf="@+id/okName3" />
 
@@ -390,7 +392,7 @@
 
                    <com.google.android.material.textfield.TextInputEditText
                        style="@style/EditContentStyle"
-                       android:hint="请输入直系亲属姓名" />
+                       android:hint="请输入同事姓名" />
                </com.google.android.material.textfield.TextInputLayout>
 
                <com.google.android.material.textfield.TextInputLayout
@@ -404,7 +406,7 @@
                    <com.google.android.material.textfield.TextInputEditText
                        style="@style/EditContentStyle"
 
-                       android:hint="请输入直系亲属电话" />
+                       android:hint="请输入同事电话" />
                </com.google.android.material.textfield.TextInputLayout>
 
                <TextView
@@ -413,6 +415,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="关系"
+                   android:visibility="gone"
                    app:layout_constraintBaseline_toBaselineOf="@+id/okRelationship3"
                    app:layout_constraintStart_toEndOf="@+id/okRelationship3" />
 
@@ -422,6 +425,7 @@
                    android:layout_weight="1"
                    android:drawableEnd="@mipmap/down_arrow"
                    android:drawablePadding="12dp"
+                   android:visibility="gone"
                    app:layout_constraintBaseline_toBaselineOf="@+id/tvRelationship3"
                    app:layout_constraintEnd_toEndOf="@+id/barrierSuffix3"
                    app:layout_constraintStart_toEndOf="@+id/barrierTitle3" />
@@ -454,17 +458,180 @@
 
                    <com.google.android.material.textfield.TextInputEditText
                        style="@style/EditContentStyle"
-                       android:hint="请输入直系亲属工作单位" />
+                       android:hint="请输入同事工作单位" />
                </com.google.android.material.textfield.TextInputLayout>
 
                <TextView
                    android:id="@+id/titleContact3"
                    style="@style/SlicePartTitle"
-                   android:text="直系亲属信息"
+                   android:text="同事信息"
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toTopOf="parent" />
            </androidx.constraintlayout.widget.ConstraintLayout>
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@color/white_foreground"
+               android:orientation="vertical">
+
+               <androidx.constraintlayout.widget.Barrier
+                   android:id="@+id/barrierTitle4"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:barrierDirection="end"
+                   app:constraint_referenced_ids="tvName4,tvCompany4"
+                   app:layout_constraintStart_toStartOf="parent" />
+
+               <androidx.constraintlayout.widget.Barrier
+                   android:id="@+id/barrierSuffix4"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:barrierDirection="start"
+                   app:constraint_referenced_ids="ivContact4"
+                   app:layout_constraintEnd_toEndOf="parent" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okName4"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/titleContact4" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okRelationship4"
+                   style="@style/SliceTitleStyle.Ok"
+                   android:visibility="gone"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okName4" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okCompany4"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okPhone4" />
+
+               <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                   android:id="@+id/okPhone4"
+                   style="@style/SliceTitleStyle.Ok"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/okRelationship4" />
+
+               <TextView
+                   android:id="@+id/tvName4"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="姓名"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okName4"
+                   app:layout_constraintStart_toEndOf="@+id/okName4" />
+
+               <ImageView
+                   android:id="@+id/ivContact4"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="12dp"
+                   android:src="@mipmap/contact"
+                   app:layout_constraintBottom_toBottomOf="@+id/etPhone4"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="@+id/etPhone4" />
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etName4"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvName4"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix4"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle4"
+                   app:layout_constraintTop_toTopOf="@+id/tvName4">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+                       android:hint="请输入朋友姓名" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etPhone4"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvPhone4"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix4"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle4"
+                   app:layout_constraintTop_toTopOf="@+id/tvPhone4">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+
+                       android:hint="请输入朋友电话" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <TextView
+                   android:id="@+id/tvRelationship4"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="关系"
+                   android:visibility="gone"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okRelationship4"
+                   app:layout_constraintStart_toEndOf="@+id/okRelationship4" />
+
+               <TextView
+                   android:id="@+id/pickerRelationship4"
+                   style="@style/SliceContent.Picker"
+                   android:layout_weight="1"
+                   android:drawableEnd="@mipmap/down_arrow"
+                   android:drawablePadding="12dp"
+                   android:visibility="gone"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/tvRelationship4"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix4"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle4" />
+
+               <TextView
+                   android:id="@+id/tvPhone4"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="电话"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okPhone4"
+                   app:layout_constraintStart_toEndOf="@+id/okPhone4" />
+
+               <TextView
+                   android:id="@+id/tvCompany4"
+                   style="@style/SliceTitleStyle.Header"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="工作单位"
+                   app:layout_constraintBaseline_toBaselineOf="@+id/okCompany4"
+                   app:layout_constraintStart_toEndOf="@+id/okCompany4" />
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/etCompany4"
+                   style="@style/EditLayoutStyle"
+                   app:layout_constraintBottom_toBottomOf="@+id/tvCompany4"
+                   app:layout_constraintEnd_toEndOf="@+id/barrierSuffix4"
+                   app:layout_constraintStart_toEndOf="@+id/barrierTitle4"
+                   app:layout_constraintTop_toTopOf="@+id/tvCompany4">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/EditContentStyle"
+                       android:hint="请输入朋友工作单位" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <TextView
+                   android:id="@+id/titleContact4"
+                   style="@style/SlicePartTitle"
+                   android:text="朋友信息"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+           </androidx.constraintlayout.widget.ConstraintLayout>
+
+           <Button
+               android:paddingStart="12dp"
+               android:paddingEnd="12dp"
+               android:text="@string/save_"
+               style="@style/button_default"
+               android:layout_marginTop="40dp"
+               android:layout_marginBottom="40dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

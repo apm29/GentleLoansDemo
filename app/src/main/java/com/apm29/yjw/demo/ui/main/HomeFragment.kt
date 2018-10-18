@@ -61,8 +61,6 @@ class HomeFragment : BaseFragment<DefaultFragmentViewModel>() {
                             .toBundle()
                     navController.navigate(R.id.preVerifyFragment, bundle)
                 }
-            } else {
-                showToast(it.msg)
             }
         })
     }
