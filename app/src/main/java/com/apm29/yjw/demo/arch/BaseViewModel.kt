@@ -1,15 +1,29 @@
 package com.apm29.yjw.demo.arch
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.apm29.yjw.demo.app.ActivityManager
 import com.apm29.yjw.demo.app.ErrorHandlerImpl
 import com.apm29.yjw.demo.di.component.AppComponent
+import com.apm29.yjw.demo.model.AreaItem
+import com.apm29.yjw.demo.model.CityItem
 import com.apm29.yjw.demo.model.Event
+import com.apm29.yjw.demo.model.Province
+import com.apm29.yjw.demo.utils.subscribeErrorHandled
+import com.apm29.yjw.demo.utils.threadAutoSwitch
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
+import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import retrofit2.Retrofit
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 abstract class BaseViewModel : ViewModel(), ViewModelContract.IViewModel {

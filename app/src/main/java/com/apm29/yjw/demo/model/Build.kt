@@ -7,6 +7,8 @@ import com.apm29.yjw.demo.ui.verify.RealNameVerifyFragment
 import com.apm29.yjw.demo.ui.verify.YYSVerifyFragment
 import com.apm29.yjw.demo.viewmodel.ALIPAY_CHANNEL_CODE
 import com.apm29.yjw.demo.viewmodel.TAOBAO_CHANNEL_CODE
+import com.contrarywind.interfaces.IPickerViewData
+import com.google.gson.annotations.SerializedName
 import java.lang.IllegalArgumentException
 
 class VerifyProgress(var isReal: Boolean, var isYYS: Boolean) :Parcelable{
@@ -81,5 +83,39 @@ data class DataMagicBox(
         ALIPAY_CHANNEL_CODE ->0
         TAOBAO_CHANNEL_CODE ->1
         else->-1
+    }
+}
+
+data class AreaItem(
+        @SerializedName("code")
+        val code: String,
+        @SerializedName("name")
+        val name: String
+) : IPickerViewData {
+    override fun getPickerViewText(): String {
+        return name
+    }
+}
+
+data class CityItem(@SerializedName("lists")
+                    val area: ArrayList<AreaItem>?,
+                    @SerializedName("name")
+                    val name: String,
+                    val code: String
+) : IPickerViewData {
+    override fun getPickerViewText(): String {
+        return name
+    }
+}
+
+
+data class Province(@SerializedName("lists")
+                    val city: ArrayList<CityItem>?,
+                    @SerializedName("name")
+                    val name: String,
+                    val code: String
+) : IPickerViewData {
+    override fun getPickerViewText(): String {
+        return name
     }
 }

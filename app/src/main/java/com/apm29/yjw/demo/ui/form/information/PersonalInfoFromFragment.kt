@@ -6,10 +6,12 @@ import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
+import com.apm29.yjw.demo.utils.setupLocationPicker
 import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.demo.viewmodel.InformationFormViewModel
 import com.apm29.yjw.gentleloansdemo.R
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
+import com.contrarywind.interfaces.IPickerViewData
 import kotlinx.android.synthetic.main.personal_info_form_fragment.*
 
 class PersonalInfoFromFragment:BaseFragment<InformationFormViewModel>() {
@@ -26,26 +28,15 @@ class PersonalInfoFromFragment:BaseFragment<InformationFormViewModel>() {
     }
 
     override fun setupViews(savedInstanceState: Bundle?) {
-
+        pickerAddress.setupLocationPicker (defaultSelect = Triple(10,0,0)){ triple, code, str, view ->
+            showToast(code)
+        }
+        pickerRegResident.setupLocationPicker(defaultSelect = Triple(10,0,0)) { triple, code, str, view ->
+            showToast(code)
+        }
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        mViewModel.loadLocationData()
 
-        mViewModel.locationData.observe(this, Observer {
-            val (component1, component2, component3) = it
-            val pickerOptions = OptionsPickerBuilder(requireContext()){
-                p1,p2,p3,_->
-                showToast("${component1[p1]} - ${component2[p1][p2]} -  ${component3[p1][p2][p3]}")
-            }
-            val build = pickerOptions.build<String>()
-            build.setPicker(component1,component2,component3)
-            //户口地址
-            pickerRegResident.setOnClickListener {
-                _->
-                        build.show()
-            }
-
-        })
     }
 }
