@@ -59,22 +59,24 @@
     <style name="EditContentStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:inputType">text</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">center|end</item>
         <item name="android:background">@null</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">@dimen/SliceEditHeight</item>
     </style>
 
     <style name="EditLayoutStyle" parent="Widget.Design.TextInputLayout">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:background">@drawable/bg_edit_outline</item>
+        <!--<item name="android:background">@drawable/bg_edit_outline</item>-->
         <item name="android:layout_marginStart">6dp</item>
         <item name="android:layout_marginEnd">6dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">@dimen/SliceEditHeight</item>
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="hintAnimationEnabled">false</item>
+        <item name="android:background">@null</item>
     </style>
 
     <style name="SliceLayoutHorizontal">
@@ -105,6 +107,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:minHeight">@dimen/SliceHeight</item>
     </style>
 
@@ -129,26 +132,40 @@
     <style name="SliceContent.Picker">
         <item name="android:gravity">center_vertical|end</item>
         <item name="android:layout_marginEnd">6dp</item>
+        <item name="android:layout_marginStart">6dp</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">@dimen/SliceHeight</item>
+        <item name="android:layout_height">@dimen/SliceEditHeight</item>
         <item name="android:text">@string/text_unselected</item>
-        <item name="android:background">@drawable/bg_ripple</item>
+        <item name="android:background">@drawable/bg_edit_outline</item>
+        <item name="android:drawableEnd">@mipmap/down_arrow</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:paddingEnd">6dp</item>
+    </style>
+
+    <style name="SliceContent.PlainText">
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:layout_marginEnd">6dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/SliceEditHeight</item>
+        <item name="android:paddingEnd">6dp</item>
     </style>
 
     <style name="SliceContent.SuffixArrow">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginEnd">12dp</item>
-        <item name="android:text">@string/箭头下</item>
+        <!--<item name="android:text">@string/箭头下</item>-->
     </style>
 
     <style name="SliceContent.SuffixUnit">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">@dimen/SliceEditHeight</item>
         <item name="android:layout_marginEnd">6dp</item>
         <item name="android:layout_marginStart">6dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1</item>
         <item name="android:text">@string/箭头下</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">center|end</item>
     </style>
     <style name="SliceContent.HintStyle" parent="TextAppearance.Design.Hint">
         <item name="android:textSize">10sp</item>
@@ -170,7 +187,21 @@
         <item name="android:layout_height">@dimen/SliceHeight</item>
     </style>
 
-
+    <style name="ButtonVerifySender">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:shadowColor">@color/colorAccent</item>
+        <item name="android:shadowDx">2.0</item>
+        <item name="android:shadowRadius">2.0</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Chip</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:background">@drawable/bg_counter_timer_outline</item>
+    </style>
 
 
 </resources>

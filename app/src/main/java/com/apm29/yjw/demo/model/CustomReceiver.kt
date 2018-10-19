@@ -86,7 +86,7 @@ class CustomReceiver : BroadcastReceiver() {
             hostActivity?.let {
                 context.startActivity(Intent(context,HostActivity::class.java))
                 val communicateViewModel = ViewModelProviders.of(hostActivity).get(CommunicateViewModel::class.java)
-                communicateViewModel.onPushClick(json ?: "")
+                communicateViewModel.onPushClick(json)
             }
         }
     }

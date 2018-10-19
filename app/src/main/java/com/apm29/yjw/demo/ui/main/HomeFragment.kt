@@ -12,6 +12,7 @@ import com.apm29.yjw.demo.model.VerifyProgress
 import com.apm29.yjw.demo.ui.verify.FORM
 import com.apm29.yjw.demo.ui.verify.PreVerifyFragmentArgs
 import com.apm29.yjw.demo.utils.defaultAnim
+import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.gentleloansdemo.R
@@ -46,11 +47,10 @@ class HomeFragment : BaseFragment<DefaultFragmentViewModel>() {
         super.initData(savedInstanceState)
         mViewModel.profile.observe(this, Observer {
             if (it.success()) {
-                val navController = requireActivity().findNavController(R.id.app_host_fragment)
                 val profile = it.peekData()
                 if (profile.is_real && profile.yys_auth) {
                     //to apply form
-                    navController.navigate(R.id.registerFormFragment,null, navOptions {
+                    navigateErrorHandled(R.id.registerFormFragment,null, navOptions {
                         anim(defaultAnim)
                     })
                 } else {
@@ -59,7 +59,7 @@ class HomeFragment : BaseFragment<DefaultFragmentViewModel>() {
                             .setDestination(FORM)
                             .build()
                             .toBundle()
-                    navController.navigate(R.id.preVerifyFragment, bundle)
+                    navigateErrorHandled(R.id.preVerifyFragment, bundle)
                 }
             }
         })

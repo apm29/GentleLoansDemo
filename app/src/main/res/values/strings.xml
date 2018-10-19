@@ -93,9 +93,9 @@
     <string name="hint_level">输入职位信息</string>
     <string name="hint_department">请输入部门名称</string>
     <string name="hint_year_income">请输入年收入（万元）</string>
-    <string name="hint_gjj_month">请输入公积金月缴金额</string>
+    <string name="hint_gjj_month">请输入公积金月缴金额(元)</string>
     <string name="text_unselected">未选择</string>
-    <string name="hint_term">请输入还款期限</string>
+    <string name="hint_term">请输入还款期限(月)</string>
     <string name="hint_zx_pass">请输入征信密码</string>
     <string name="hint_zx_account">请输入征信账号</string>
     <string name="hint_zx_verify">请输入征信验证码</string>
@@ -120,6 +120,16 @@
 
     <string name="text_estate">房产信息</string>
     <string name="text_car">车产信息</string>
+    <string name="text_usage_warning">说明：\n
+
+                借款不得用于以下目的和用途：\n
+
+                A:借款资金不得以任何形式进入证券市场或用于股本权益性投资；\n
+
+                B:借款资金不得用于国家明令禁止或限制的经营活动；\n
+
+                C:借款资金不得用于房地产项目开发。\n</string>
+    <string name="text_hint_usage_term">借款期间为自借款发起之日起止约定的清偿全部贷款本息之日止</string>
     <string name="about_us">公司介绍\n
         <h>\t\t浙江君磊资产管理有限公司始建于2016年11月07日，是专注于基金/证券/期货/投资行业的民营企业公司，公司坐落于美丽的浙江省杭州，以始终坚持“诚信为本、客户至上、互惠互利，开拓创新”为企业宗旨，本着“本质为本、专业执着、精益求精”的经营销售理念，力求给客户提供全方位优质服务。君磊资管，你身边的金融服务专家，全新服务体验，银行团队全程服务，规范经营，健康发展，致力于打造用户一站式的融资体验。
             \n</h>
@@ -129,4 +139,11 @@
     <string name="apply_info_form_notice">本人保证上述内容真实、合法、有效，如有问题，本人愿承担相应的法律责任（包括不限于民事责任及刑事责任等）。</string>
 
     <string name="hint_add">点击添加新项</string>
+    <string name="hint_agent_id">请输入推荐人电话</string>
+    <string name="hint_job_time">请输入入职时间</string>
+    <string name="hint_company_address">请选择单位地址</string>
+    <string name="hint_company_address_detail">请输入单位详细地址</string>
+    <string name="hint_company_phone">请输入单位电话</string>
+    <string name="hint_month_salary">请输入每月基本薪资</string>
+    <string name="hint_pay_way">请选择发薪方式</string>
 </resources>

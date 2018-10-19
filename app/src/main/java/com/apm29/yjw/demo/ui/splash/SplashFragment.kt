@@ -18,6 +18,7 @@ import com.apm29.yjw.demo.model.ProfileBean
 import com.apm29.yjw.demo.model.VerifyProgress
 import com.apm29.yjw.demo.ui.dialog.RuntimeRationale
 import com.apm29.yjw.demo.ui.verify.PreVerifyFragmentArgs
+import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.gentleloansdemo.R
 import com.yanzhenjie.permission.AndPermission
@@ -68,7 +69,7 @@ class SplashFragment : BaseFragment<DefaultFragmentViewModel>() {
         )
         ViewCompat.setTransitionName(imageViewLogo, getString(R.string.app_icon))
         if (profile.yys_auth && profile.is_real) {
-            findNavController().navigate(
+            navigateErrorHandled(
                     R.id.mainFragment,
                     null,
                     navOptions {
@@ -81,7 +82,7 @@ class SplashFragment : BaseFragment<DefaultFragmentViewModel>() {
                     .setVerifyProgress(VerifyProgress(profile.is_real, profile.yys_auth))
                     .build()
                     .toBundle()
-            findNavController().navigate(
+            navigateErrorHandled(
                     R.id.preVerifyFragment,
                     preVerifyFragmentArgs,
                     navOptions {

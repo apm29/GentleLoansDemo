@@ -9,6 +9,7 @@ import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
+import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.demo.viewmodel.CommunicateViewModel
 import com.apm29.yjw.demo.viewmodel.YYSVerifyViewModel
 import com.apm29.yjw.gentleloansdemo.BuildConfig
@@ -56,7 +57,7 @@ class YYSVerifyFragment : BaseFragment<YYSVerifyViewModel>() {
                 .setUrl(url)
                 .build()
                 .toBundle()
-        findNavController().navigate(R.id.action_preVerifyFragment_to_webViewFragment, args)
+        navigateErrorHandled(R.id.webViewFragment, args)
     }
 
     private var isYYSAuth = false

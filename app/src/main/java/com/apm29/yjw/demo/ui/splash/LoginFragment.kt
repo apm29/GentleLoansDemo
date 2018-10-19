@@ -28,6 +28,7 @@ import com.apm29.yjw.demo.model.ProfileBean
 import com.apm29.yjw.demo.model.VerifyProgress
 import com.apm29.yjw.demo.ui.verify.PreVerifyFragmentArgs
 import com.apm29.yjw.demo.utils.getTextOrEmpty
+import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.gentleloansdemo.BuildConfig
@@ -143,7 +144,7 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
         ViewCompat.setTransitionName(imageViewLogo, transitionName)
         if (profile.is_real && profile.yys_auth) {
 
-            findNavController().navigate(
+            navigateErrorHandled(
                     R.id.mainFragment,
                     null,
                     navOptions {
@@ -156,7 +157,7 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
                     .setVerifyProgress(VerifyProgress(profile.is_real, profile.yys_auth))
                     .build()
                     .toBundle()
-            findNavController().navigate(
+            navigateErrorHandled(
                     R.id.preVerifyFragment,
                     preVerifyFragmentArgs,
                     navOptions {

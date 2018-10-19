@@ -17,6 +17,7 @@ import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.model.VerifyProgress
 import com.apm29.yjw.demo.ui.verify.PreVerifyFragmentArgs
+import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.demo.viewmodel.CommunicateViewModel
 import com.apm29.yjw.demo.viewmodel.RealNameVerifyViewModel

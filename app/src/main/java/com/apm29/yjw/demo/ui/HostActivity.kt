@@ -48,11 +48,8 @@ class HostActivity : BaseActivity<DefaultActivityViewModel>() {
         intent?.extras.let {
             val json = it?.getString(JPushInterface.EXTRA_EXTRA)
             val communicateViewModel = ViewModelProviders.of(this).get(CommunicateViewModel::class.java)
-            communicateViewModel.onPushClick(json?:"")
+            communicateViewModel.onPushClick(json)
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
 }

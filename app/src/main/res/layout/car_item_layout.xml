@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrierTitle1"
+            android:id="@+id/barrierTitle"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             app:barrierDirection="end"
@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrierSuffix1"
+            android:id="@+id/barrierSuffix"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             app:barrierDirection="start"
@@ -50,8 +50,8 @@
             style="@style/EditLayoutStyle"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="@id/tvBrand"
-            app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
-            app:layout_constraintStart_toEndOf="@id/barrierTitle1"
+            app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+            app:layout_constraintStart_toEndOf="@id/barrierTitle"
             app:layout_constraintTop_toTopOf="@id/tvBrand">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -77,8 +77,8 @@
             style="@style/EditLayoutStyle"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="@id/tvLicense"
-            app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
-            app:layout_constraintStart_toEndOf="@id/barrierTitle1"
+            app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+            app:layout_constraintStart_toEndOf="@id/barrierTitle"
             app:layout_constraintTop_toTopOf="@id/tvLicense">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -105,8 +105,8 @@
             style="@style/EditLayoutStyle"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="@id/tvColor"
-            app:layout_constraintEnd_toEndOf="@id/barrierSuffix1"
-            app:layout_constraintStart_toEndOf="@id/barrierTitle1"
+            app:layout_constraintEnd_toEndOf="@id/barrierSuffix"
+            app:layout_constraintStart_toEndOf="@id/barrierTitle"
             app:layout_constraintTop_toTopOf="@id/tvColor">
 
             <com.google.android.material.textfield.TextInputEditText

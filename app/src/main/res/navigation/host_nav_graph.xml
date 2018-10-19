@@ -154,7 +154,7 @@
             app:destination="@id/applicantInfoManagerFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/applicant_info_fragment"
+        tools:layout="@layout/applicant_info_fragment_constraint"
         android:id="@+id/applicantInfoFragment"
         android:name="com.apm29.yjw.demo.ui.form.register.ApplicantInfoFragment"
         android:label="申请人信息表" />

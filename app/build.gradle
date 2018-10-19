@@ -31,7 +31,7 @@ android {
         }
 
         debug {
-            applicationIdSuffix ".test"
+            applicationIdSuffix ".demo"
             buildConfigField "String", "BASE_URL", "\"http://api.junleizg.com.cn\""
             shrinkResources false
             zipAlignEnabled false

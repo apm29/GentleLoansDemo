@@ -7,6 +7,7 @@ import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.model.ApplicantInfo
+import com.apm29.yjw.demo.model.PersonalInfo
 import com.apm29.yjw.demo.utils.*
 import com.apm29.yjw.demo.viewmodel.RegisterFormViewModel
 import com.apm29.yjw.gentleloansdemo.R
@@ -33,15 +34,35 @@ class ApplicantInfoFragment : BaseFragment<RegisterFormViewModel>() {
         pickerStaff.setupOneOptPicker(staffList)
         pickerPayType.setupOneOptPicker(payTypeList)
 
-        etCompany.disabled()
-
         btnSave.setOnClickListener {
             val (error, success) = verifyInput()
             if (!success) {
                 showToast(error)
                 return@setOnClickListener
             }
-            showToast("verify success")
+            val personalInfo = PersonalInfo(
+                    etName.getTextOrEmpty(),
+                    etIdCard.getTextOrEmpty(),
+                    pickerGender.getIndexByText(genderList),
+                    pickerMarital.getIndexByText(maritalList),
+                    etCompany.getTextOrEmpty(),
+                    etDepartment.getTextOrEmpty(),
+                    etLevel.getTextOrEmpty(),
+                    pickerStaff.getIndexByText(staffList),
+                    etYearIncome.getTextOrEmpty(),
+                    etGjjMonth.getTextOrEmpty(),
+                    pickerPayType.getIndexByText(payTypeList),
+                    etTerm.getTextOrEmpty(),
+                    etZxAccount.getTextOrEmpty(),
+                    etZxPass.getTextOrEmpty(),
+                    etZxVerify.getTextOrEmpty(),
+                    etGjjAccount.getTextOrEmpty(),
+                    etGjjPass.getTextOrEmpty(),
+                    etZwAccount.getTextOrEmpty(),
+                    etZwPass.getTextOrEmpty(),
+                    etAgent.getTextOrEmpty()
+            )
+            mViewModel.postApplicantInfo(personalInfo)
         }
     }
 
@@ -74,6 +95,7 @@ class ApplicantInfoFragment : BaseFragment<RegisterFormViewModel>() {
                 .verifyEdit(etGjjPass)
                 .verifyEdit(etZwAccount)
                 .verifyEdit(etZxPass)
+                .verifyEdit(etAgent)
     }
 
     private fun setInitValues(applicantInfo: ApplicantInfo?) {

@@ -10,7 +10,7 @@ import com.apm29.yjw.gentleloansdemo.R
 
 class JobInfoFromFragment:BaseFragment<InformationFormViewModel>() {
     override fun setupViewLayout(savedInstanceState: Bundle?): Int {
-        return R.layout.personal_info_form_fragment
+        return R.layout.job_info_form_fragment
     }
 
     override fun setupModel(appComponent: AppComponent) {

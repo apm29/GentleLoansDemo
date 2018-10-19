@@ -129,15 +129,10 @@
 
                 <com.apm29.yjw.demo.ui.widget.CounterText
                     android:id="@+id/tvSend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:shadowColor="@color/colorAccent"
-                    android:shadowDx="2.0"
-                    android:shadowRadius="2.0"
                     android:text="发送验证码"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Chip"
-                    android:textColor="@color/colorAccent" />
+                    style="@style/ButtonVerifySender"
+                    />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

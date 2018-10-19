@@ -1,7 +1,9 @@
 package com.apm29.yjw.demo.utils
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -10,7 +12,7 @@ import androidx.annotation.StringRes
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.AnimBuilder
+import androidx.navigation.*
 import com.apm29.yjw.demo.app.ActivityManager
 import com.apm29.yjw.demo.app.AppApplication
 import com.apm29.yjw.demo.app.ErrorHandledObserver
@@ -27,6 +29,7 @@ import com.contrarywind.interfaces.IPickerViewData
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import com.tencent.bugly.crashreport.CrashReport
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -35,6 +38,31 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
+
+fun Fragment.findHostNaviController(): NavController? {
+    return ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
+}
+
+fun Activity.findHostNaviController(): NavController? {
+    return ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
+}
+
+fun Fragment.navigateErrorHandled(
+        destination: Int,
+        args: Bundle? = null,
+        options: NavOptions? = navOptions {
+            anim(defaultAnim)
+        },
+        extra: Navigator.Extras? = null
+) {
+    try {
+        findHostNaviController()?.navigate(destination, args, options, extra)
+    } catch (e: Exception) {
+        CrashReport.postCatchedException(e)
+        e.printStackTrace()
+    }
+}
+
 /**
  * 获取全局组件库
  */
@@ -42,6 +70,9 @@ fun Context.getAppComponent(): AppComponent {
     return (this.applicationContext as AppApplication).getAppComponent()
 }
 
+/**
+ * 线程转换
+ */
 fun <T> getThreadSchedulers(): ObservableTransformer<T, T> {
     return ObservableTransformer {
         return@ObservableTransformer it.subscribeOn(Schedulers.io())
@@ -49,10 +80,16 @@ fun <T> getThreadSchedulers(): ObservableTransformer<T, T> {
     }
 }
 
+/**
+ * 线程切换快捷方法
+ */
 fun <T> Observable<T>.threadAutoSwitch(): Observable<T> {
     return this.compose(getThreadSchedulers())
 }
 
+/**
+ * 自动错误处理的订阅方法
+ */
 fun <T> Observable<T>.subscribeErrorHandled(
         errorData: MutableLiveData<String>?,
         responseErrorHandler: ResponseErrorHandler?,
@@ -68,7 +105,7 @@ fun <T> Observable<T>.subscribeErrorHandled(
     )
 }
 
-
+/*--------------------------------------------------------------------------------*/
 var toast: Toast? = null
 
 @SuppressLint("ShowToast")
@@ -88,12 +125,56 @@ fun Fragment.showToast(msg: String?) {
         toast.also { it?.setText(msg) }?.show()
     }
 }
+/*--------------------------------------------------------------------------------*/
 
 fun TextView.getTextOrEmpty(): String {
     return this.text?.toString()?.trim() ?: ""
 }
 
+fun TextInputLayout.getTextOrEmpty(): String {
+    return this.editText?.text?.toString()?.trim() ?: ""
+}
 
+
+fun IconFontTextView.ok() {
+    this.text = context.getString(R.string.确定)
+}
+
+fun IconFontTextView.error() {
+    this.text = context.getString(R.string.取消)
+}
+
+fun TextInputLayout.disabled(error: String? = null) {
+    this.isEnabled = false
+    this.isHintEnabled = false
+//    this.editText?.hint= context.getString(R.string.text_uneditable_hint)
+    error?.let {
+        this.error = error
+    }
+}
+
+fun View.disableAll(){
+    if (this is ViewGroup){
+        this.children.forEach {
+            if (it is TextInputLayout){
+                it.disabled()
+            }
+            it.disableAll()
+        }
+    }else{
+        this.isEnabled = false
+    }
+}
+
+fun TextInputLayout.setText(text: String?) {
+    this.editText?.setText(text)
+}
+
+fun TextInputLayout.setText(@StringRes text: Int) {
+    this.editText?.setText(text)
+}
+
+/*--------------------------------------------------------------------------------*/
 data class Verify(var error: String, var success: Boolean) {
 
     companion object {
@@ -158,38 +239,15 @@ data class Verify(var error: String, var success: Boolean) {
     }
 }
 
-
+/*--------------------------------------------------------------------------------*/
 val defaultAnim: AnimBuilder.() -> Unit = {
     enter = R.anim.slide_in_right
     exit = R.anim.slide_out_left
     popEnter = R.anim.slide_in_left
     popExit = R.anim.slide_out_right
 }
+/*--------------------------------------------------------------------------------*/
 
-fun IconFontTextView.ok() {
-    this.text = context.getString(R.string.确定)
-}
-
-fun IconFontTextView.error() {
-    this.text = context.getString(R.string.取消)
-}
-
-fun TextInputLayout.disabled(error: String? = null) {
-    this.isEnabled = false
-    this.isHintEnabled = false
-//    this.editText?.hint= context.getString(R.string.text_uneditable_hint)
-    error?.let {
-        this.error = error
-    }
-}
-
-fun TextInputLayout.setText(text: String?) {
-    this.editText?.setText(text)
-}
-
-fun TextInputLayout.setText(@StringRes text: Int) {
-    this.editText?.setText(text)
-}
 
 fun clearAllFocus(itemView: View) {
     if (itemView is ViewGroup) {
@@ -201,6 +259,18 @@ fun clearAllFocus(itemView: View) {
     }
 }
 
+fun TextView.setTextByIndex(index: Int, list: ArrayList<String>) {
+    if (index in 0..(list.size - 1)) {
+        this.text = list[index]
+    } else {
+        this.text = context.getString(R.string.text_unselected)
+    }
+}
+
+fun TextView.getIndexByText(list: ArrayList<String>): Int {
+    return list.indexOf(text.trim())
+}
+/*--------------------------------------------------------------------------------*/
 val mortgageList = arrayListOf("已抵押", "未抵押")
 val genderList = arrayListOf("男", "女")
 val maritalList = arrayListOf("未婚", "已婚", "离异", "丧偶")
@@ -223,8 +293,11 @@ fun TextView.setupOneOptPicker(list: ArrayList<String>, defaultSelection: Int = 
     }
 }
 
+/**
+ * 从本地读取json来设置LocationPicker
+ */
 @SuppressLint("SetTextI18n")
-fun TextView.setupLocationPicker(
+fun TextView.setupLocationPickerLocal(
         /**
          * 默认选择项
          */
@@ -234,17 +307,47 @@ fun TextView.setupLocationPicker(
          */
         selectedOp: ((Triple<Int, Int, Int>, String, String, View) -> Unit)? = null
 ) {
-    loadLocationData {
+    loadLocalPCAData {
         setupLocationPickerInternal(it, selectedOp, defaultSelect)
     }
 }
 
-private fun TextView.setupLocationPickerInternal(it: Triple<List<Province>, List<List<CityItem>>, List<List<List<AreaItem>>>>, selectedOp: ((Triple<Int, Int, Int>, String, String, View) -> Unit)?, defaultSelect: Triple<Int, Int, Int>?) {
-    val (component1, component2, component3) = it
+/**
+ * 获取数据后设置Picker-location
+ */
+fun TextView.setupLocationWithData(
+        data: List<Province>,
+        /**
+         * 默认选择项
+         */
+        defaultSelect: Triple<Int, Int, Int>? = null,
+        /**
+         * 选择地址回调
+         */
+        selectedOp: ((Triple<Int, Int, Int>, String, String, View) -> Unit)? = null) {
+   locationDataProcess(data){
+       setupLocationPickerInternal(it, selectedOp, defaultSelect)
+   }
+}
+
+/**
+ * 设置PickerOptions，Click Listener等
+ */
+private fun TextView.setupLocationPickerInternal(
+        data: Triple<List<Province>, List<List<CityItem>>, List<List<List<AreaItem>>>>,
+        selectedOp: ((Triple<Int, Int, Int>, String, String, View) -> Unit)?,
+        defaultSelect: Triple<Int, Int, Int>?
+) {
+    val (component1, component2, component3) = data
     val pickerOptions = OptionsPickerBuilder(context) { p1, p2, p3, _ ->
-        val result = "${component1[p1].pickerViewText} - ${component2[p1][p2].pickerViewText} -  ${component3[p1][p2][p3].pickerViewText}"
+        val result = "${component1[p1].pickerViewText} ${component2[p1][p2].pickerViewText} ${component3[p1][p2][p3].pickerViewText}".trim()
+        //设置文字
         text = result
-        selectedOp?.invoke(Triple(p1, p2, p3), component3[p1][p2][p3].code, result, this)
+        //将code 作为tag设置给textView
+        val code = component3[p1][p2][p3].code
+        setTag(R.id.TAG_LOCATION_CODE, code)
+        //调用CallBack
+        selectedOp?.invoke(Triple(p1, p2, p3), code, result, this)
     }.build<IPickerViewData>()
     pickerOptions.setPicker(component1, component2, component3)
     if (defaultSelect != null) {
@@ -256,49 +359,39 @@ private fun TextView.setupLocationPickerInternal(it: Triple<List<Province>, List
     }
 }
 
-fun TextView.setTextByIndex(index: Int, list: ArrayList<String>) {
-    if (index in 0..(list.size - 1)) {
-        this.text = list[index]
-    } else {
-        this.text = context.getString(R.string.text_unselected)
-    }
-}
-
-fun TextView.getIndexByText(list: ArrayList<String>): Int {
-    return list.indexOf(text.trim())
-}
 
 /**-------------------------获取三级联动PCA信息---------------------------*/
 
-fun loadLocationData(
-        callBack: ((result: Triple<List<Province>, List<List<CityItem>>, List<List<List<AreaItem>>>>) -> Unit)? = null
-) {
-
-    Observable.just(1)
+/**
+ * 处理Province列表数据，返回一个PickerOptions 可用的Triple数据
+ */
+private fun locationDataProcess(provinceList: List<Province>, callBack: ((result: Triple<List<Province>, List<List<CityItem>>, List<List<List<AreaItem>>>>) -> Unit)?) {
+    Observable.just(provinceList)
             .map {
                 val options1Items: ArrayList<Province> = arrayListOf()
                 val options2Items: ArrayList<ArrayList<CityItem>> = arrayListOf()
                 val options3Items: ArrayList<ArrayList<ArrayList<AreaItem>>> = arrayListOf()
-                ActivityManager.findHostActivity()?.let { context ->
-                    val json = getPCAJson(context)
-                    val jsonBean = parsePCAData(json)
-
-                    val size = jsonBean.size
-
-                    options1Items.addAll(jsonBean)
-                    jsonBean.forEach { province ->
-                        val cityList: ArrayList<CityItem> = province.city ?: arrayListOf()
-                        options2Items.add(cityList)
-
-                        val secondaryAreaList = arrayListOf<ArrayList<AreaItem>>()
-                        cityList.forEach { city ->
-                            val areaList = city.area
-                            secondaryAreaList.add(areaList ?: arrayListOf())
-                        }
-
-                        options3Items.add(secondaryAreaList)
+                options1Items.addAll(provinceList)
+                provinceList.forEach { province ->
+                    val cityList: ArrayList<CityItem> = province.city ?: arrayListOf()
+                    //城市列表为空时加入一个默认数据
+                    if (cityList.isEmpty()){
+                        cityList.add(CityItem(area = arrayListOf(),name = "",code = province.code))
                     }
+                    options2Items.add(cityList)
+                    val secondaryAreaList = arrayListOf<ArrayList<AreaItem>>()
+                    cityList.forEach { city ->
+                        val areaList = city.area?: arrayListOf()
+                        //区县列表为空时加入一个默认数据
+                        if (areaList.isEmpty()){
+                            areaList.add(AreaItem(code = city.code,name = ""))
+                        }
+                        secondaryAreaList.add(areaList ?: arrayListOf())
+                    }
+
+                    options3Items.add(secondaryAreaList)
                 }
+
                 Triple(options1Items, options2Items, options3Items)
             }
             .threadAutoSwitch()
@@ -308,6 +401,18 @@ fun loadLocationData(
                 }
             }
 }
+
+
+fun loadLocalPCAData(
+        callBack: ((result: Triple<List<Province>, List<List<CityItem>>, List<List<List<AreaItem>>>>) -> Unit)? = null
+) {
+    ActivityManager.findHostActivity()?.let { context ->
+        val json = getPCAJson(context)
+        val jsonBean = parsePCAData(json)
+        locationDataProcess(jsonBean, callBack)
+    }
+}
+
 
 private fun getPCAJson(context: Context, fileName: String = "pca-code.json"): String {
 

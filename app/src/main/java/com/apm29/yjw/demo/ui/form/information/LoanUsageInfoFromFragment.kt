@@ -10,7 +10,7 @@ import com.apm29.yjw.gentleloansdemo.R
 
 class LoanUsageInfoFromFragment:BaseFragment<InformationFormViewModel>() {
     override fun setupViewLayout(savedInstanceState: Bundle?): Int {
-        return R.layout.personal_info_form_fragment
+        return R.layout.loan_usage_info_form_fragment
     }
 
     override fun setupModel(appComponent: AppComponent) {

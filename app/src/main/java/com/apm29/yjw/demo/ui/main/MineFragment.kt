@@ -11,6 +11,7 @@ import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.utils.defaultAnim
+import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.gentleloansdemo.BuildConfig
 import com.apm29.yjw.gentleloansdemo.R
@@ -44,7 +45,7 @@ class MineFragment: BaseFragment<DefaultFragmentViewModel>() {
         }
 
         layoutLoanLog.setOnClickListener {
-            findNavController?.navigate(
+            navigateErrorHandled(
                     R.id.loanLogListFragment,
                     null,
                     navOptions {
@@ -53,7 +54,7 @@ class MineFragment: BaseFragment<DefaultFragmentViewModel>() {
             )
         }
         layoutPersonalInfo.setOnClickListener {
-            findNavController?.navigate(
+            navigateErrorHandled(
                     R.id.personalInfoFragment,
                     null,
                     navOptions {
@@ -63,7 +64,7 @@ class MineFragment: BaseFragment<DefaultFragmentViewModel>() {
         }
 
         layoutAboutUs.setOnClickListener {
-            findNavController?.navigate(
+            navigateErrorHandled(
                     R.id.aboutUsFragment,
                     null,
                     navOptions {

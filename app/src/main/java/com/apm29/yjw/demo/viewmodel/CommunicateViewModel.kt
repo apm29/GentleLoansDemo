@@ -13,7 +13,7 @@ class CommunicateViewModel:ViewModel() {
         realResult.value = Event(true)
     }
 
-    fun onPushClick(json:String){
+    fun onPushClick(json:String?){
         pushJsonData.value = Event(json)
     }
 

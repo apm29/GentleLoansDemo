@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/barrierTitle1"
+                android:id="@+id/barrierTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="end"
@@ -179,7 +179,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toTopOf="@+id/tvName">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -194,7 +194,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvPhone1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toTopOf="@+id/tvPhone1">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -208,7 +208,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvPhone2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toTopOf="@+id/tvPhone2">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -222,7 +222,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvId"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toTopOf="@+id/tvId">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -236,7 +236,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMail"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toTopOf="@+id/tvMail">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -250,7 +250,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvResidencePhone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toTopOf="@+id/tvResidencePhone">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -266,7 +266,7 @@
                 android:drawablePadding="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMarital"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toTopOf="@+id/tvMarital" />
 
             <TextView
@@ -277,7 +277,7 @@
                 android:drawablePadding="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvRegResident"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toTopOf="@+id/tvRegResident" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -285,7 +285,7 @@
                 style="@style/EditLayoutStyle"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toBottomOf="@+id/pickerRegResident">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -301,7 +301,7 @@
                 android:drawablePadding="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvAddress"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toTopOf="@+id/tvAddress" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -309,7 +309,7 @@
                 style="@style/EditLayoutStyle"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/barrierTitle1"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
                 app:layout_constraintTop_toBottomOf="@id/okAddress">
 
                 <com.google.android.material.textfield.TextInputEditText

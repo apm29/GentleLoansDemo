@@ -32,7 +32,7 @@ data class BaseBean<T>(val code: Int = 200, val msg: String = "", private val da
 /**
  * Used as a wrapper for getDataIfNotExpired that is exposed via a LiveData that represents an event.
  */
-open class Event<out T>(private val content: T) {
+open class Event<out T>(private val content: T?) {
 
     var hasBeenHandled = false
         private set // Allow external read but not write
@@ -49,7 +49,7 @@ open class Event<out T>(private val content: T) {
         }
     }
 
-    fun getContentIfNotHandled(consumer: (content: T) -> Unit) {
+    fun getContentIfNotHandled(consumer: (content: T?) -> Unit) {
         if (!hasBeenHandled) {
             hasBeenHandled = true
             consumer(content)
@@ -60,7 +60,7 @@ open class Event<out T>(private val content: T) {
     /**
      * Returns the content, even if it's already been handled.
      */
-    fun peekContent(): T = content
+    fun peekContent(): T? = content
 
 
     private val classesThatHandledTheEvent = HashSet<String>(0)
@@ -146,28 +146,29 @@ data class ApplicantInfo(
 ) {
     constructor() : this(null, null, 0, 0,
             null, null, null, 0, null,
-            null, 0, null, null, null,null,
-            null,null,null,null)
+            null, 0, null, null, null, null,
+            null, null, null, null)
 }
+
 open class Assets
 data class Estate(
-        var owner:String?,
-        var area:String?,
-        var location:String?,
-        var mortgage:Boolean?,
-        var mortgageCreditor1:String?,
-        var mortgageAmount1:String?,
-        var mortgageCreditor2:String?,
-        var mortgageAmount2:String?
-):Assets(){
+        var owner: String?,
+        var area: String?,
+        var location: String?,
+        var mortgage: Boolean?,
+        var mortgageCreditor1: String?,
+        var mortgageAmount1: String?,
+        var mortgageCreditor2: String?,
+        var mortgageAmount2: String?
+) : Assets() {
 
     init {
-        if (mortgage==null){
+        if (mortgage == null) {
             mortgage = false
         }
     }
 
-    constructor():this(
+    constructor() : this(
             null,
             null,
             null,
@@ -183,8 +184,8 @@ data class Car(
         var license: String?,
         var brand: String?,
         var color: String?
-):Assets(){
-    constructor():this(
+) : Assets() {
+    constructor() : this(
             null,
             null,
             null
@@ -193,21 +194,21 @@ data class Car(
 
 
 data class LoanLog(
-        @SerializedName("total_amount") var totalAmount:String?,
-        @SerializedName("interest_rate")var interestRate:String?,
-        @SerializedName("term")var term:String?,
-        @SerializedName("repayment_type")var repaymentType:Int?,
-        @SerializedName("repayment_type_comment")var repaymentTypeComment:String?,
-        @SerializedName("actual_time")var actualTime:String?,
-        @SerializedName("rest_amount")var restAmount:Double?,
-        @SerializedName("total_interest")var totalInterest:Double?,
-        @SerializedName("total_fine")var totalFine:Double?,
-        @SerializedName("total_overdue")var totalOverdue:Double?,
-        @SerializedName("bank_name")var bankName:String?,
-        var id:String?,
-        var status:Int?
-){
-    constructor():this(
+        @SerializedName("total_amount") var totalAmount: String?,
+        @SerializedName("interest_rate") var interestRate: String?,
+        @SerializedName("term") var term: String?,
+        @SerializedName("repayment_type") var repaymentType: Int?,
+        @SerializedName("repayment_type_comment") var repaymentTypeComment: String?,
+        @SerializedName("actual_time") var actualTime: String?,
+        @SerializedName("rest_amount") var restAmount: Double?,
+        @SerializedName("total_interest") var totalInterest: Double?,
+        @SerializedName("total_fine") var totalFine: Double?,
+        @SerializedName("total_overdue") var totalOverdue: Double?,
+        @SerializedName("bank_name") var bankName: String?,
+        var id: String?,
+        var status: Int?
+) {
+    constructor() : this(
             null,
             null,
             null,
@@ -223,5 +224,29 @@ data class LoanLog(
             null
     )
 }
+
+
+data class PersonalInfo(
+        @SerializedName("real_name") val name: String?,
+        @SerializedName("id_card_no") val idCard: String?,
+        @SerializedName("gender") val gender: Int?,
+        @SerializedName("marital_status") val maritalStatus: Int?,
+        @SerializedName("company_name") val company: String?,
+        @SerializedName("department") val department: String?,
+        @SerializedName("position_level") val level: String?,
+        @SerializedName("staffing") val staff: Int?,
+        @SerializedName("year_income") val yearIncome: String?,
+        @SerializedName("foundation_month_amount") val gjjMonth: String?,
+        @SerializedName("repayment_type") val payType: Int?,
+        @SerializedName("term") val term: String?,
+        @SerializedName("credit_account") val zxAccount: String?,
+        @SerializedName("credit_account_password") val zxPass: String?,
+        @SerializedName("credit_account_code") val zxVerify: String?,
+        @SerializedName("foundation_account") val gjjAccount: String?,
+        @SerializedName("foundation_account_password") val gjjPass: String?,
+        @SerializedName("gov_affairs_account") val zwAccount: String?,
+        @SerializedName("gov_affairs_account_password") val zwPass: String?,
+        @SerializedName("agent_id") val agentId: String?
+)
 
 

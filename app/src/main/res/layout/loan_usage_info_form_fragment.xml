@@ -1,13 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <include layout="@layout/toolbar_layout"/>
     <androidx.core.widget.NestedScrollView
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/white_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="tvUsage,tvAmount" />
+
+            <TextView
+                android:id="@+id/tvTitleTerm"
+                style="@style/SlicePartTitle"
+                android:text="@string/text_hint_usage_term" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+
+                android:id="@+id/okUsage"
+                style="@style/SliceTitleStyle.Ok"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleTerm" />
+
+            <TextView
+                android:id="@+id/tvUsage"
+                style="@style/SliceTitleStyle.Header"
+                android:text="借款用途"
+                app:layout_constraintBaseline_toBaselineOf="@+id/okUsage"
+                app:layout_constraintStart_toEndOf="@+id/okUsage" />
+
+            <TextView
+                style="@style/SliceContent.Picker"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvUsage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvUsage" />
+
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+
+                android:id="@+id/okAmount"
+                style="@style/SliceTitleStyle.Ok"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/okUsage" />
+
+            <TextView
+                android:id="@+id/tvAmount"
+                style="@style/SliceTitleStyle.Header"
+                android:text="借款总金额"
+                app:layout_constraintBaseline_toBaselineOf="@+id/okAmount"
+                app:layout_constraintStart_toEndOf="@+id/okUsage" />
+
+            <TextView
+                style="@style/SliceContent.PlainText"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAmount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvAmount" />
+
+            <com.apm29.yjw.demo.ui.widget.IconFontTextView
+
+                android:id="@+id/okTerm"
+                style="@style/SliceTitleStyle.Ok"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/okAmount" />
+
+            <TextView
+                android:id="@+id/tvTerm"
+                style="@style/SliceTitleStyle.Header"
+                android:text="申请期限"
+                app:layout_constraintBaseline_toBaselineOf="@+id/okTerm"
+                app:layout_constraintStart_toEndOf="@+id/okUsage" />
+
+            <TextView
+                style="@style/SliceContent.PlainText"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTerm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/barrierTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvTerm" />
+
+            <View
+                style="@style/EditDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okUsage" />
+
+            <View
+                android:id="@+id/view3"
+                style="@style/EditDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okTerm" />
+
+            <View
+                style="@style/EditDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/okAmount" />
+
+            <View
+                android:id="@+id/dividerBottom"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/light_gray_background"
+                app:layout_constraintTop_toBottomOf="@id/okTerm" />
+
+            <Button
+                android:id="@+id/button"
+                style="@style/button_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/save_"
+                app:layout_constraintEnd_toStartOf="@+id/dividerBottom"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/dividerBottom"
+                app:layout_constraintTop_toBottomOf="@id/okTerm" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/text_usage_warning"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

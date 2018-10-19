@@ -56,8 +56,8 @@ class MainFragment : BaseFragment<DefaultFragmentViewModel>(){
         val communicateViewModel = ViewModelProviders.of(requireActivity()).get(CommunicateViewModel::class.java)
         communicateViewModel.pushJsonData.observe(requireActivity(), Observer {
             //推送点击统一处理
-            it.getContentIfNotHandled()?.apply {
-                showToast(this)
+            it.getContentIfNotHandled()?.let {
+                showToast(it)
             }
         })
     }

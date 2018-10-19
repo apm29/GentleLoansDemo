@@ -1,6 +1,10 @@
 package com.apm29.yjw.demo.ui.form.register
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.RelativeSizeSpan
+import android.text.style.SuperscriptSpan
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.Group
@@ -63,6 +67,13 @@ class FamilyAssetsFragment : BaseFragment<RegisterFormViewModel>() {
         }
         holder.groupMortgages?.visibility = if(estate.mortgage == true) View.VISIBLE else View.GONE
         holder.pickerMortgage?.text =  if(estate.mortgage == true) mortgageList[0] else mortgageList[1]
+        /**
+         * @href https://juejin.im/post/59bf91476fb9a00a583178d3
+         */
+        val stringBuilder = SpannableStringBuilder("m2")
+        stringBuilder.setSpan( SuperscriptSpan(),1,2, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE )
+        stringBuilder.setSpan( RelativeSizeSpan(0.5f),1,2, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE )
+        holder.unitArea?.text = stringBuilder
     }
 
 
@@ -119,6 +130,7 @@ class FamilyAssetsFragment : BaseFragment<RegisterFormViewModel>() {
         var okArea: TextView? = itemView.findViewById(R.id.okArea)
         var tvArea: TextView? = itemView.findViewById(R.id.tvArea)
         var etArea: TextInputLayout? = itemView.findViewById(R.id.etArea)
+        var unitArea: TextView? = itemView.findViewById(R.id.unitArea)
 
         var okLocation: TextView? = itemView.findViewById(R.id.okLocation)
         var tvLocation: TextView? = itemView.findViewById(R.id.tvLocation)

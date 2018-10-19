@@ -7,6 +7,7 @@ import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
+import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.demo.viewmodel.InformationFormViewModel
 import com.apm29.yjw.gentleloansdemo.R
@@ -28,22 +29,22 @@ class ApplicantInfoManagerFragment : BaseFragment<InformationFormViewModel>() {
     override fun setupViews(savedInstanceState: Bundle?) {
         val navController = ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
         layoutPersaonalInfo.setOnClickListener {
-            navController?.navigate(R.id.action_applicantInfoManagerFragment_to_personalInfoFromFragment)
+            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_personalInfoFromFragment)
         }
         layoutContactsInfo.setOnClickListener {
-            navController?.navigate(R.id.action_applicantInfoManagerFragment_to_contactsInfoFormFragment)
+            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_contactsInfoFormFragment)
         }
         layoutLoanUsageInfo.setOnClickListener {
-            navController?.navigate(R.id.action_applicantInfoManagerFragment_to_loanUsageInfoFromFragment)
+            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_loanUsageInfoFromFragment)
         }
         layoutAssetsInfo.setOnClickListener {
-            navController?.navigate(R.id.action_applicantInfoManagerFragment_to_assetsInfoFromFragment)
+            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_assetsInfoFromFragment)
         }
         layoutJobInfo.setOnClickListener {
-            navController?.navigate(R.id.action_applicantInfoManagerFragment_to_jobInfoFromFragment)
+            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_jobInfoFromFragment)
         }
         layoutPhotoInfo.setOnClickListener {
-            navController?.navigate(R.id.action_applicantInfoManagerFragment_to_imageInfoFromFragment)
+            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_imageInfoFromFragment)
         }
         btnSubmit.setOnClickListener {
             showToast("submit")

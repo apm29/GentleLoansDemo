@@ -11,10 +11,10 @@ import com.contrarywind.interfaces.IPickerViewData
 import com.google.gson.annotations.SerializedName
 import java.lang.IllegalArgumentException
 
-class VerifyProgress(var isReal: Boolean, var isYYS: Boolean) :Parcelable{
+class VerifyProgress(var isReal: Boolean, var isYYS: Boolean) : Parcelable {
 
-    var pageCount:Int
-    var pageTitles:ArrayList<String>
+    var pageCount: Int
+    var pageTitles: ArrayList<String>
 
     constructor(parcel: Parcel) : this(
             parcel.readByte() != 0.toByte(),
@@ -27,12 +27,12 @@ class VerifyProgress(var isReal: Boolean, var isYYS: Boolean) :Parcelable{
     init {
         var sum = 0
         pageTitles = ArrayList()
-        if (!isYYS){
-            sum+=1
+        if (!isYYS) {
+            sum += 1
             pageTitles.add("运营商验证")
         }
-        if (!isReal){
-            sum+=1
+        if (!isReal) {
+            sum += 1
             pageTitles.add("实名认证")
         }
         pageCount = sum
@@ -53,10 +53,10 @@ class VerifyProgress(var isReal: Boolean, var isYYS: Boolean) :Parcelable{
         return "VerifyProgress(isReal=$isReal, isYYS=$isYYS, pageCount=$pageCount, pageTitles=$pageTitles)"
     }
 
-    fun getPageType(position: Int):Class<out Fragment> {
-        return when(pageTitles[position]){
-            "运营商验证"-> YYSVerifyFragment::class.java
-            "实名认证"-> RealNameVerifyFragment::class.java
+    fun getPageType(position: Int): Class<out Fragment> {
+        return when (pageTitles[position]) {
+            "运营商验证" -> YYSVerifyFragment::class.java
+            "实名认证" -> RealNameVerifyFragment::class.java
             else -> throw IllegalArgumentException("未知的页面类型")
         }
     }
@@ -72,21 +72,20 @@ class VerifyProgress(var isReal: Boolean, var isYYS: Boolean) :Parcelable{
     }
 
 
-
-
 }
 
 data class DataMagicBox(
-        var idCardNo: String, var mobile: String,var realName: String,var channelCode: String
-){
-    val type:Int = when (channelCode){
-        ALIPAY_CHANNEL_CODE ->0
-        TAOBAO_CHANNEL_CODE ->1
-        else->-1
+        var idCardNo: String, var mobile: String, var realName: String, var channelCode: String
+) {
+    val type: Int = when (channelCode) {
+        ALIPAY_CHANNEL_CODE -> 0
+        TAOBAO_CHANNEL_CODE -> 1
+        else -> -1
     }
 }
 
 data class AreaItem(
+        val id: Long? = null,
         @SerializedName("code")
         val code: String,
         @SerializedName("name")
@@ -97,11 +96,13 @@ data class AreaItem(
     }
 }
 
-data class CityItem(@SerializedName("lists")
-                    val area: ArrayList<AreaItem>?,
-                    @SerializedName("name")
-                    val name: String,
-                    val code: String
+data class CityItem(
+        val id: Long? = null,
+        @SerializedName("country")
+        val area: ArrayList<AreaItem>?,
+        @SerializedName("name")
+        val name: String,
+        val code: String
 ) : IPickerViewData {
     override fun getPickerViewText(): String {
         return name
@@ -109,11 +110,13 @@ data class CityItem(@SerializedName("lists")
 }
 
 
-data class Province(@SerializedName("lists")
-                    val city: ArrayList<CityItem>?,
-                    @SerializedName("name")
-                    val name: String,
-                    val code: String
+data class Province(
+        val id: Long? = null,
+        @SerializedName("city")
+        val city: ArrayList<CityItem>?,
+        @SerializedName("name")
+        val name: String,
+        val code: String
 ) : IPickerViewData {
     override fun getPickerViewText(): String {
         return name

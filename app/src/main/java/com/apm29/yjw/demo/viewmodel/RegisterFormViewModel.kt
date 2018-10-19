@@ -2,9 +2,8 @@ package com.apm29.yjw.demo.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.apm29.yjw.demo.arch.BaseViewModel
-import com.apm29.yjw.demo.model.ApplicantInfo
-import com.apm29.yjw.demo.model.Car
-import com.apm29.yjw.demo.model.Estate
+import com.apm29.yjw.demo.model.*
+import com.apm29.yjw.demo.model.api.UserApi
 import com.apm29.yjw.demo.utils.subscribeErrorHandled
 import com.apm29.yjw.demo.utils.threadAutoSwitch
 import io.reactivex.Observable
@@ -42,6 +41,15 @@ class RegisterFormViewModel : BaseViewModel() {
                     assetsData.value = it to arrayListOf()
                 }
 
+    }
+
+    fun postApplicantInfo(personalInfo: PersonalInfo) {
+        mRetrofit.create(UserApi::class.java)
+                .personalInfo(mGson.toJson(personalInfo))
+                .threadAutoSwitch()
+                .subscribeErrorHandled(mErrorData,mErrorHandlerImpl,mLoadingData){
+                    mToastData.value = Event(it.msg)
+                }
     }
 
 }

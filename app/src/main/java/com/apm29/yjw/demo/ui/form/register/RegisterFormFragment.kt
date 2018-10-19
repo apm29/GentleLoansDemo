@@ -12,6 +12,8 @@ import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.model.DataMagicBox
+import com.apm29.yjw.demo.utils.findHostNaviController
+import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.demo.viewmodel.ALIPAY_CHANNEL_CODE
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
 import com.apm29.yjw.demo.viewmodel.TAOBAO_CHANNEL_CODE
@@ -39,13 +41,12 @@ class RegisterFormFragment : BaseFragment<DefaultFragmentViewModel>(){
 
     override fun setupViews(savedInstanceState: Bundle?) {
 
-        val navController = ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
         layoutApplicantInfo.setOnClickListener {
-            navController?.navigate(R.id.action_registerFormFragment_to_applicantInfoFragment)
+            navigateErrorHandled(R.id.applicantInfoFragment)
         }
 
         layoutAssetsInfo.setOnClickListener {
-            navController?.navigate(R.id.action_registerFormFragment_to_familyAssetsFragment)
+            navigateErrorHandled(R.id.familyAssetsFragment)
         }
 
         layoutAlipay.setOnClickListener {
@@ -56,7 +57,7 @@ class RegisterFormFragment : BaseFragment<DefaultFragmentViewModel>(){
         }
 
         btnSubmitApplication.setOnClickListener {
-            navController?.navigate(R.id.action_registerFormFragment_to_applicantInfoManagerFragment)
+            navigateErrorHandled(R.id.applicantInfoManagerFragment)
         }
 
     }

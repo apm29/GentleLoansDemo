@@ -1,9 +1,6 @@
 package com.apm29.yjw.demo.model.api
 
-import com.apm29.yjw.demo.model.BaseBean
-import com.apm29.yjw.demo.model.LoanLog
-import com.apm29.yjw.demo.model.LoginBean
-import com.apm29.yjw.demo.model.ProfileBean
+import com.apm29.yjw.demo.model.*
 import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -100,5 +97,14 @@ interface UserApi {
             @Field("mobile") mobile: String,
             @Field("task_id") taskId: String,
             @Field("type") type: Int
+    ): Observable<BaseBean<String>>
+
+
+
+    /**------------------------------------------NEW-INTERFACE-----------------------------------------------*/
+    @FormUrlEncoded
+    @POST("/v1/Application/personInfo")
+    fun personalInfo(
+            @Field("biz_content")personalInfo:String
     ): Observable<BaseBean<String>>
 }

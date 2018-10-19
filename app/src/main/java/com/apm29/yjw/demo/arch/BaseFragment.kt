@@ -78,7 +78,10 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
         }
         if (observingToast){
             mViewModel.mToastData.observe(this, Observer {
-                showToast(it.getContentIfNotHandled())
+                event->
+                event.getContentIfNotHandled()?.let {
+                    showToast(it)
+                }
             })
         }
         setupShareElementTransition()
