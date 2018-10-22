@@ -6,12 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -126,14 +128,17 @@ class ImageEditFragment:BaseFragment<DefaultFragmentViewModel>() {
     private fun createImageFile(): File? {
         // Create an image file name
         return try {
-            val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINESE).format(Date())
-            val storageDir: File = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+            val storageDir: File? =requireContext().getExternalFilesDir(null)
             File.createTempFile(
                     "JPEG_${timeStamp}_", /* prefix */
                     ".jpg", /* suffix */
                     storageDir /* directory */
             ).apply {
                 // Save a file: path for use with ACTION_VIEW intents
+                if (!exists()){
+                    this.mkdir()
+                }
                 mCurrentPhotoPath = absolutePath
             }
         } catch (e: Exception) {
@@ -143,11 +148,15 @@ class ImageEditFragment:BaseFragment<DefaultFragmentViewModel>() {
     private fun captureImage(file:File) {
         val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
         if (cameraIntent.resolveActivity(requireContext().packageManager)!=null) {
-            val photoURI: Uri = FileProvider.getUriForFile(
-                    requireContext(),
-                    BuildConfig.APPLICATION_ID+".provider",
-                    file
-            )
+            val photoURI:Uri = if(Build.VERSION_CODES.N<Build.VERSION.SDK_INT) {
+                FileProvider.getUriForFile(
+                        requireContext(),
+                        BuildConfig.APPLICATION_ID + ".provider",
+                        file
+                )
+            }else{
+                file.toUri()
+            }
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
             startActivityForResult(cameraIntent, CODE_CAMER_IMAGE_CAPTURE)
         }else{
