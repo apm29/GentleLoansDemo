@@ -146,4 +146,5 @@
     <string name="hint_company_phone">请输入单位电话</string>
     <string name="hint_month_salary">请输入每月基本薪资</string>
     <string name="hint_pay_way">请选择发薪方式</string>
+    <string name="camera_image">camera_image</string>
 </resources>

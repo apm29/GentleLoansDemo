@@ -249,4 +249,8 @@ data class PersonalInfo(
         @SerializedName("agent_id") val agentId: String?
 )
 
+data class ImageUploadResultBean(
+        @SerializedName("path") val path:String
+)
+
 

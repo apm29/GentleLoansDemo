@@ -21,7 +21,7 @@ abstract class BaseEmptyAdapter<T, VH : RecyclerView.ViewHolder>(
         if (viewType == EMPTY_TYPE) {
             return createEmptyHolder(layoutInflater.inflate(emptyRes, parent, false))
         }
-        val inflate = layoutInflater.inflate(layout(), parent, false)
+        val inflate = layoutInflater.inflate(layout(viewType), parent, false)
         return createBaseHolder(viewType, inflate)
     }
 
@@ -29,7 +29,7 @@ abstract class BaseEmptyAdapter<T, VH : RecyclerView.ViewHolder>(
 
     abstract fun createBaseHolder(viewType: Int, view: View): VH
     @LayoutRes
-    abstract fun layout(): Int
+    abstract fun layout(viewType:Int): Int
 
 
     override fun getItemCount(): Int {

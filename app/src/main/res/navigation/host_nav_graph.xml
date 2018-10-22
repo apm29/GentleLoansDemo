@@ -255,6 +255,32 @@
         android:id="@+id/imageInfoFromFragment"
         android:name="com.apm29.yjw.demo.ui.form.information.ImageInfoFromFragment"
         tools:layout = "@layout/image_info_form_fragment"
-        android:label="照片信息" />
+        android:label="照片信息" >
+        <argument
+            android:name="photoData"
+            app:argType="com.apm29.yjw.demo.ui.form.information.Photo"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
+        <action
+            android:id="@+id/action_imageInfoFromFragment_to_imageEditFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/imageEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageEditFragment"
+        android:name="com.apm29.yjw.demo.ui.dialog.ImageEditFragment"
+        tools:layout="@layout/image_edit_layout"
+        android:label="照片编辑" >
+        <argument
+            android:name="photoData"
+            app:argType="com.apm29.yjw.demo.ui.form.information.Photo"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
+    </fragment>
 
 </navigation>

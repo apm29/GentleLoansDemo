@@ -65,7 +65,7 @@ class AssetsAdapter<T>(
         }
     }
 
-    override fun layout(): Int {
+    override fun layout(viewType: Int): Int {
         return layoutRes
     }
 

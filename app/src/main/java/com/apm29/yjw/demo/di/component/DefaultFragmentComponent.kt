@@ -2,6 +2,7 @@ package com.apm29.yjw.demo.di.component
 
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.di.scope.ActivityScope
+import com.apm29.yjw.demo.ui.dialog.ImageEditFragment
 import com.apm29.yjw.demo.ui.form.information.*
 import com.apm29.yjw.demo.ui.form.register.ApplicantInfoFragment
 import com.apm29.yjw.demo.ui.form.register.FamilyAssetsFragment
@@ -49,4 +50,5 @@ interface DefaultFragmentComponent {
     fun inject(assetsInfoFromFragment: AssetsInfoFromFragment)
     fun inject(jobInfoFromFragment: JobInfoFromFragment)
     fun inject(imageInfoFromFragment: ImageInfoFromFragment)
+    fun inject(imageEditFragment: ImageEditFragment)
 }

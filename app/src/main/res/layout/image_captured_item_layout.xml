@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="6dp"
+    android:paddingStart="6dp"
+    android:paddingEnd="6dp"
+    android:paddingBottom="1dp"
+    app:cardCornerRadius="12dp"
+    android:layout_margin="6dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivImageCaptured"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@mipmap/upload"
+            app:layout_constraintDimensionRatio="9:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tvEdit"
+            android:layout_width="0dp"
+            android:padding="12dp"
+            app:layout_constraintTop_toBottomOf="@id/ivImageCaptured"
+            android:layout_height="wrap_content"
+            android:text="编辑"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintEnd_toStartOf="@+id/tvDelete"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:padding="12dp"
+            android:id="@+id/tvDelete"
+            android:gravity="center"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@id/ivImageCaptured"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvEdit" />
+        <CheckBox
+            android:id="@+id/checkStatus"
+            android:clickable="false"
+            android:button="@drawable/selector_button_success_fail"
+            app:layout_constraintStart_toEndOf="@id/tvEdit"
+            app:layout_constraintEnd_toStartOf="@id/tvDelete"
+            app:layout_constraintTop_toBottomOf="@id/ivImageCaptured"
+            app:layout_constraintBottom_toBottomOf="@id/ivImageCaptured"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:background="@color/light_gray_background"
+            app:layout_constraintStart_toStartOf="@id/tvEdit"
+            app:layout_constraintEnd_toEndOf="@id/tvEdit"
+            app:layout_constraintBottom_toTopOf="@id/tvEdit"
+            android:layout_marginEnd="12dp"
+            android:layout_width="0dp"
+            android:layout_height="1dp"/>
+
+        <View
+            android:background="@color/light_gray_background"
+            app:layout_constraintStart_toStartOf="@id/tvDelete"
+            app:layout_constraintEnd_toEndOf="@id/tvDelete"
+            app:layout_constraintBottom_toTopOf="@id/tvDelete"
+            android:layout_marginStart="12dp"
+            android:layout_width="0dp"
+            android:layout_height="1dp"/>
+
+        <View
+            android:background="@color/light_gray_background"
+            android:layout_marginTop="12dp"
+            android:layout_width="1dp"
+            app:layout_constraintTop_toBottomOf="@id/ivImageCaptured"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvEdit"
+            app:layout_constraintEnd_toStartOf="@id/tvDelete"
+            android:layout_height="0dp"/>
+
+        <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/progressView"
+            app:layout_constraintTop_toTopOf="@id/ivImageCaptured"
+            app:layout_constraintBottom_toBottomOf="@id/ivImageCaptured"
+            app:layout_constraintStart_toStartOf="@id/ivImageCaptured"
+            app:layout_constraintEnd_toEndOf="@id/ivImageCaptured"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvDebug"
+            app:layout_constraintTop_toTopOf="@id/ivImageCaptured"
+            app:layout_constraintBottom_toBottomOf="@id/ivImageCaptured"
+            app:layout_constraintStart_toStartOf="@id/ivImageCaptured"
+            app:layout_constraintEnd_toEndOf="@id/ivImageCaptured"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

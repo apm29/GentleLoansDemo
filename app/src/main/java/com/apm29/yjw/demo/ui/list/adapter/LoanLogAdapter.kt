@@ -15,7 +15,7 @@ class LoanLogAdapter(list: List<LoanLog>, bindOp: (VH, LoanLog,Int) -> Unit) : B
         return VH(view)
     }
 
-    override fun layout(): Int {
+    override fun layout(viewType: Int): Int {
         return R.layout.loan_item_layout
     }
 
