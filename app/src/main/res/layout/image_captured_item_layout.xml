@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="6dp"
     android:paddingStart="6dp"
     android:paddingEnd="6dp"
     android:paddingBottom="1dp"
@@ -22,7 +21,8 @@
             android:id="@+id/ivImageCaptured"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@mipmap/upload"
+            android:background="@drawable/upload"
+            android:scaleType="fitXY"
             app:layout_constraintDimensionRatio="9:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,10 +53,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tvEdit" />
+        <ImageView
+            android:background="@drawable/shape_circle_white"
+            app:layout_constraintStart_toEndOf="@id/tvEdit"
+            app:layout_constraintEnd_toStartOf="@id/tvDelete"
+            app:layout_constraintTop_toBottomOf="@id/ivImageCaptured"
+            app:layout_constraintBottom_toBottomOf="@id/ivImageCaptured"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
         <CheckBox
             android:id="@+id/checkStatus"
             android:clickable="false"
-            android:button="@drawable/selector_button_success_fail"
+            android:button="@drawable/selector_button_ok_warning"
             app:layout_constraintStart_toEndOf="@id/tvEdit"
             app:layout_constraintEnd_toStartOf="@id/tvDelete"
             app:layout_constraintTop_toBottomOf="@id/ivImageCaptured"

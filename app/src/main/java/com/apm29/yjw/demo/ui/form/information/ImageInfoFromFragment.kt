@@ -1,33 +1,29 @@
 package com.apm29.yjw.demo.ui.form.information
 
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.View
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.apm29.yjw.demo.app.GlideApp
 import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
+import com.apm29.yjw.demo.model.*
+import com.apm29.yjw.demo.model.Photo
 import com.apm29.yjw.demo.ui.dialog.ImageEditFragmentArgs
-import com.apm29.yjw.demo.ui.list.base.BaseEmptyAdapter
-import com.apm29.yjw.demo.ui.list.base.EMPTY_TYPE
+import com.apm29.yjw.demo.ui.list.adapter.ImageAdapter
 import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.demo.viewmodel.CommunicateViewModel
 import com.apm29.yjw.demo.viewmodel.InformationFormViewModel
 import com.apm29.yjw.gentleloansdemo.R
 import kotlinx.android.synthetic.main.image_info_form_fragment.*
-import java.lang.IllegalArgumentException
-import kotlin.collections.ArrayList
 
 class ImageInfoFromFragment : BaseFragment<InformationFormViewModel>() {
     override fun setupViewLayout(savedInstanceState: Bundle?): Int {
@@ -46,30 +42,123 @@ class ImageInfoFromFragment : BaseFragment<InformationFormViewModel>() {
 
         data.position = position
         holder.ivCapturedImage?.setOnClickListener {
-            val args = ImageEditFragmentArgs.Builder()
-                    .setPhotoData(data)
-                    .build()
-            val name = getString(R.string.camera_image)
-            val extras = FragmentNavigatorExtras(
-                    holder.ivCapturedImage to name
-            )
-            ViewCompat.setTransitionName(holder.ivCapturedImage, name)
-            navigateErrorHandled(R.id.imageEditFragment, args.toBundle(), null, extras)
+            if (data.filePath == null) {
+                toEditImage(data)
+            } else {
+
+            }
+        }
+
+        holder.tvEdit?.setOnClickListener {
+            toEditImage(data)
+        }
+
+        holder.ivCapturedImage?.let {
+            if (data.filePath != null) {
+                GlideApp.with(this)
+                        .load(data.filePath)
+                        .placeholder(R.drawable.upload)
+                        .into(it)
+            } else {
+                it.setImageBitmap(null)
+            }
         }
         holder.tvDebug?.text = data.imageUrl
+        holder.checkStatus?.isChecked = data.imageUrl!=null
+    }
+
+    private fun toEditImage(data: Photo) {
+        val args = ImageEditFragmentArgs.Builder()
+                .setPhotoData(data)
+                .build()
+        navigateErrorHandled(R.id.imageEditFragment, args.toBundle(), null, null)
     }
 
     private val houseEditable = true
+    private val companyEditable = true
+    private val idEditable = true
+    private val coupleIdEditable = true
+    private val registerAccountEditable = true
+    private val marriageEditable = true
+    private val proofEditable = true
 
-    private val mDataHouse:ArrayList<Photo> = arrayListOf()
+    private val mDataHouse: ArrayList<Photo> = arrayListOf()
+    private val mDataCompany: ArrayList<Photo> = arrayListOf()
+    private val mDataId: ArrayList<Photo> = arrayListOf()
+    private val mDataCoupleId: ArrayList<Photo> = arrayListOf()
+    private val mDataRegisterAccount: ArrayList<Photo> = arrayListOf()
+    private val mDataMarriage: ArrayList<Photo> = arrayListOf()
+    private val mDataProof: ArrayList<Photo> = arrayListOf()
 
     override fun setupViews(savedInstanceState: Bundle?) {
+        setupList()
+    }
 
+    private fun setupList() {
         listHouse.layoutManager = GridLayoutManager(requireContext(), 2)
         listHouse.adapter = ImageAdapter(houseEditable, 6, mDataHouse, R.layout.empty_item_layout,
                 addOp = {
                     return@ImageAdapter Photo(
-                            houseEditable, null, null, type = IMAGE_TYPE_HOUSE,file = null
+                            houseEditable, null, null, type = IMAGE_TYPE_HOUSE, filePath = null
+                    )
+                },
+                bindOp = ::bindHolder
+        )
+
+        listCompany.layoutManager = GridLayoutManager(requireContext(), 2)
+        listCompany.adapter = ImageAdapter(companyEditable, 6, mDataCompany, R.layout.empty_item_layout,
+                addOp = {
+                    return@ImageAdapter Photo(
+                            companyEditable, null, null, type = IMAGE_TYPE_COMPANY, filePath = null
+                    )
+                },
+                bindOp = ::bindHolder
+        )
+
+        listRegisterAccount.layoutManager = GridLayoutManager(requireContext(), 2)
+        listRegisterAccount.adapter = ImageAdapter(registerAccountEditable, 6, mDataRegisterAccount, R.layout.empty_item_layout,
+                addOp = {
+                    return@ImageAdapter Photo(
+                            registerAccountEditable, null, null, type = IMAGE_TYPE_REGISTER_ACCOUNT, filePath = null
+                    )
+                },
+                bindOp = ::bindHolder
+        )
+
+        listId.layoutManager = GridLayoutManager(requireContext(), 2)
+        listId.adapter = ImageAdapter(idEditable, 6, mDataId, R.layout.empty_item_layout,
+                addOp = {
+                    return@ImageAdapter Photo(
+                            idEditable, null, null, type = IMAGE_TYPE_ID, filePath = null
+                    )
+                },
+                bindOp = ::bindHolder
+        )
+
+        listCoupleId.layoutManager = GridLayoutManager(requireContext(), 2)
+        listCoupleId.adapter = ImageAdapter(coupleIdEditable, 6, mDataCoupleId, R.layout.empty_item_layout,
+                addOp = {
+                    return@ImageAdapter Photo(
+                            coupleIdEditable, null, null, type = IMAGE_TYPE_COUPLE_ID, filePath = null
+                    )
+                },
+                bindOp = ::bindHolder
+        )
+
+        listMarriage.layoutManager = GridLayoutManager(requireContext(), 2)
+        listMarriage.adapter = ImageAdapter(marriageEditable, 6, mDataMarriage, R.layout.empty_item_layout,
+                addOp = {
+                    return@ImageAdapter Photo(
+                            marriageEditable, null, null, type = IMAGE_TYPE_MARRIAGE, filePath = null
+                    )
+                },
+                bindOp = ::bindHolder
+        )
+        listProof.layoutManager = GridLayoutManager(requireContext(), 2)
+        listProof.adapter = ImageAdapter(companyEditable, 6, mDataProof, R.layout.empty_item_layout,
+                addOp = {
+                    return@ImageAdapter Photo(
+                            proofEditable, null, null, type = IMAGE_TYPE_PROOF, filePath = null
                     )
                 },
                 bindOp = ::bindHolder
@@ -80,18 +169,43 @@ class ImageInfoFromFragment : BaseFragment<InformationFormViewModel>() {
         val communicateViewModel = ViewModelProviders.of(requireActivity()).get(CommunicateViewModel::class.java)
         communicateViewModel.mPhotoData.observe(this, Observer {
             it.getContentIfNotHandled { image ->
-                when(image?.type){
-                    IMAGE_TYPE_HOUSE->{
-                        mDataHouse[image.position].imageUrl = image.imageUrl
-                        mDataHouse[image.position].locationDes = image.locationDes
-                        listHouse.adapter?.notifyItemChanged(image.position)
+
+                when (image?.type) {
+                    IMAGE_TYPE_HOUSE -> {
+                        replaceImageData(mDataHouse, listHouse, image)
                     }
-                    else->{
+                    IMAGE_TYPE_COMPANY -> {
+                        replaceImageData(mDataCompany, listCompany, image)
+                    }
+                    IMAGE_TYPE_REGISTER_ACCOUNT -> {
+                        replaceImageData(mDataRegisterAccount, listRegisterAccount, image)
+                    }
+                    IMAGE_TYPE_ID -> {
+                        replaceImageData(mDataId, listId, image)
+                    }
+                    IMAGE_TYPE_COUPLE_ID -> {
+                        replaceImageData(mDataCoupleId, listCoupleId, image)
+                    }
+                    IMAGE_TYPE_MARRIAGE -> {
+                        replaceImageData(mDataMarriage, listMarriage, image)
+                    }
+                    IMAGE_TYPE_PROOF -> {
+                        replaceImageData(mDataProof, listProof, image)
+                    }
+                    else -> {
                         throw IllegalArgumentException("错误的照片排列位置")
                     }
                 }
             }
         })
+    }
+
+
+    private fun replaceImageData(dataList: ArrayList<Photo>, recyclerView: RecyclerView, image: Photo) {
+        dataList[image.position].imageUrl = image.imageUrl
+        dataList[image.position].filePath = image.filePath
+        dataList[image.position].locationDes = image.locationDes
+        recyclerView.adapter?.notifyItemChanged(image.position)
     }
 
     class ImageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -103,139 +217,5 @@ class ImageInfoFromFragment : BaseFragment<InformationFormViewModel>() {
         val progressView: ProgressBar? = itemView.findViewById(R.id.progressView)
 
     }
-
-
-    class ImageAdapter<T : ImageData>(
-            private val editable: Boolean,
-            private val maxCount: Int,
-            list: List<T>,
-            emptyRes: Int,
-            val addOp: () -> T,
-            bindOp: (ImageHolder, T, Int) -> Unit
-    ) : BaseEmptyAdapter<T, ImageHolder>(
-            list, emptyRes, bindOp
-    ) {
-        override fun createEmptyHolder(inflate: View): ImageHolder {
-            return ImageHolder(inflate)
-        }
-
-        override fun createBaseHolder(viewType: Int, view: View): ImageHolder {
-            if (viewType == ADD_TYPE) {
-                view.setOnClickListener {
-                    if (list is MutableList) {
-                        if (list.add(addOp())) {
-                            notifyItemInserted(list.size)
-                        }
-                    }
-                }
-            }
-            return ImageHolder(view)
-        }
-
-        override fun layout(viewType: Int): Int {
-            return when (viewType) {
-                ADD_TYPE -> R.layout.add_item_layout
-                EMPTY_TYPE -> R.layout.empty_item_layout
-                else -> R.layout.image_captured_item_layout
-            }
-        }
-
-        override fun getItemViewType(position: Int): Int {
-            return if (editable) {
-                if (position == list.size) {
-                    ADD_TYPE
-                } else {
-                    0
-                }
-            } else {
-                if (position == 0 && list.isEmpty()) {
-                    EMPTY_TYPE
-                } else {
-                    0
-                }
-            }
-        }
-
-        override fun getItemCount(): Int {
-            return if (editable) {
-                if (list.size < maxCount) {
-                    list.size + 1
-                } else {
-                    maxCount
-                }
-            } else {
-                when {
-                    list.isEmpty() -> 1
-                    list.size <= maxCount -> list.size
-                    else -> maxCount
-                }
-            }
-        }
-
-        override fun onBindViewHolder(holder: ImageHolder, position: Int) {
-            if (position in 0 until list.size) {
-                val data = list[holder.adapterPosition]
-                bindOp(holder, data, holder.adapterPosition)
-            }
-        }
-
-    }
-}
-
-const val IMAGE_TYPE_HOUSE = 1
-const val IMAGE_TYPE_COMPANY = 2
-
-const val ADD_TYPE = 29
-
-interface ImageData {
-    var imageUrl: String?
-    var locationDes: String?
-    var editable: Boolean
-    var type: Int
-    var position: Int
-    var file:String?
-}
-
-
-data class Photo(
-        override var editable: Boolean,
-        override var imageUrl: String?,/**thumb*/
-        override var locationDes: String?,
-        override var type: Int,
-        override var position: Int = -1,
-        override var file: String?
-) : ImageData, Parcelable {
-    constructor(parcel: Parcel) : this(
-            parcel.readByte() != 0.toByte(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readInt(),
-            parcel.readInt(),
-            parcel.readString()) {
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeByte(if (editable) 1 else 0)
-        parcel.writeString(imageUrl)
-        parcel.writeString(locationDes)
-        parcel.writeInt(type)
-        parcel.writeInt(position)
-        parcel.writeString(file)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Photo> {
-        override fun createFromParcel(parcel: Parcel): Photo {
-            return Photo(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Photo?> {
-            return arrayOfNulls(size)
-        }
-    }
-
 
 }

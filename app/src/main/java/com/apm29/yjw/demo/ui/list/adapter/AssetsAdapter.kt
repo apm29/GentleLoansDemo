@@ -2,9 +2,9 @@ package com.apm29.yjw.demo.ui.list.adapter
 
 import android.view.View
 import androidx.annotation.LayoutRes
+import com.apm29.yjw.demo.model.EMPTY_TYPE
 import com.apm29.yjw.demo.ui.form.register.FamilyAssetsFragment
 import com.apm29.yjw.demo.ui.list.base.BaseEmptyAdapter
-import com.apm29.yjw.demo.ui.list.base.EMPTY_TYPE
 import com.apm29.yjw.gentleloansdemo.R
 
 class AssetsAdapter<T>(

@@ -7,6 +7,7 @@
     <androidx.core.widget.NestedScrollView
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
+        android:id="@+id/scrollView"
         android:layout_height="match_parent">
         <LinearLayout
             android:orientation="vertical"
@@ -20,6 +21,55 @@
                 android:id="@+id/listHouse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/titleCompany"
+                android:text="我的工作单位照片"
+                style="@style/SlicePartTitle"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listCompany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/titleRegisterAccount"
+                android:text="我的户口本照片"
+                style="@style/SlicePartTitle"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listRegisterAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/titleId"
+                android:text="我的身份证正反面照片"
+                style="@style/SlicePartTitle"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/titleCoupleId"
+                android:text="我的配偶身份证照片"
+                style="@style/SlicePartTitle"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listCoupleId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/titleMarriage"
+                android:text="我的结婚证照片"
+                style="@style/SlicePartTitle"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listMarriage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/titleProof"
+                android:text="我的收入证明照片"
+                style="@style/SlicePartTitle"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listProof"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

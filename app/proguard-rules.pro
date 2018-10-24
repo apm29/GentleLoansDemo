@@ -17,7 +17,7 @@
 #-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
-# hide the original source file name.
+# hide the original source filePath name.
 #-renamesourcefileattribute SourceFile
 #指定压缩级别
 -optimizationpasses 5
@@ -107,3 +107,9 @@
 -keep class com.alibaba.fastjson.** { *; }
 -dontwarn com.alibaba.fastjson.**
 -keep class cn.fraudmetrix.octopus.aspirit.bean.** { *; }
+
+#高德地图
+
+-keep class com.amap.api.location.**{*;}
+-keep class com.amap.api.fence.**{*;}
+-keep class com.autonavi.aps.amapapi.model.**{*;}

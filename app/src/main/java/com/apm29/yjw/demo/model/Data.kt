@@ -1,7 +1,9 @@
 package com.apm29.yjw.demo.model
 
-import com.apm29.yjw.demo.arch.UserLoginInfo
-import com.apm29.yjw.demo.arch.UserType
+import android.os.Parcel
+import android.os.Parcelable
+import com.apm29.yjw.demo.arch.user.UserLoginInfo
+import com.apm29.yjw.demo.arch.user.UserType
 import com.google.gson.annotations.SerializedName
 
 data class BaseBean<T>(val code: Int = 200, val msg: String = "", private val data: T) {
@@ -205,24 +207,55 @@ data class LoanLog(
         @SerializedName("total_fine") var totalFine: Double?,
         @SerializedName("total_overdue") var totalOverdue: Double?,
         @SerializedName("bank_name") var bankName: String?,
-        var id: String?,
+        var id: Int?,
         var status: Int?
-) {
-    constructor() : this(
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-    )
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Double::class.java.classLoader) as? Double,
+            parcel.readValue(Double::class.java.classLoader) as? Double,
+            parcel.readValue(Double::class.java.classLoader) as? Double,
+            parcel.readValue(Double::class.java.classLoader) as? Double,
+            parcel.readString(),
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readValue(Int::class.java.classLoader) as? Int)
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(totalAmount)
+        parcel.writeString(interestRate)
+        parcel.writeString(term)
+        parcel.writeValue(repaymentType)
+        parcel.writeString(repaymentTypeComment)
+        parcel.writeString(actualTime)
+        parcel.writeValue(restAmount)
+        parcel.writeValue(totalInterest)
+        parcel.writeValue(totalFine)
+        parcel.writeValue(totalOverdue)
+        parcel.writeString(bankName)
+        parcel.writeValue(id)
+        parcel.writeValue(status)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<LoanLog> {
+        override fun createFromParcel(parcel: Parcel): LoanLog {
+            return LoanLog(parcel)
+        }
+
+        override fun newArray(size: Int): Array<LoanLog?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+
 }
 
 
@@ -250,7 +283,56 @@ data class PersonalInfo(
 )
 
 data class ImageUploadResultBean(
-        @SerializedName("path") val path:String
+        @SerializedName("path") val path: String
 )
 
+
+data class RepaymentSchedule(
+        val id: Int?,
+        val total_amount: String?,
+        val status: String?,
+        val type: String?,
+        val interest_amount: Double?,
+        val overdue_amount: Double?,
+        val fine_amount: Double?,
+        val expect_time: String?,
+        val term: String?
+        /**
+         * {
+         * "total_amount": "2100.00",
+         * "status": 0,
+         * "type": 1,
+         * "overdue_amount": 100,
+         * "fine_amount": "0.00",
+         * "interest_amount": "100.00",
+         * "expect_time": "12月03日",
+         * "term": "5\/5期"
+         * }
+         */
+)
+
+data class RepaymentRecord(
+        val id: Int?,
+        val total_amount: Double?,
+        val loans_amount: Double?,
+        val overdue_amount: Double?,
+        val fine_amount: Double?,
+        val interest_amount: Double?,
+        val term: String?,
+        val actual_time_Ymd: String?,
+        val actual_time_His: String?
+
+        /**
+         * {
+         * "total_amount": "2100.00",
+         * "loans_amount": "2000.00",
+         * "interest_amount": "100.00",
+         * "overdue_amount": 100,
+         * "fine_amount": "0.00",
+         * "term": "1\/5期",
+         * "actual_time_Ymd": "2018.07.05",
+         * "actual_time_His": "14:11:59"
+         * }
+         */
+)
 

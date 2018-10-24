@@ -10,7 +10,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.apm29.yjw.demo.arch.BaseFragment
-import com.apm29.yjw.demo.arch.UserManager
+import com.apm29.yjw.demo.arch.user.UserManager
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule

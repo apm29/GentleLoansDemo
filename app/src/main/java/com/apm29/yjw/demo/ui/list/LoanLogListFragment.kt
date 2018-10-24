@@ -2,17 +2,24 @@ package com.apm29.yjw.demo.ui.list
 
 import android.view.View
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.view.ViewCompat
+import androidx.navigation.Navigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Explode
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.model.LoanLog
 import com.apm29.yjw.demo.ui.list.adapter.LoanLogAdapter
 import com.apm29.yjw.demo.ui.list.base.BaseListFragment
+import com.apm29.yjw.demo.ui.loan.LoanDetailFragmentArgs
+import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.gentleloansdemo.R
 
 
-class LoanLogListFragment: BaseListFragment<LoanLog, VH, LoanLogAdapter>() {
+class LoanLogListFragment: BaseListFragment<LoanLog, LoanLogListFragment.VH, LoanLogAdapter>() {
     override fun load(refresh: Boolean, lists: ArrayList<LoanLog>) {
         mViewModel.loadLoanLogs(refresh,lists)
     }
@@ -20,9 +27,26 @@ class LoanLogListFragment: BaseListFragment<LoanLog, VH, LoanLogAdapter>() {
     override fun setupAdapter(): LoanLogAdapter {
         return LoanLogAdapter(data){
             holder,data,_->
+
+            holder.itemView.setOnClickListener {
+                val args = LoanDetailFragmentArgs.Builder()
+                        .setLoanLog(data)
+                        .build()
+                var extra:Navigator.Extras? = null
+                holder.cardFrame?.let {
+                    card->
+                    val transitionName = getString(R.string.app_icon)
+                    extra = FragmentNavigatorExtras(
+                            card to transitionName
+                    )
+                    ViewCompat.setTransitionName(card, transitionName)
+                }
+
+                navigateErrorHandled(R.id.loanDetailFragment,args.toBundle(),null,extra = extra)
+            }
             holder.tvTime?.text = data.actualTime
-            holder.tvPayType?.text = if (data.repaymentType==0)"等额本息" else "先息后本"
-            holder.tvPayTypeComment?.text = data.repaymentTypeComment
+            holder.tvPayType?.text = data.repaymentTypeComment
+            holder.tvPayTypeComment?.text = getString(R.string.text_pay_type_comment,data.term,data.interestRate)
             holder.tvAmount?.text = data.totalAmount
         }
     }
@@ -34,11 +58,19 @@ class LoanLogListFragment: BaseListFragment<LoanLog, VH, LoanLogAdapter>() {
                 .build()
                 .inject(this)
     }
+    override  fun setTransitions(){
+        super.setTransitions()
+        enterTransition = Explode()
+        exitTransition = Explode()
+        reenterTransition = Explode()
+        returnTransition = Explode()
+    }
+    class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val tvPayType = itemView.findViewById<TextView?>(R.id.tvRepaymentType)
+        val tvPayTypeComment = itemView.findViewById<TextView?>(R.id.tvRepaymentTypeComment)
+        val tvAmount = itemView.findViewById<TextView?>(R.id.tvAmount)
+        val tvTime = itemView.findViewById<TextView?>(R.id.tvTime)
+        val cardFrame = itemView.findViewById<CardView?>(R.id.cardFrame)
+    }
 }
 
-class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
-    val tvPayType = itemView.findViewById<TextView?>(R.id.tvRepaymentType)
-    val tvPayTypeComment = itemView.findViewById<TextView?>(R.id.tvRepaymentTypeComment)
-    val tvAmount = itemView.findViewById<TextView?>(R.id.tvAmount)
-    val tvTime = itemView.findViewById<TextView?>(R.id.tvTime)
-}

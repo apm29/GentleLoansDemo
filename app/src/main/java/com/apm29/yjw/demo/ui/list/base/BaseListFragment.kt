@@ -11,11 +11,13 @@ import com.paginate.Paginate
 import kotlinx.android.synthetic.main.base_list_fragment.*
 
 abstract class BaseListFragment<T, VH : RecyclerView.ViewHolder, ADAPTER : BaseEmptyAdapter<T, VH>> : BaseFragment<DefaultListViewModel>() {
+
+    override var observingLoading: Boolean = false
     override fun setupViewLayout(savedInstanceState: Bundle?): Int {
-        return R.layout.base_list_fragment
+        return if (useToolBar) R.layout.base_list_fragment else R.layout.base_list_no_title_fragment
     }
 
-
+    open val useToolBar = true
     val data = arrayListOf<T>()
     var adapter: ADAPTER = this.setupAdapter()
     lateinit var paginate:Paginate
@@ -47,10 +49,7 @@ abstract class BaseListFragment<T, VH : RecyclerView.ViewHolder, ADAPTER : BaseE
                 .setLoadingTriggerThreshold(0)
                 .setLoadingListItemCreator(DefaultLoadMreCreator())
                 .build()
-        paginate.setHasMoreDataToLoad(true)
-
-
-        load(true, data)
+        paginate.setHasMoreDataToLoad(false)
     }
 
     abstract fun setupAdapter(): ADAPTER
@@ -65,11 +64,16 @@ abstract class BaseListFragment<T, VH : RecyclerView.ViewHolder, ADAPTER : BaseE
                 adapter.notifyItemRangeRemoved(it.second, it.first)
             }
         })
+        load(true, data)
+
+        mViewModel.mLoadingData.observe(this, Observer {
+                refreshLayout?.isRefreshing = it
+        })
     }
 
     override fun hideLoading() {
         super.hideLoading()
-        refreshLayout.isRefreshing = false
+        refreshLayout?.isRefreshing = false
         paginate.setHasMoreDataToLoad(false)
     }
 }

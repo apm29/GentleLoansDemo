@@ -5,9 +5,8 @@ import com.apm29.yjw.demo.model.Province
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import com.apm29.yjw.demo.model.ImageUploadResultBean
+import com.apm29.yjw.demo.model.V1_USER_UPLOAD
 import retrofit2.http.*
-
-const val V1_USER_UPLOAD = "/v1/user/upload"
 
 interface CommonApi {
     @POST("/v1/common/bankcode")

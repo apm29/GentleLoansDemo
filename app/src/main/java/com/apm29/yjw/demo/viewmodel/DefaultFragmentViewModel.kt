@@ -13,16 +13,33 @@ import com.apm29.yjw.gentleloansdemo.BuildConfig
 import io.reactivex.Observable
 import java.lang.IllegalArgumentException
 import com.apm29.yjw.demo.model.*
+import com.apm29.yjw.demo.model.api.CommonApi
+import com.apm29.yjw.demo.utils.bitmap2Base64
 
 
 class DefaultFragmentViewModel : BaseViewModel() {
 
+    companion object {
+        /*
+        * Defines an array that contains column names to move from
+        * the Cursor to the ListView.
+        */
+        val PROJECTION = arrayOf(
+                ContactsContract.RawContacts.CONTACT_ID
+        )
+        val PROJECTION_DATA = arrayOf(
+                ContactsContract.Data.DATA1,
+                ContactsContract.Data.MIMETYPE
+        )
+        const val SELECTION = ContactsContract.RawContacts.CONTACT_ID + "= ?"
+    }
 
     var smsResult: MutableLiveData<BaseBean<String>> = MutableLiveData()
     var loginResult: MutableLiveData<BaseBean<LoginBean>> = MutableLiveData()
     var profile: MutableLiveData<BaseBean<ProfileBean>> = MutableLiveData()
+    var uploadResultData: MutableLiveData<BaseBean<ImageUploadResultBean>> = MutableLiveData()
 
-    fun profileVerify(refresh:Boolean  = true) {
+    fun profileVerify(refresh: Boolean = true) {
         mRetrofit.create(UserApi::class.java)
                 .profile()
                 .threadAutoSwitch()
@@ -167,38 +184,17 @@ class DefaultFragmentViewModel : BaseViewModel() {
                 }
     }
 
+    fun uploadImage(photoPath: String) {
+        mRetrofit.create(CommonApi::class.java)
+                .upload("data:image/jpeg;base64,${bitmap2Base64(filePath = photoPath)}")
+                .threadAutoSwitch()
+                .subscribeErrorHandled(mErrorData, mErrorHandlerImpl, mLoadingData) {
+                    mToastData.value = Event(it.peekData().path)
+                    uploadResultData.value = it
+                }
+    }
+
     val magicBoxData: MutableLiveData<DataMagicBox> = MutableLiveData()
 
 
 }
-
-const val ALIPAY_CHANNEL_CODE = "005004"
-const val TAOBAO_CHANNEL_CODE = "005003"
-
-/**
- * store contact information
- */
-data class Contact(var name: String = "", var phone: ArrayList<String> = arrayListOf(), val id: String) {
-    /**
-     * convert to json format string(for uploading)
-     */
-    override fun toString(): String {
-        return "{ \"name\" :\"$name\", \"phone\":\"${phone.joinToString(separator = ",")}\"}"
-    }
-
-
-}
-
-/*
- * Defines an array that contains column names to move from
- * the Cursor to the ListView.
- */
-val PROJECTION = arrayOf(
-        ContactsContract.RawContacts.CONTACT_ID
-)
-val PROJECTION_DATA = arrayOf(
-        ContactsContract.Data.DATA1,
-        ContactsContract.Data.MIMETYPE
-)
-
-private const val SELECTION = ContactsContract.RawContacts.CONTACT_ID + "= ?"

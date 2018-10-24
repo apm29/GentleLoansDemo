@@ -42,6 +42,7 @@ android {
                     JPUSH_PKGNAME: "com.dingzhu.junkd.test",
                     JPUSH_APPKEY : "3cf9044ace2ef05436dbe2d5",
                     JPUSH_CHANNEL: "default",
+                    GAODE_KEY    : "3846ea69e397656a4453ac331ab2902b"
             ]
         }
     }
@@ -157,7 +158,11 @@ dependencies {
     implementation(name: 'android_shujumohe_sdk_beta_20180705_1.2.6', ext: 'aar')
     implementation 'com.alibaba:fastjson:1.1.58.android'
 
-   
+    /**
+     * 高德定位
+     */
+    implementation 'com.amap.api:location:4.3.0'
+
 }
 repositories {
     google()

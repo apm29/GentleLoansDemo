@@ -24,7 +24,7 @@
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 app:barrierDirection="end"
-                app:constraint_referenced_ids="tvGjjMonth,tvMarital,tvName,tvIdCard,tvGender,tvCompany,tvDepartment,tvLevel,tvStaff,tvYearIncome,tvRepaymentType,tvTerm,tvZxAccount,tvZxPass,tvZxVerify,tvGjjAccount,tvGjjPass,tvZwAccount,tvZwPass"
+                app:constraint_referenced_ids="tvGjjMonth,tvMarital,tvName,tvIdCard,tvGender,tvCompany,tvDepartment,tvLevel,tvStaff,tvYearIncome,tvRepaymentType,textTerm,tvZxAccount,tvZxPass,tvZxVerify,tvGjjAccount,tvGjjPass,tvZwAccount,tvZwPass"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -346,7 +346,7 @@
                 app:layout_constraintTop_toBottomOf="@id/okPayType" />
 
             <TextView
-                android:id="@+id/tvTerm"
+                android:id="@+id/textTerm"
                 style="@style/SliceTitleStyle.Header"
                 android:text="还款期限"
                 app:layout_constraintBaseline_toBaselineOf="@id/okTerm"
@@ -357,10 +357,10 @@
                 style="@style/EditLayoutStyle"
                 android:hint="@string/hint_term"
                 app:boxBackgroundMode="none"
-                app:layout_constraintBottom_toBottomOf="@id/tvTerm"
+                app:layout_constraintBottom_toBottomOf="@id/textTerm"
                 app:layout_constraintEnd_toStartOf="@id/barrierSuffix"
                 app:layout_constraintStart_toEndOf="@id/barrierTitle"
-                app:layout_constraintTop_toTopOf="@id/tvTerm">
+                app:layout_constraintTop_toTopOf="@id/textTerm">
 
                 <com.google.android.material.textfield.TextInputEditText style="@style/EditContentStyle" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -369,8 +369,8 @@
                 android:id="@+id/unitTerm"
                 style="@style/SliceContent.SuffixUnit"
                 android:text=""
-                app:layout_constraintTop_toTopOf="@id/tvTerm"
-                app:layout_constraintBottom_toBottomOf="@id/tvTerm"
+                app:layout_constraintTop_toTopOf="@id/textTerm"
+                app:layout_constraintBottom_toBottomOf="@id/textTerm"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <com.apm29.yjw.demo.ui.widget.IconFontTextView
