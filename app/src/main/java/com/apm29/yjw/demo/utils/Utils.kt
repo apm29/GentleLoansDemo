@@ -3,7 +3,10 @@ package com.apm29.yjw.demo.utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -35,15 +38,17 @@ import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.io.BufferedReader
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStreamReader
+import java.text.DecimalFormat
 
 
-fun Fragment.findHostNaviController(): NavController? {
+fun Fragment.findHostNavController(): NavController? {
     return ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
 }
 
-fun Activity.findHostNaviController(): NavController? {
+fun Activity.findHostNavController(): NavController? {
     return ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
 }
 
@@ -56,7 +61,7 @@ fun Fragment.navigateErrorHandled(
         extra: Navigator.Extras? = null
 ) {
     try {
-        findHostNaviController()?.navigate(destination, args, options, extra)
+        findHostNavController()?.navigate(destination, args, options, extra)
     } catch (e: Exception) {
         CrashReport.postCatchedException(e)
         e.printStackTrace()
@@ -153,15 +158,15 @@ fun TextInputLayout.disabled(error: String? = null) {
     }
 }
 
-fun View.disableAll(){
-    if (this is ViewGroup){
+fun View.disableAll() {
+    if (this is ViewGroup) {
         this.children.forEach {
-            if (it is TextInputLayout){
+            if (it is TextInputLayout) {
                 it.disabled()
             }
             it.disableAll()
         }
-    }else{
+    } else {
         this.isEnabled = false
     }
 }
@@ -270,12 +275,13 @@ fun TextView.setTextByIndex(index: Int, list: ArrayList<String>) {
 fun TextView.getIndexByText(list: ArrayList<String>): Int {
     return list.indexOf(text.trim())
 }
+
 /*--------------------------------------------------------------------------------*/
 val mortgageList = arrayListOf("已抵押", "未抵押")
 val genderList = arrayListOf("男", "女")
 val maritalList = arrayListOf("未婚", "已婚", "离异", "丧偶")
 val staffList = arrayListOf("事业", "企业", "公务员")
-val payTypeList = arrayListOf("先息后本", "等额本息")
+val payTypeList = arrayListOf( "等额本息","先息后本")
 
 fun TextView.setupOneOptPicker(list: ArrayList<String>, defaultSelection: Int = -1, selectedOp: ((Int, String, View) -> Unit)? = null) {
     val pickerViewOption = OptionsPickerBuilder(context, OnOptionsSelectListener { options1, _, _, _ ->
@@ -325,9 +331,9 @@ fun TextView.setupLocationWithData(
          * 选择地址回调
          */
         selectedOp: ((Triple<Int, Int, Int>, String, String, View) -> Unit)? = null) {
-   locationDataProcess(data){
-       setupLocationPickerInternal(it, selectedOp, defaultSelect)
-   }
+    locationDataProcess(data) {
+        setupLocationPickerInternal(it, selectedOp, defaultSelect)
+    }
 }
 
 /**
@@ -375,16 +381,16 @@ private fun locationDataProcess(provinceList: List<Province>, callBack: ((result
                 provinceList.forEach { province ->
                     val cityList: ArrayList<CityItem> = province.city ?: arrayListOf()
                     //城市列表为空时加入一个默认数据
-                    if (cityList.isEmpty()){
-                        cityList.add(CityItem(area = arrayListOf(),name = "",code = province.code))
+                    if (cityList.isEmpty()) {
+                        cityList.add(CityItem(area = arrayListOf(), name = "", code = province.code))
                     }
                     options2Items.add(cityList)
                     val secondaryAreaList = arrayListOf<ArrayList<AreaItem>>()
                     cityList.forEach { city ->
-                        val areaList = city.area?: arrayListOf()
+                        val areaList = city.area ?: arrayListOf()
                         //区县列表为空时加入一个默认数据
-                        if (areaList.isEmpty()){
-                            areaList.add(AreaItem(code = city.code,name = ""))
+                        if (areaList.isEmpty()) {
+                            areaList.add(AreaItem(code = city.code, name = ""))
                         }
                         secondaryAreaList.add(areaList ?: arrayListOf())
                     }
@@ -445,3 +451,60 @@ private fun parsePCAData(result: String): ArrayList<Province> {//Gson 解析
     return detail
 }
 /**-------------------------获取三级联动PCA信息---------------------------*/
+
+
+/**-------------------------IMAGE---------------------------*/
+
+//把bitmap转换成String
+fun bitmap2Base64(filePath: String): String {
+    val bm = getSmallBitmap(filePath)
+    val outputStream = ByteArrayOutputStream()
+    bm.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+    val bytes = outputStream.toByteArray()
+    return Base64.encodeToString(bytes, Base64.NO_WRAP)
+}
+
+// 根据路径获得图片并压缩，返回bitmap用于显示
+fun getSmallBitmap(filePath: String): Bitmap {
+    val options = BitmapFactory.Options()
+    options.inJustDecodeBounds = true
+    BitmapFactory.decodeFile(filePath, options)
+
+    // Calculate inSampleSize
+    options.inSampleSize = calculateInSampleSize(options, 480, 800)
+
+    // Decode bitmap with inSampleSize set
+    options.inJustDecodeBounds = false
+
+    return BitmapFactory.decodeFile(filePath, options)
+}
+
+//计算图片的缩放值
+fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeight: Int): Int {
+    val height = options.outHeight
+    val width = options.outWidth
+    var inSampleSize = 1
+
+    if (height > reqHeight || width > reqWidth) {
+        val heightRatio = Math.round(height.toFloat() / reqHeight.toFloat())
+        val widthRatio = Math.round(width.toFloat() / reqWidth.toFloat())
+        inSampleSize = if (heightRatio < widthRatio) heightRatio else widthRatio
+    }
+    return inSampleSize
+}
+
+//double
+val formatter= DecimalFormat("#,##0.00")
+fun Double?.toStringDot2F():String{
+    if (this == null){
+        return formatter.format(0.00f)
+    }
+    return formatter.format(this)
+}
+fun Double?.hasNonZeroValue():Boolean{
+    return if(this == null){
+        false
+    }else{
+        this > 0
+    }
+}

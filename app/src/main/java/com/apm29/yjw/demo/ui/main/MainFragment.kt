@@ -1,16 +1,12 @@
-package com.apm29.yjw.demo.ui.splash
+package com.apm29.yjw.demo.ui.main
 
 import android.Manifest
-import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.TextUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.loader.app.LoaderManager
-import androidx.loader.content.CursorLoader
-import androidx.loader.content.Loader
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.apm29.yjw.demo.arch.BaseFragment
@@ -21,7 +17,7 @@ import com.apm29.yjw.demo.ui.dialog.RuntimeRationale
 import com.apm29.yjw.demo.utils.showToast
 import com.apm29.yjw.demo.viewmodel.CommunicateViewModel
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
-import com.apm29.yjw.demo.viewmodel.PROJECTION
+import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel.Companion.PROJECTION
 import com.apm29.yjw.gentleloansdemo.BuildConfig
 import com.apm29.yjw.gentleloansdemo.R
 import com.tencent.bugly.beta.Beta

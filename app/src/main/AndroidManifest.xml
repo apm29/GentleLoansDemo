@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name="com.apm29.yjw.demo.model.CustomReceiver"
+            android:name="com.apm29.yjw.demo.third.CustomReceiver"
             android:enabled="true">
             <intent-filter>
 
@@ -66,6 +66,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="${GAODE_KEY}"/>
+        <service android:name="com.amap.api.location.APSService"/>
     </application>
 
 </manifest>

@@ -3,7 +3,6 @@ package com.apm29.yjw.demo.ui.form.register
 import android.app.AlertDialog
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import cn.fraudmetrix.octopus.aspirit.bean.OctopusParam
 import cn.fraudmetrix.octopus.aspirit.main.OctopusManager
 import com.apm29.yjw.demo.app.ActivityManager
@@ -11,12 +10,11 @@ import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
+import com.apm29.yjw.demo.model.ALIPAY_CHANNEL_CODE
 import com.apm29.yjw.demo.model.DataMagicBox
-import com.apm29.yjw.demo.utils.findHostNaviController
+import com.apm29.yjw.demo.model.TAOBAO_CHANNEL_CODE
 import com.apm29.yjw.demo.utils.navigateErrorHandled
-import com.apm29.yjw.demo.viewmodel.ALIPAY_CHANNEL_CODE
 import com.apm29.yjw.demo.viewmodel.DefaultFragmentViewModel
-import com.apm29.yjw.demo.viewmodel.TAOBAO_CHANNEL_CODE
 import com.apm29.yjw.gentleloansdemo.R
 import kotlinx.android.synthetic.main.register_form_fragment.*
 

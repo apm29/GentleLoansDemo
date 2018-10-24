@@ -6,7 +6,7 @@ import android.net.ParseException
 import android.util.Log
 import androidx.navigation.findNavController
 import com.apm29.yjw.demo.app.exception.UserInfoExpiredException
-import com.apm29.yjw.demo.arch.UserManager
+import com.apm29.yjw.demo.arch.user.UserManager
 import com.apm29.yjw.gentleloansdemo.BuildConfig
 import com.apm29.yjw.gentleloansdemo.R
 import com.google.gson.JsonParseException

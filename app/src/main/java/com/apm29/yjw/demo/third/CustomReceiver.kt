@@ -1,4 +1,4 @@
-package com.apm29.yjw.demo.model
+package com.apm29.yjw.demo.third
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -97,7 +97,7 @@ class CustomReceiver : BroadcastReceiver() {
     }
 
     companion object {
-        private val TAG = "JIGUANG-JKD"
+        private const val TAG = "JIGUANG-JKD"
 
         // 打印所有的 intent extra 数据
         private fun printBundle(bundle: Bundle): String {

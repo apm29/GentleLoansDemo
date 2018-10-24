@@ -40,4 +40,9 @@ class DefaultFragmentModule(var fragment: Fragment) {
     fun providesInformationFormViewModel(): InformationFormViewModel {
         return ViewModelProviders.of(fragment).get(InformationFormViewModel::class.java)
     }
+
+    @Provides
+    fun providesLoanDetailViewModel(): LoanDetailViewModel {
+        return ViewModelProviders.of(fragment).get(LoanDetailViewModel::class.java)
+    }
 }

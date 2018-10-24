@@ -2,11 +2,10 @@ package com.apm29.yjw.demo.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.provider.ContactsContract
 import androidx.fragment.app.Fragment
 import com.apm29.yjw.demo.ui.verify.RealNameVerifyFragment
 import com.apm29.yjw.demo.ui.verify.YYSVerifyFragment
-import com.apm29.yjw.demo.viewmodel.ALIPAY_CHANNEL_CODE
-import com.apm29.yjw.demo.viewmodel.TAOBAO_CHANNEL_CODE
 import com.contrarywind.interfaces.IPickerViewData
 import com.google.gson.annotations.SerializedName
 import java.lang.IllegalArgumentException
@@ -121,4 +120,71 @@ data class Province(
     override fun getPickerViewText(): String {
         return name
     }
+}
+
+
+interface ImageData {
+    var imageUrl: String?
+    var locationDes: String?
+    var editable: Boolean
+    var type: Int
+    var position: Int
+    var filePath: String?
+}
+
+
+data class Photo(
+        override var editable: Boolean,
+        override var imageUrl: String?,
+        override var locationDes: String?,
+        override var type: Int,
+        override var position: Int = -1,
+        override var filePath: String?
+) : ImageData, Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readByte() != 0.toByte(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readInt(),
+            parcel.readInt(),
+            parcel.readString())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeByte(if (editable) 1 else 0)
+        parcel.writeString(imageUrl)
+        parcel.writeString(locationDes)
+        parcel.writeInt(type)
+        parcel.writeInt(position)
+        parcel.writeString(filePath)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Photo> {
+        override fun createFromParcel(parcel: Parcel): Photo {
+            return Photo(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Photo?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+
+}
+
+/**
+ * store contact information
+ */
+data class Contact(var name: String = "", var phone: ArrayList<String> = arrayListOf(), val id: String) {
+    /**
+     * convert to json format string(for uploading)
+     */
+    override fun toString(): String {
+        return "{ \"name\" :\"$name\", \"phone\":\"${phone.joinToString(separator = ",")}\"}"
+    }
+
+
 }

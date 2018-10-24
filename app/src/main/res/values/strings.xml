@@ -86,7 +86,7 @@
     <string name="confirm">确定</string>
     <string name="save_">保存</string>
     <string name="text_apply">立即申请</string>
-    <string name="quit">退出应用</string>
+    <string name="quit">退出</string>
     <string name="submit_registration">提交申请</string>
     <string name="hint_gender">请输入性别</string>
     <string name="hint_company_name">请输入单位名称</string>
@@ -147,4 +147,9 @@
     <string name="hint_month_salary">请输入每月基本薪资</string>
     <string name="hint_pay_way">请选择发薪方式</string>
     <string name="camera_image">camera_image</string>
+    <string name="text_loan_detail" >其中包含利息%.2f元,逾期利息%.2f元,罚息%.2f元</string>
+    <string name="text_bank_hint" >还款日将从%s自动扣款,\n请确保还款账户余额充足</string>
+    <string name="text_pay_type_comment" >贷款期限%s个月,贷款利率%s%%</string>
+    <string name="text_repayment_interest_normal" >包含利息%.2f</string>
+    <string name="text_repayment_interest_overdue" >包含逾期利息%.2f,罚息%.2f</string>
 </resources>

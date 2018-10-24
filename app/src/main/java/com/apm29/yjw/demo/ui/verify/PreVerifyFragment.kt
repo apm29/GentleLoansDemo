@@ -15,6 +15,8 @@ import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
+import com.apm29.yjw.demo.model.FORM
+import com.apm29.yjw.demo.model.MAIN
 import com.apm29.yjw.demo.model.VerifyProgress
 import com.apm29.yjw.demo.ui.verify.PreVerifyFragmentArgs
 import com.apm29.yjw.demo.utils.navigateErrorHandled
@@ -24,12 +26,6 @@ import com.apm29.yjw.demo.viewmodel.RealNameVerifyViewModel
 import com.apm29.yjw.gentleloansdemo.R
 import kotlinx.android.synthetic.main.pre_verify_fragment.*
 import java.lang.IllegalArgumentException
-
-/**
- * 根据传回的destination值决定完成验证后进入那个页面
- */
-const val MAIN = 0
-const val FORM = 1
 
 class PreVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
 

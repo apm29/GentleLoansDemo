@@ -11,13 +11,13 @@
     <!--<external-cache-path>：外部存储空间应用私有目录下的 cache/ 目录，等同于 Context.getExternalCacheDir()；-->
     <external-files-path
         name="my_images"
-        path="images/" />
+        path="." />
     <external-cache-path
         name="my_cache"
-        path="caches/" />
+        path="." />
     <external-path
         name="my_external"
-        path="external/"/>
+        path="."/>
     <files-path
         name="my_files"
         path="files/" />

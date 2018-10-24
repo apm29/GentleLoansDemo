@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.apm29.yjw.demo.ui.splash.MainFragment"
+        android:name="com.apm29.yjw.demo.ui.main.MainFragment"
         tools:layout="@layout/main_fragment" >
         <action
             app:clearTask="true"
@@ -162,7 +162,15 @@
         android:id="@+id/loanLogListFragment"
         android:name="com.apm29.yjw.demo.ui.list.LoanLogListFragment"
         tools:layout = "@layout/base_list_fragment"
-        android:label="贷款记录" />
+        android:label="贷款记录" >
+        <action
+            android:id="@+id/action_loanLogListFragment_to_loanDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:destination="@id/loanDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/personalInfoFragment"
         android:name="com.apm29.yjw.demo.ui.main.PersonalInfoFragment"
@@ -258,7 +266,7 @@
         android:label="照片信息" >
         <argument
             android:name="photoData"
-            app:argType="com.apm29.yjw.demo.ui.form.information.Photo"
+            app:argType="com.apm29.yjw.demo.model.Photo"
             app:nullable="true"
             android:defaultValue="@null"
             />
@@ -277,7 +285,19 @@
         android:label="照片编辑" >
         <argument
             android:name="photoData"
-            app:argType="com.apm29.yjw.demo.ui.form.information.Photo"
+            app:argType="com.apm29.yjw.demo.model.Photo"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/loanDetailFragment"
+        android:name="com.apm29.yjw.demo.ui.loan.LoanDetailFragment"
+        tools:layout = "@layout/loan_detail_fragment"
+        android:label="贷款记录/还款计划" >
+        <argument
+            android:name="loanLog"
+            app:argType="com.apm29.yjw.demo.model.LoanLog"
             app:nullable="true"
             android:defaultValue="@null"
             />

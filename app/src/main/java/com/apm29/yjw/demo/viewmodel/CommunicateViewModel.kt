@@ -3,7 +3,7 @@ package com.apm29.yjw.demo.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.apm29.yjw.demo.model.Event
-import com.apm29.yjw.demo.ui.form.information.Photo
+import com.apm29.yjw.demo.model.Photo
 
 class CommunicateViewModel : ViewModel() {
     fun yysAuthSuccess() {

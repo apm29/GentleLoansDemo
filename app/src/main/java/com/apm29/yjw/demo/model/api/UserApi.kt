@@ -8,6 +8,8 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 
+
+
 interface UserApi {
     @POST("/v1/user/profile")
     @Headers("Content-Type: application/json; charset=utf-8")
@@ -81,8 +83,8 @@ interface UserApi {
     @FormUrlEncoded
     @POST("/v1/user/application_history")
     fun applicationHistory(
-            @Field("page") page:Int
-    ):Observable<BaseBean<List<LoanLog>>>
+            @Field("page") page: Int
+    ): Observable<BaseBean<List<LoanLog>>>
 
     /**
      *
@@ -99,12 +101,25 @@ interface UserApi {
             @Field("type") type: Int
     ): Observable<BaseBean<String>>
 
+    @FormUrlEncoded
+    @POST("/v1/user/payment_plan")
+    fun paymentPlan(
+            @Field("page") page: Int,
+            @Field("application_id") id: Int
+    ): Observable<BaseBean<List<RepaymentSchedule>>>
 
+
+    @FormUrlEncoded
+    @POST("/v1/user/payment_history")
+    fun paymentHistory(
+            @Field("page") page: Int,
+            @Field("application_id") id: Int
+    ): Observable<BaseBean<List<RepaymentRecord>>>
 
     /**------------------------------------------NEW-INTERFACE-----------------------------------------------*/
     @FormUrlEncoded
     @POST("/v1/Application/personInfo")
     fun personalInfo(
-            @Field("biz_content")personalInfo:String
+            @Field("biz_content") personalInfo: String
     ): Observable<BaseBean<String>>
 }

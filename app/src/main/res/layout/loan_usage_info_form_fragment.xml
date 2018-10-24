@@ -87,7 +87,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/okAmount" />
 
             <TextView
-                android:id="@+id/tvTerm"
+                android:id="@+id/textTerm"
                 style="@style/SliceTitleStyle.Header"
                 android:text="申请期限"
                 app:layout_constraintBaseline_toBaselineOf="@+id/okTerm"
@@ -96,10 +96,10 @@
             <TextView
                 style="@style/SliceContent.PlainText"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvTerm"
+                app:layout_constraintBottom_toBottomOf="@+id/textTerm"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/barrierTitle"
-                app:layout_constraintTop_toTopOf="@+id/tvTerm" />
+                app:layout_constraintTop_toTopOf="@+id/textTerm" />
 
             <View
                 style="@style/EditDivider"

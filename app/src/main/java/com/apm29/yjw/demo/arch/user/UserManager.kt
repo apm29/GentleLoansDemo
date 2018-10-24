@@ -1,4 +1,4 @@
-package com.apm29.yjw.demo.arch
+package com.apm29.yjw.demo.arch.user
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -12,27 +12,6 @@ import androidx.navigation.navOptions
 import com.apm29.yjw.demo.app.AppApplication
 import com.apm29.yjw.demo.model.LoginBean
 import com.apm29.yjw.gentleloansdemo.R
-
-//todo
-interface UserLifecycle {
-    var currentUser: UserLoginInfo?
-    val loginDestination: NavDirections
-    val logoutDestination: NavDirections
-    fun isUserLogin(): Boolean
-    fun login(userLoginInfo: UserLoginInfo): Boolean
-    fun logout(): Boolean
-    fun toLogin(naviController: NavController,naviExtras:Navigator.Extras? = null )
-    fun toLogout(naviController: NavController)
-}
-
-interface UserLoginInfo {
-    var accessToken: String
-    var userType: UserType
-}
-
-enum class UserType {
-    Proxy, Common, Manager
-}
 
 object UserManager : UserLifecycle {
     private val sharedPreferences: SharedPreferences = AppApplication.context.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
@@ -94,8 +73,8 @@ object UserManager : UserLifecycle {
         return currentUser == null
     }
 
-    override fun toLogin(naviController: NavController,naviExtras:Navigator.Extras?) {
-        naviController.navigate(R.id.loginFragment,null, navOptions {
+    override fun toLogin(navController: NavController, navExtras: Navigator.Extras?) {
+        navController.navigate(R.id.loginFragment,null, navOptions {
             this.anim {
                 this.enter = R.anim.slide_in_bottom
                 this.exit = R.anim.nav_default_exit_anim
@@ -103,11 +82,11 @@ object UserManager : UserLifecycle {
                 this.popExit = R.anim.slide_out_bottom
             }
             this.clearTask = true
-        },naviExtras)
+        },navExtras)
     }
 
-    override fun toLogout(naviController: NavController) {
-        naviController.navigate(loginDestination, navOptions {
+    override fun toLogout(navController: NavController) {
+        navController.navigate(loginDestination, navOptions {
             this.anim {
                 this.enter = R.anim.slide_in_bottom
                 this.exit = R.anim.nav_default_exit_anim

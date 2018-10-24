@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import com.apm29.yjw.demo.model.EMPTY_TYPE
 import com.apm29.yjw.gentleloansdemo.R
 
-const val EMPTY_TYPE = 200
 
 abstract class BaseEmptyAdapter<T, VH : RecyclerView.ViewHolder>(
         val list: List<T>,

@@ -3,6 +3,7 @@ package com.apm29.yjw.demo.arch
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.transition.AutoTransition
+import androidx.transition.Explode
+import androidx.transition.Slide
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.ui.dialog.LoadingDialog
 import com.apm29.yjw.demo.utils.showToast
@@ -84,7 +87,7 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
                 }
             })
         }
-        setupShareElementTransition()
+        setTransitions()
         initData(savedInstanceState)
     }
 
@@ -97,7 +100,7 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
 
     }
 
-    private fun setupShareElementTransition() {
+    protected open fun setTransitions() {
         sharedElementReturnTransition = AutoTransition().also {
             it.duration = 800
             it.interpolator = BounceInterpolator()
@@ -106,6 +109,11 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
             it.duration = 800
             it.interpolator = BounceInterpolator()
         }
+
+        enterTransition = Slide(Gravity.END)
+        exitTransition = Slide(Gravity.START)
+        reenterTransition = Slide(Gravity.START)
+        returnTransition = Slide(Gravity.END)
     }
 
     /**

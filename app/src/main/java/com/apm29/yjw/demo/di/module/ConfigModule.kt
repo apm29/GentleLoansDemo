@@ -5,7 +5,7 @@ import android.os.Build
 import android.util.Log
 import cn.jpush.android.api.JPushInterface
 import com.apm29.yjw.demo.app.exception.UserInfoExpiredException
-import com.apm29.yjw.demo.arch.UserManager
+import com.apm29.yjw.demo.arch.user.UserManager
 import com.apm29.yjw.demo.model.BaseBean
 import com.apm29.yjw.gentleloansdemo.BuildConfig
 import com.facebook.stetho.okhttp3.StethoInterceptor
@@ -72,6 +72,7 @@ class ConfigModule {
                     val token = UserManager.currentUser?.accessToken ?: ""
                     val registrationID = JPushInterface.getRegistrationID(application)
                     val versionCode = BuildConfig.VERSION_CODE
+                    val versionName = BuildConfig.VERSION_NAME
                     //添加公共参数
 
                     if ("POST".equals(oldRequest.method(), true)) {
@@ -89,6 +90,7 @@ class ConfigModule {
                         jsonBuilder.append("\"").append("_app_type").append("\"").append(":").append("\"").append("android").append("\"").append(",")
                         jsonBuilder.append("\"").append("is_simulator").append("\"").append(":").append("\"").append((Build.SERIAL == "unknown")).append("\"").append(",")
                         jsonBuilder.append("\"").append("version_code").append("\"").append(":").append("\"").append(versionCode).append("\"").append(",")
+                        jsonBuilder.append("\"").append("version_name").append("\"").append(":").append("\"").append(versionName).append("\"").append(",")
 
                         jsonBuilder.append("\"").append("biz_content").append("\"").append(":").append(bizBuilder.toString())
                         jsonBuilder.append("}")
@@ -154,8 +156,8 @@ class ConfigModule {
                 .build()
     }
 
-    val prettyGson = GsonBuilder().setPrettyPrinting().create()
-    val jp = JsonParser()
+    private val prettyGson: Gson = GsonBuilder().setPrettyPrinting().create()
+    private val jp: JsonParser = JsonParser()
     private fun printRequestBody(json: String) {
         val jsonElement = jp.parse(json)
         println(prettyGson.toJson(jsonElement))

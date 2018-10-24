@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/appBar"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg_gradient_primary2accent_vertical"
+    android:layout_height="wrap_content"
+    android:paddingTop="25dp">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:contentScrim="@color/colorAccent"
+        app:layout_scrollFlags="scroll">
+
+
+        <LinearLayout
+            android:transitionName="@string/app_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="@color/white_foreground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="剩余应还总额(元)"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                style="@style/DecimalTextStyle.Title" />
+
+            <TextView
+                android:textColor="@color/white_foreground"
+                android:id="@+id/tvDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="其中包含本金0.00元,利息0.00元,罚息0.00元"
+                android:textSize="13sp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/warning" />
+
+                <TextView
+                    android:textColor="@color/white_foreground"
+                    android:id="@+id/tvBankHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="3dp"
+                    android:padding="12dp"
+                    android:text="还款日将从银行账户自动扣款,\n请确保还款账户余额充足"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ToolbarTheme"
+            app:titleTextColor="@color/white_foreground"
+            app:layout_collapseMode="parallax"
+            app:layout_collapseParallaxMultiplier="0.6"
+            android:gravity="center_horizontal" />
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabPagerHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_collapseMode="pin"
+        app:tabBackground="@drawable/selector_tab"
+        app:tabTextColor="@color/gray_not_enabled"
+        app:tabIndicatorColor="@color/colorPrimaryDark"
+        app:tabSelectedTextColor="@color/colorAccent">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="还款计划" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="还款记录" />
+    </com.google.android.material.tabs.TabLayout>
+</com.google.android.material.appbar.AppBarLayout>
