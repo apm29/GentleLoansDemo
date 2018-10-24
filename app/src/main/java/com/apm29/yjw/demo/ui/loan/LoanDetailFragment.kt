@@ -34,10 +34,6 @@ class LoanDetailFragment : BaseFragment<LoanDetailViewModel>() {
                 .loanLog
     }
 
-    override  fun setTransitions(){
-        super.setTransitions()
-        enterTransition = Slide()
-    }
 
     override fun setupViews(savedInstanceState: Bundle?) {
         mLoanLog?.let {

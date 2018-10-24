@@ -1,9 +1,12 @@
 package com.apm29.yjw.demo.model
 
+import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 import android.provider.ContactsContract
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigator
 import com.apm29.yjw.demo.ui.verify.RealNameVerifyFragment
 import com.apm29.yjw.demo.ui.verify.YYSVerifyFragment
 import com.contrarywind.interfaces.IPickerViewData
@@ -188,3 +191,11 @@ data class Contact(var name: String = "", var phone: ArrayList<String> = arrayLi
 
 
 }
+
+
+data class JumpData(var id:Int, var args: Bundle? = null, var navOptions: NavOptions? = null, var extras: Navigator.Extras?=null)
+
+//申请人信息提交结果
+data class ApplicantInfoUploadResult(
+        @SerializedName("application_id")var applicationId:Long?
+)

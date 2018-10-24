@@ -93,6 +93,9 @@ object UserManager : UserLifecycle {
                 this.popEnter = R.anim.nav_default_pop_exit_anim
                 this.popExit = R.anim.slide_out_bottom
             }
+            popUpTo(R.id.mainFragment){
+                inclusive = true
+            }
             this.clearTask = true
         })
     }

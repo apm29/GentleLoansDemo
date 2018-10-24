@@ -48,7 +48,7 @@ class RegisterFormViewModel : BaseViewModel() {
                 .personalInfo(mGson.toJson(personalInfo))
                 .threadAutoSwitch()
                 .subscribeErrorHandled(mErrorData,mErrorHandlerImpl,mLoadingData){
-                    mToastData.value = Event(it.msg)
+                    mToastData.value = Event("进件ID:${it.peekData().applicationId}")
                 }
     }
 

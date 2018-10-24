@@ -14,9 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.transition.AutoTransition
-import androidx.transition.Explode
-import androidx.transition.Slide
+import androidx.transition.*
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.ui.dialog.LoadingDialog
 import com.apm29.yjw.demo.utils.showToast
@@ -32,7 +30,7 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
     open var observingLoading: Boolean = true
     open var observingToast: Boolean = true
     open var showToolBar: Boolean = true
-    val mHandler:Handler = Handler(Looper.getMainLooper())
+    val mHandler: Handler = Handler(Looper.getMainLooper())
     @Inject
     lateinit var mViewModel: VM
 
@@ -46,19 +44,19 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
             val activity = requireActivity()
             if (activity is AppCompatActivity) {
                 val toolBar = view.findViewById<Toolbar>(R.id.toolBar)
-                if (toolBar!=null) {
+                if (toolBar != null) {
                     activity.setSupportActionBar(toolBar)
                     activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-                    NavigationUI.setupWithNavController(toolBar,findNavController())
+                    NavigationUI.setupWithNavController(toolBar, findNavController())
                 }
             }
         }
         setupViews(savedInstanceState)
     }
 
-    fun hideToolBarArrow(){
+    fun hideToolBarArrow() {
         val activity = requireActivity()
-        if(activity is AppCompatActivity){
+        if (activity is AppCompatActivity) {
             activity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         }
     }
@@ -70,18 +68,17 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
                 showToast(it)
             })
         }
-        if (observingLoading){
+        if (observingLoading) {
             mViewModel.mLoadingData.observe(this, Observer {
                 if (it) {
                     showLoading()
-                }else{
+                } else {
                     hideLoading()
                 }
             })
         }
-        if (observingToast){
-            mViewModel.mToastData.observe(this, Observer {
-                event->
+        if (observingToast) {
+            mViewModel.mToastData.observe(this, Observer { event ->
                 event.getContentIfNotHandled()?.let {
                     showToast(it)
                 }
@@ -101,19 +98,27 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
     }
 
     protected open fun setTransitions() {
-        sharedElementReturnTransition = AutoTransition().also {
-            it.duration = 800
-            it.interpolator = BounceInterpolator()
-        }
-        sharedElementEnterTransition = AutoTransition().also {
-            it.duration = 800
-            it.interpolator = BounceInterpolator()
-        }
+        val d: Long = 700
+        setSharedElementTransitions(d)
+        val transitionSet = TransitionSet()
+        transitionSet.ordering = TransitionSet.ORDERING_TOGETHER
+        transitionSet.addTransition(Explode().apply { duration = d })
+        transitionSet.addTransition(ChangeBounds().apply { duration = d })
+        enterTransition = transitionSet
+        exitTransition = transitionSet
+        reenterTransition = transitionSet
+        returnTransition = transitionSet
+    }
 
-        enterTransition = Slide(Gravity.END)
-        exitTransition = Slide(Gravity.START)
-        reenterTransition = Slide(Gravity.START)
-        returnTransition = Slide(Gravity.END)
+    protected open fun setSharedElementTransitions(d: Long) {
+        sharedElementReturnTransition = AutoTransition().apply {
+            duration = d
+            interpolator = BounceInterpolator()
+        }
+        sharedElementEnterTransition = AutoTransition().apply {
+            duration = d
+            interpolator = BounceInterpolator()
+        }
     }
 
     /**
@@ -128,9 +133,10 @@ abstract class BaseFragment<VM : ViewModelContract.IViewModel> : Fragment(), Vie
     }
 
     @Synchronized
-    override  fun showLoading() {
+    override fun showLoading() {
         LoadingDialog.show()
     }
+
     @Synchronized
     override fun hideLoading() {
         LoadingDialog.dismiss()

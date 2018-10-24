@@ -191,4 +191,6 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
         mViewModel.sendLoginVerifySMS(textInputMobile.getTextOrEmpty())
     }
 
+
+
 }

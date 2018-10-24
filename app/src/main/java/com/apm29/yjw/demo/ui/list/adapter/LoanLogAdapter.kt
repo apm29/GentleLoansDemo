@@ -2,7 +2,7 @@ package com.apm29.yjw.demo.ui.list.adapter
 
 import android.view.View
 import com.apm29.yjw.demo.model.LoanLog
-import com.apm29.yjw.demo.ui.list.LoanLogListFragment
+import com.apm29.yjw.demo.ui.loan.LoanLogListFragment
 import com.apm29.yjw.demo.ui.list.base.BaseEmptyAdapter
 import com.apm29.yjw.gentleloansdemo.R
 

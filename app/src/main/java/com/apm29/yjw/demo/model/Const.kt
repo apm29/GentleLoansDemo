@@ -27,3 +27,7 @@ const val ALIPAY_CHANNEL_CODE = "005004"
 const val TAOBAO_CHANNEL_CODE = "005003"
 
 const val PAGE_SIZE = 10
+
+val LOAN_RECORD = "loanrecord"
+val INFO = "info"
+val INDEX = "index"

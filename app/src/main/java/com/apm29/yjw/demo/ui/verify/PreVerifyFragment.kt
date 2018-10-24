@@ -1,31 +1,30 @@
 package com.apm29.yjw.demo.ui.verify
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.apm29.yjw.demo.app.ActivityManager
 import com.apm29.yjw.demo.arch.BaseFragment
+import com.apm29.yjw.demo.arch.user.UserManager
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.model.FORM
 import com.apm29.yjw.demo.model.MAIN
 import com.apm29.yjw.demo.model.VerifyProgress
-import com.apm29.yjw.demo.ui.verify.PreVerifyFragmentArgs
-import com.apm29.yjw.demo.utils.navigateErrorHandled
-import com.apm29.yjw.demo.utils.showToast
+import com.apm29.yjw.demo.ui.HostActivity
 import com.apm29.yjw.demo.viewmodel.CommunicateViewModel
 import com.apm29.yjw.demo.viewmodel.RealNameVerifyViewModel
 import com.apm29.yjw.gentleloansdemo.R
 import kotlinx.android.synthetic.main.pre_verify_fragment.*
-import java.lang.IllegalArgumentException
 
 class PreVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
 
@@ -104,12 +103,18 @@ class PreVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
+        val destination: Int? = PreVerifyFragmentArgs.fromBundle(arguments).destination
+        if (destination == FORM){
+            return
+        }
         inflater?.inflate(R.menu.app_bar_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        //必须是顶层的NavController
+        val findNavController = ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
         if (item?.itemId == R.id.toLogin) {
-            findNavController().navigate(R.id.action_global_loginFragment)
+            findNavController?.navigate(R.id.action_global_loginFragment)
             return true
         }
         return super.onOptionsItemSelected(item)

@@ -1,4 +1,4 @@
-package com.apm29.yjw.demo.ui.list
+package com.apm29.yjw.demo.ui.loan
 
 import android.view.View
 import android.widget.TextView
@@ -7,14 +7,12 @@ import androidx.core.view.ViewCompat
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.Explode
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.model.LoanLog
 import com.apm29.yjw.demo.ui.list.adapter.LoanLogAdapter
 import com.apm29.yjw.demo.ui.list.base.BaseListFragment
-import com.apm29.yjw.demo.ui.loan.LoanDetailFragmentArgs
 import com.apm29.yjw.demo.utils.navigateErrorHandled
 import com.apm29.yjw.gentleloansdemo.R
 
@@ -57,13 +55,6 @@ class LoanLogListFragment: BaseListFragment<LoanLog, LoanLogListFragment.VH, Loa
                 .defaultFragmentModule(DefaultFragmentModule(this))
                 .build()
                 .inject(this)
-    }
-    override  fun setTransitions(){
-        super.setTransitions()
-        enterTransition = Explode()
-        exitTransition = Explode()
-        reenterTransition = Explode()
-        returnTransition = Explode()
     }
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
         val tvPayType = itemView.findViewById<TextView?>(R.id.tvRepaymentType)

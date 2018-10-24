@@ -22,7 +22,9 @@ class MineFragment: BaseFragment<DefaultFragmentViewModel>() {
     override fun setupViewLayout(savedInstanceState: Bundle?): Int {
         return R.layout.mine_fragment
     }
-
+    override fun setTransitions() {
+        setSharedElementTransitions(700)
+    }
     override fun setupModel(appComponent: AppComponent) {
         DaggerDefaultFragmentComponent.builder()
                 .appComponent(appComponent)
@@ -33,7 +35,7 @@ class MineFragment: BaseFragment<DefaultFragmentViewModel>() {
 
     @SuppressLint("SetTextI18n")
     override fun setupViews(savedInstanceState: Bundle?) {
-        //必须是顶层的NaviController
+        //必须是顶层的NavController
         val findNavController = ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
 
         logout.setOnClickListener {
@@ -46,30 +48,18 @@ class MineFragment: BaseFragment<DefaultFragmentViewModel>() {
 
         layoutLoanLog.setOnClickListener {
             navigateErrorHandled(
-                    R.id.loanLogListFragment,
-                    null,
-                    navOptions {
-                        anim(defaultAnim)
-                    }
+                    R.id.loanLogListFragment
             )
         }
         layoutPersonalInfo.setOnClickListener {
             navigateErrorHandled(
-                    R.id.personalInfoFragment,
-                    null,
-                    navOptions {
-                        anim(defaultAnim)
-                    }
+                    R.id.personalInfoFragment
             )
         }
 
         layoutAboutUs.setOnClickListener {
             navigateErrorHandled(
-                    R.id.aboutUsFragment,
-                    null,
-                    navOptions {
-                        anim(defaultAnim)
-                    }
+                    R.id.aboutUsFragment
             )
         }
 

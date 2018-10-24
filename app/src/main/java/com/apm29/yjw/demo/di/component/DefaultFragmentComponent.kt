@@ -8,7 +8,7 @@ import com.apm29.yjw.demo.ui.form.register.ApplicantInfoFragment
 import com.apm29.yjw.demo.ui.form.register.FamilyAssetsFragment
 import com.apm29.yjw.demo.ui.form.register.RegisterFormFragment
 import com.apm29.yjw.demo.ui.loan.LoanDetailFragment
-import com.apm29.yjw.demo.ui.list.LoanLogListFragment
+import com.apm29.yjw.demo.ui.loan.LoanLogListFragment
 import com.apm29.yjw.demo.ui.loan.LoanRepaymentRecordFragment
 import com.apm29.yjw.demo.ui.loan.LoanRepaymentScheduleFragment
 import com.apm29.yjw.demo.ui.main.*
@@ -57,4 +57,5 @@ interface DefaultFragmentComponent {
     fun inject(loanDetailFragment: LoanDetailFragment)
     fun inject(loanScheduleFragment: LoanRepaymentScheduleFragment)
     fun inject(loanRepaymentRecordFragment: LoanRepaymentRecordFragment)
+    fun inject(pushMessageListFragment: PushMessageListFragment)
 }

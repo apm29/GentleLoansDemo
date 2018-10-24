@@ -116,10 +116,20 @@ interface UserApi {
             @Field("application_id") id: Int
     ): Observable<BaseBean<List<RepaymentRecord>>>
 
+
+    /**
+     * /v1/user/message_list
+     */
+    @FormUrlEncoded
+    @POST("/v1/user/message_list")
+    abstract fun messageList(
+            @Field("page") page: Int
+    ): Observable<BaseBean<List<PushMessage>>>
+
     /**------------------------------------------NEW-INTERFACE-----------------------------------------------*/
     @FormUrlEncoded
     @POST("/v1/Application/personInfo")
     fun personalInfo(
             @Field("biz_content") personalInfo: String
-    ): Observable<BaseBean<String>>
+    ): Observable<BaseBean<ApplicantInfoUploadResult>>
 }

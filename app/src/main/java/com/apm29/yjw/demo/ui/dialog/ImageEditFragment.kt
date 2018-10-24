@@ -31,14 +31,18 @@ import java.text.SimpleDateFormat
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
+import com.apm29.yjw.demo.model.CODE_ALBUM_IMAGE_CAPTURE
 import com.apm29.yjw.demo.model.CODE_CAMERA_IMAGE_CAPTURE
 import com.apm29.yjw.demo.model.Photo
 import java.util.*
 
 
-
-
 class ImageEditFragment : BaseFragment<DefaultFragmentViewModel>() {
+
+    enum class TYPE {
+        CAMERA, ALBUM
+    }
+
     override fun setupViewLayout(savedInstanceState: Bundle?): Int {
         return R.layout.image_edit_layout
     }
@@ -52,7 +56,11 @@ class ImageEditFragment : BaseFragment<DefaultFragmentViewModel>() {
 
     override fun setupViews(savedInstanceState: Bundle?) {
         btnCapture.setOnClickListener {
-            requestCameraPermission()
+            requestCameraPermission(TYPE.CAMERA)
+        }
+
+        btnAlbum.setOnClickListener {
+            requestCameraPermission(TYPE.ALBUM)
         }
     }
 
@@ -62,13 +70,13 @@ class ImageEditFragment : BaseFragment<DefaultFragmentViewModel>() {
     }
 
 
-    private fun requestCameraPermission() {
+    private fun requestCameraPermission(type: TYPE) {
         AndPermission.with(this)
                 .runtime()
                 .permission(arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 .onGranted {
                     createImageFile()?.let { file ->
-                        captureImage(file)
+                        captureImage(file, type)
                     }
                 }
                 .onDenied {
@@ -86,11 +94,11 @@ class ImageEditFragment : BaseFragment<DefaultFragmentViewModel>() {
                                             .setting()
                                             .onComeback {
                                                 // 用户从设置回来了。
-                                                requestCameraPermission()
+                                                requestCameraPermission(TYPE.ALBUM)
                                             }
                                             .start()
                                 } else {
-                                    requestCameraPermission()
+                                    requestCameraPermission(TYPE.ALBUM)
                                 }
                             }
                             .setNegativeButton(R.string.quit) { _, _ ->
@@ -122,28 +130,60 @@ class ImageEditFragment : BaseFragment<DefaultFragmentViewModel>() {
         }
     }
 
-    private fun captureImage(file: File) {
-        val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-        if (cameraIntent.resolveActivity(requireContext().packageManager) != null) {
-            val photoURI: Uri = if (Build.VERSION_CODES.N <= Build.VERSION.SDK_INT) {
-                FileProvider.getUriForFile(
-                        requireContext(),
-                        BuildConfig.APPLICATION_ID + ".provider",
-                        file
-                )
-            } else {
-                file.toUri()
-            }
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-            startActivityForResult(cameraIntent, CODE_CAMERA_IMAGE_CAPTURE)
+    private fun captureImage(file: File, type: TYPE) {
+        val intent = if (type == TYPE.CAMERA) {
+            Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
         } else {
-            showToast("没有可用的拍照App,请到应用市场下载相机类App")
+            Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        }
+        if (type == TYPE.CAMERA) {
+            if (intent.resolveActivity(requireContext().packageManager) != null) {
+                val photoURI: Uri = if (Build.VERSION_CODES.N <= Build.VERSION.SDK_INT) {
+                    FileProvider.getUriForFile(
+                            requireContext(),
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            file
+                    )
+                } else {
+                    file.toUri()
+                }
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                startActivityForResult(intent,  CODE_CAMERA_IMAGE_CAPTURE )
+            }
+        }else{
+            intent.type = "image/*"
+            startActivityForResult(Intent.createChooser(intent,"选择相册"), CODE_ALBUM_IMAGE_CAPTURE)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CODE_ALBUM_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+//                val photo = data.extras?.get("data") as Bitmap //缩略图
+
+            val selectedImage = data?.data
+            selectedImage?.let {
+                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+
+                val cursor = requireContext().contentResolver.query(selectedImage,
+                        filePathColumn, null, null, null)
+                cursor?.let {
+                    cursor.moveToFirst()
+
+                    val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+                    val picturePath = cursor.getString(columnIndex)
+                    mCurrentPhotoPath = picturePath
+                    mPhotoData?.filePath = mCurrentPhotoPath
+                    requestLocationPermission()
+                    cursor.close()
+                }
+            }
+
+        }
+
         if (requestCode == CODE_CAMERA_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
 //                val photo = data.extras?.get("data") as Bitmap //缩略图
+
             println(mCurrentPhotoPath)
             mPhotoData?.filePath = mCurrentPhotoPath
 
@@ -204,7 +244,7 @@ class ImageEditFragment : BaseFragment<DefaultFragmentViewModel>() {
                 uploadImage()
 
 
-            }else{
+            } else {
                 showToast(location.errorInfo)
                 println("${location.errorCode} = ${location.errorInfo}")
             }

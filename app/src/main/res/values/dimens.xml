@@ -5,4 +5,5 @@
     <dimen name="status_height">25dp</dimen>
     <dimen name="SliceHeight">48dp</dimen>
     <dimen name="SliceEditHeight">36dp</dimen>
+    <dimen name="anim_duration_default">1000</dimen>
 </resources>

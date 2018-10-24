@@ -1,8 +1,12 @@
 package com.apm29.yjw.demo.viewmodel
 
+import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigator
 import com.apm29.yjw.demo.model.Event
+import com.apm29.yjw.demo.model.JumpData
 import com.apm29.yjw.demo.model.Photo
 
 class CommunicateViewModel : ViewModel() {
@@ -24,6 +28,10 @@ class CommunicateViewModel : ViewModel() {
         }
     }
 
+    fun toDestinationId(id:Int,args: Bundle? = null , navOptions: NavOptions? = null,extras: Navigator.Extras?=null){
+        mJumpData.value = Event(JumpData(id,args,navOptions,extras))
+    }
+
     val yysResult: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val realResult: MutableLiveData<Event<Boolean>> = MutableLiveData()
 
@@ -31,4 +39,6 @@ class CommunicateViewModel : ViewModel() {
     val pushJsonData: MutableLiveData<Event<String>> = MutableLiveData()
 
     val mPhotoData: MutableLiveData<Event<Photo>> = MutableLiveData()
+
+    val mJumpData:MutableLiveData<Event<JumpData>> = MutableLiveData()
 }

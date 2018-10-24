@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/splash_nav_graph.xml"
+    android:id="@+id/host_nav_graph.xml"
     app:startDestination="@id/splashFragment">
 
     <fragment
@@ -70,6 +70,12 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_left"
             app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_pushMessageListFragment"
+            app:destination="@id/pushMessageListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_preVerifyFragment"
+            app:destination="@id/preVerifyFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_loginFragment"
@@ -160,7 +166,7 @@
         android:label="申请人信息表" />
     <fragment
         android:id="@+id/loanLogListFragment"
-        android:name="com.apm29.yjw.demo.ui.list.LoanLogListFragment"
+        android:name="com.apm29.yjw.demo.ui.loan.LoanLogListFragment"
         tools:layout = "@layout/base_list_fragment"
         android:label="贷款记录" >
         <action
@@ -302,5 +308,9 @@
             android:defaultValue="@null"
             />
     </fragment>
+    <fragment
+        android:id="@+id/pushMessageListFragment"
+        android:name="com.apm29.yjw.demo.ui.main.PushMessageListFragment"
+        android:label="消息列表" />
 
 </navigation>

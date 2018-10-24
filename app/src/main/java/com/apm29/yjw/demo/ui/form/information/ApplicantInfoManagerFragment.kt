@@ -29,22 +29,22 @@ class ApplicantInfoManagerFragment : BaseFragment<InformationFormViewModel>() {
     override fun setupViews(savedInstanceState: Bundle?) {
         val navController = ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
         layoutPersaonalInfo.setOnClickListener {
-            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_personalInfoFromFragment)
+            navigateErrorHandled(R.id.personalInfoFromFragment)
         }
         layoutContactsInfo.setOnClickListener {
-            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_contactsInfoFormFragment)
+            navigateErrorHandled(R.id.contactsInfoFormFragment)
         }
         layoutLoanUsageInfo.setOnClickListener {
-            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_loanUsageInfoFromFragment)
+            navigateErrorHandled(R.id.loanUsageInfoFromFragment)
         }
         layoutAssetsInfo.setOnClickListener {
-            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_assetsInfoFromFragment)
+            navigateErrorHandled(R.id.assetsInfoFromFragment)
         }
         layoutJobInfo.setOnClickListener {
-            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_jobInfoFromFragment)
+            navigateErrorHandled(R.id.jobInfoFromFragment)
         }
         layoutPhotoInfo.setOnClickListener {
-            navigateErrorHandled(R.id.action_applicantInfoManagerFragment_to_imageInfoFromFragment)
+            navigateErrorHandled(R.id.imageInfoFromFragment)
         }
         btnSubmit.setOnClickListener {
             showToast("submit")

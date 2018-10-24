@@ -5,6 +5,7 @@ import com.apm29.yjw.demo.app.ErrorHandledObserver
 import com.apm29.yjw.demo.arch.BaseViewModel
 import com.apm29.yjw.demo.model.*
 import com.apm29.yjw.demo.model.api.UserApi
+import com.apm29.yjw.demo.utils.subscribeErrorHandled
 import com.apm29.yjw.demo.utils.threadAutoSwitch
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -50,7 +51,6 @@ class DefaultListViewModel : BaseViewModel() {
             page = 1
         }
         getLoanLogObservable()
-                .threadAutoSwitch()
                 .loadListInternal(refresh,list)
 
     }
@@ -70,7 +70,6 @@ class DefaultListViewModel : BaseViewModel() {
             page = 1
         }
         getScheduleObservable(id)
-                .threadAutoSwitch()
                 .loadListInternal(refresh,lists)
     }
 
@@ -79,10 +78,18 @@ class DefaultListViewModel : BaseViewModel() {
             page =1
         }
         getLoanRepaymentRecordObservable(id)
-                .threadAutoSwitch()
                 .loadListInternal(refresh,lists)
     }
 
     private fun getLoanRepaymentRecordObservable(id: Int) = mRetrofit.create(UserApi::class.java)
             .paymentHistory(page, id)
+
+    fun loadPushMessage(refresh: Boolean, lists: ArrayList<PushMessage>) {
+        if (refresh){
+            page = 1
+        }
+        mRetrofit.create(UserApi::class.java)
+                .messageList(page)
+                .loadListInternal(refresh,lists)
+    }
 }

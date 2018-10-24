@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.apm29.yjw.demo.arch.user.UserLoginInfo
 import com.apm29.yjw.demo.arch.user.UserType
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
 data class BaseBean<T>(val code: Int = 200, val msg: String = "", private val data: T) {
@@ -335,4 +336,32 @@ data class RepaymentRecord(
          * }
          */
 )
+
+data class PushMessage (
+    /**
+     * {
+     * "id": 1,
+     * "jump": "cutrecord",
+     * "param": "{\"param\":\"278\"}",
+     * "content": "您有一笔手续费扣款，点击查看详情",
+     * "create_time": "2018-07-25 17:55:21"
+     * }
+     */
+    var id: Int?,
+    @SerializedName("create_time")
+    var createTime: String?,
+    var content: String?,
+    var jump: String?,
+    var param: String?,
+    var isRead:Boolean = false
+
+){
+    val paramObj:Param
+    init {
+        paramObj = Gson().fromJson(param,Param::class.java)
+    }
+    class Param {
+        var param: String? = null
+    }
+}
 

@@ -55,9 +55,7 @@ fun Activity.findHostNavController(): NavController? {
 fun Fragment.navigateErrorHandled(
         destination: Int,
         args: Bundle? = null,
-        options: NavOptions? = navOptions {
-            anim(defaultAnim)
-        },
+        options: NavOptions? = null,
         extra: Navigator.Extras? = null
 ) {
     try {

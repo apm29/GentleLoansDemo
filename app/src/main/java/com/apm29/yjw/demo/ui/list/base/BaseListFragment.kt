@@ -4,11 +4,11 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.viewmodel.DefaultListViewModel
 import com.apm29.yjw.gentleloansdemo.R
 import com.paginate.Paginate
-import kotlinx.android.synthetic.main.base_list_fragment.*
 
 abstract class BaseListFragment<T, VH : RecyclerView.ViewHolder, ADAPTER : BaseEmptyAdapter<T, VH>> : BaseFragment<DefaultListViewModel>() {
 
@@ -20,36 +20,71 @@ abstract class BaseListFragment<T, VH : RecyclerView.ViewHolder, ADAPTER : BaseE
     open val useToolBar = true
     val data = arrayListOf<T>()
     var adapter: ADAPTER = this.setupAdapter()
-    lateinit var paginate:Paginate
-    override fun setupViews(savedInstanceState: Bundle?) {
+    private lateinit var paginate: Paginate
 
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-
-        val callbacks = object : Paginate.Callbacks {
-            override fun isLoading(): Boolean {
-                return mViewModel.mLoadingData.value ?: false
-            }
-
-            override fun hasLoadedAllItems(): Boolean {
-                return mViewModel.hasLoadAll
-            }
-
-            override fun onLoadMore() {
-                load(false, data)
-            }
-
+    private var lastOffset = 0
+    private var lastPosition = 0
+    /**
+     * 记录RecyclerView当前位置
+     */
+    private fun getPositionAndOffset(recyclerView: RecyclerView) {
+        val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+        //获取可视的第一个view
+        val topView = layoutManager.getChildAt(0)
+        if (topView != null) {
+            //获取与该view的顶部的偏移量
+            lastOffset = topView.top
+            //得到该View的数组位置
+            lastPosition = layoutManager.getPosition(topView)
         }
+    }
 
-        refreshLayout.setOnRefreshListener {
+    /**
+     * 让RecyclerView滚动到指定位置
+     */
+    private fun scrollToPosition(recyclerView: RecyclerView) {
+        if (recyclerView.layoutManager != null && lastPosition >= 0) {
+            (recyclerView.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(lastPosition, lastOffset)
+        }
+    }
+
+
+    override fun setupViews(savedInstanceState: Bundle?) {
+        val refreshLayout = view?.findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+        refreshLayout?.setOnRefreshListener {
             load(true, data)
         }
-        paginate = Paginate.with(recyclerView, callbacks)
-                .setLoadingTriggerThreshold(0)
-                .setLoadingListItemCreator(DefaultLoadMreCreator())
-                .build()
-        paginate.setHasMoreDataToLoad(false)
+        recyclerView?.apply {
+            this.adapter = this@BaseListFragment.adapter
+            this.layoutManager = LinearLayoutManager(context)
+
+
+            val callbacks = object : Paginate.Callbacks {
+                override fun isLoading(): Boolean {
+                    return mViewModel.mLoadingData.value ?: false
+                }
+
+                override fun hasLoadedAllItems(): Boolean {
+                    return mViewModel.hasLoadAll
+                }
+
+                override fun onLoadMore() {
+                    load(false, data)
+                }
+
+            }
+            paginate = Paginate.with(recyclerView, callbacks)
+                    .setLoadingTriggerThreshold(0)
+                    .setLoadingListItemCreator(DefaultLoadMreCreator())
+                    .build()
+            paginate.setHasMoreDataToLoad(!mViewModel.hasLoadAll)
+            if (data.isEmpty()) {
+                load(true, data)
+            }
+
+            scrollToPosition(this)
+        }
     }
 
     abstract fun setupAdapter(): ADAPTER
@@ -62,17 +97,19 @@ abstract class BaseListFragment<T, VH : RecyclerView.ViewHolder, ADAPTER : BaseE
                 adapter.notifyItemRangeChanged(it.first, it.second)
             } else if (it.first > it.second) {
                 adapter.notifyItemRangeRemoved(it.second, it.first)
+            } else {
+                paginate.setHasMoreDataToLoad(false)
             }
         })
-        load(true, data)
-
         mViewModel.mLoadingData.observe(this, Observer {
-                refreshLayout?.isRefreshing = it
+            val refreshLayout = view?.findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+            refreshLayout?.isRefreshing = it
         })
     }
 
     override fun hideLoading() {
         super.hideLoading()
+        val refreshLayout = view?.findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
         refreshLayout?.isRefreshing = false
         paginate.setHasMoreDataToLoad(false)
     }
