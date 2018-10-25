@@ -1,7 +1,6 @@
 package com.apm29.yjw.demo.ui.main
 
 import android.os.Bundle
-import android.os.Handler
 import androidx.lifecycle.Observer
 import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.di.component.AppComponent
@@ -64,7 +63,7 @@ class PersonalInfoFragment:BaseFragment<DefaultFragmentViewModel>() {
                         builder.append("*")
                     }
                     val maskedName = name.replaceRange(1 until name.length, builder.toString())
-                    tvName.text = maskedName
+                    tvId.text = maskedName
                 }
             }
 

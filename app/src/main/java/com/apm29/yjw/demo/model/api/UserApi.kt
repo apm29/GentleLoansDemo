@@ -74,7 +74,7 @@ interface UserApi {
 
     @FormUrlEncoded
     @POST("/v1/user/contact")
-    fun contact(@Field("biz_content") mContactList: String): Observable<BaseBean<String>>
+    fun contact(@Field(BIZ) mContactList: String): Observable<BaseBean<String>>
 
 
     /**
@@ -130,6 +130,12 @@ interface UserApi {
     @FormUrlEncoded
     @POST("/v1/Application/personInfo")
     fun personalInfo(
-            @Field("biz_content") personalInfo: String
+            @Field(BIZ) personalInfo: String
     ): Observable<BaseBean<ApplicantInfoUploadResult>>
+
+    @FormUrlEncoded
+    @POST("v1/Application/houseProperty")
+    fun saveAssetsInfo(
+            @Field(BIZ)assets: String
+    ):Observable<BaseBean<Any>>
 }

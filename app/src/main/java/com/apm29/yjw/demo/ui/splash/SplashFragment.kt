@@ -55,12 +55,28 @@ class SplashFragment : BaseFragment<DefaultFragmentViewModel>() {
 
         mViewModel.profile.observe(this, Observer {
             if (it != null) {
-                navigateToVerify(it.peekData())
+                //navigateToVerify(it.peekData())
+                navigateToMain()
             }
         })
         mViewModel.mErrorData.observe(this, Observer {
             UserManager.toLogin(findNavController())
         })
+    }
+
+    private fun navigateToMain() {
+        val extras = FragmentNavigatorExtras(
+                imageViewLogo to getString(R.string.app_icon)
+        )
+        ViewCompat.setTransitionName(imageViewLogo, getString(R.string.app_icon))
+        navigateErrorHandled(
+                R.id.mainFragment,
+                null,
+                navOptions {
+                    clearTask = true
+                },
+                extras
+        )
     }
 
     private fun navigateToVerify(profile: ProfileBean) {

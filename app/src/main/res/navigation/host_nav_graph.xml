@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_loginFragment_to_preVerifyFragment"
             app:destination="@id/preVerifyFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_serviceProtocolFragment"
+            app:destination="@id/serviceProtocolFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -283,6 +286,9 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_left"
             app:destination="@id/imageEditFragment" />
+        <action
+            android:id="@+id/action_imageInfoFromFragment_to_photoViewFragment"
+            app:destination="@id/photoViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/imageEditFragment"
@@ -312,5 +318,15 @@
         android:id="@+id/pushMessageListFragment"
         android:name="com.apm29.yjw.demo.ui.main.PushMessageListFragment"
         android:label="消息列表" />
+    <fragment
+        android:id="@+id/serviceProtocolFragment"
+        android:name="com.apm29.yjw.demo.ui.splash.ServiceProtocolFragment"
+        tools:layout="@layout/service_protocol_fragment"
+        android:label="服务协议" />
+    <fragment
+        android:id="@+id/photoViewFragment"
+        android:name="com.apm29.yjw.demo.ui.dialog.PhotoViewFragment"
+        android:label="照片查看" >
+    </fragment>
 
 </navigation>

@@ -11,9 +11,7 @@ import com.apm29.yjw.demo.arch.BaseFragment
 import com.apm29.yjw.demo.di.component.AppComponent
 import com.apm29.yjw.demo.di.component.DaggerDefaultFragmentComponent
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
-import com.apm29.yjw.demo.utils.Verify
-import com.apm29.yjw.demo.utils.getTextOrEmpty
-import com.apm29.yjw.demo.utils.showToast
+import com.apm29.yjw.demo.utils.*
 import com.apm29.yjw.demo.viewmodel.CommunicateViewModel
 import com.apm29.yjw.demo.viewmodel.RealNameVerifyViewModel
 import com.apm29.yjw.gentleloansdemo.BuildConfig
@@ -36,24 +34,7 @@ class RealNameVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
 
     override fun setupViews(savedInstanceState: Bundle?) {
 
-        bankSpinnerSelector.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
 
-            }
-
-            override
-            fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (view is TextView) {
-                    val bankName = view.getTextOrEmpty()
-                    bankCode.forEach {
-                        if (it.value == bankName) {
-                            code = it.key
-                        }
-                    }
-                }
-            }
-
-        }
         tvSend.setOnClickListener { _ ->
             verifyInput().apply {
                 if (!success) {
@@ -99,9 +80,12 @@ class RealNameVerifyFragment : BaseFragment<RealNameVerifyViewModel>() {
         mViewModel.bankCodes.observe(this, Observer {
             bankCode = it.peekData()
             val arrays = it.peekData().values.toList()
-            val arrayAdapter = ArrayAdapter<String>(requireContext(),
-                    android.R.layout.simple_selectable_list_item, arrays)
-            bankSpinnerSelector.adapter = arrayAdapter
+            val list = arrayListOf<String>()
+            list.addAll(arrays)
+            bankSpinner.setupOneOptPicker(list){
+                p,str,v->
+                code = bankSpinner.getIndexByText(list).toString()
+            }
         })
 
 

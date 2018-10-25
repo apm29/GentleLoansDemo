@@ -162,7 +162,8 @@ data class Estate(
         var mortgageCreditor1: String?,
         var mortgageAmount1: String?,
         var mortgageCreditor2: String?,
-        var mortgageAmount2: String?
+        var mortgageAmount2: String?,
+        @SerializedName("application_id")  val applicationId:Int?
 ) : Assets() {
 
     init {
@@ -179,6 +180,7 @@ data class Estate(
             null,
             null,
             null,
+            null,
             null
     )
 }
@@ -186,14 +188,21 @@ data class Estate(
 data class Car(
         var license: String?,
         var brand: String?,
-        var color: String?
+        var color: String?,
+        @SerializedName("application_id")  val applicationId:Int?
 ) : Assets() {
     constructor() : this(
+            null,
             null,
             null,
             null
     )
 }
+
+data class AssetsPack(
+        val estates:List<Estate>,
+        val cars:List<Car>
+)
 
 
 data class LoanLog(

@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardStatus"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:cardCornerRadius="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -60,22 +61,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/ivWarning" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/btnDebug"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Debug-跳过验证"
-                tools:visibility="gone"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
+                android:text="Debug-跳过验证"
                 android:textColor="@color/colorAccent"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnVerify" />
+                app:layout_constraintTop_toBottomOf="@+id/btnVerify"
+                tools:visibility="gone" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardForm"
         android:layout_width="match_parent"
@@ -95,201 +97,249 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ScrollView
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
+        <androidx.core.widget.NestedScrollView
+            android:fillViewport="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrierTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:barrierDirection="end"
+                    app:constraint_referenced_ids="tvBank,okBank,tvId" />
+
+                <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                    android:id="@+id/okBank"
+                    style="@style/SliceTitleStyle.Ok"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
                 <TextView
-                    android:visibility="gone"
+                    android:id="@+id/tvBank"
+                    style="@style/SliceTitleStyle.Header"
+                    android:text="绑卡银行"
+                    app:layout_constraintBottom_toBottomOf="@+id/okBank"
+                    app:layout_constraintStart_toEndOf="@id/okBank"
+                    app:layout_constraintTop_toTopOf="@+id/okBank" />
+
+                <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="实名绑卡"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <FrameLayout
-
+                <TextView
                     android:id="@+id/bankSpinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    style="@style/SliceContent.Picker"
+                    android:hint="@string/text_bank_hint"
+                    app:layout_constraintBottom_toBottomOf="@id/tvBank"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintTop_toBottomOf="@id/tvTitle">
+                    app:layout_constraintStart_toStartOf="@+id/barrierTitle"
+                    app:layout_constraintTop_toTopOf="@id/tvBank"/>
 
-                    <Spinner
-                        android:id="@+id/bankSpinnerSelector"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:prompt="@string/bank"
-                        android:spinnerMode="dropdown" />
-                </FrameLayout>
+                <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                    android:id="@+id/okBankCard"
+                    style="@style/SliceTitleStyle.Ok"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/okBank" />
 
+                <TextView
+                    android:id="@+id/tvBankCard"
+                    style="@style/SliceTitleStyle.Header"
+                    android:text="银行卡号"
+                    app:layout_constraintBottom_toBottomOf="@+id/okBankCard"
+                    app:layout_constraintStart_toEndOf="@id/okBankCard"
+                    app:layout_constraintTop_toTopOf="@+id/okBankCard" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/bankCardLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="输入银行卡号"
-                    android:maxLines="1"
+                    style="@style/EditLayoutStyle"
+                    app:layout_constraintBottom_toBottomOf="@id/tvBankCard"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bankSpinner">
+                    android:hint="@string/text_bank_card_hint"
+                    app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                    app:layout_constraintTop_toTopOf="@id/tvBankCard">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etCard"
-                        android:maxLines="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        style="@style/EditContentStyle"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                    android:id="@+id/okId"
+                    style="@style/SliceTitleStyle.Ok"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/okBankCard" />
+
+                <TextView
+                    android:id="@+id/tvId"
+                    style="@style/SliceTitleStyle.Header"
+                    android:text="开户身份证"
+                    app:layout_constraintBottom_toBottomOf="@+id/okId"
+                    app:layout_constraintStart_toEndOf="@id/okId"
+                    app:layout_constraintTop_toTopOf="@+id/okId" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/idCardLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="输入开户人身份证"
-                    android:maxLines="1"
-                    app:counterMaxLength="18"
+                    style="@style/EditLayoutStyle"
+                    android:hint="@string/text_id_hint"
+                    app:layout_constraintBottom_toBottomOf="@id/tvId"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bankCardLayout">
+                    app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                    app:layout_constraintTop_toTopOf="@id/tvId">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etId"
+                        style="@style/EditContentStyle"
                         android:imeOptions="actionNext"
-                        android:maxLines="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:inputType="text"
-                        android:maxLength="18" />
+                        android:maxLength="18"
+                        android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                    android:id="@+id/okName"
+                    style="@style/SliceTitleStyle.Ok"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/okId" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    style="@style/SliceTitleStyle.Header"
+                    android:text="开户人姓名"
+                    app:layout_constraintBottom_toBottomOf="@+id/okName"
+                    app:layout_constraintStart_toEndOf="@id/okName"
+                    app:layout_constraintTop_toTopOf="@+id/okName" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/nameLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="输入开户人姓名"
+                    style="@style/EditLayoutStyle"
+                    android:hint="@string/text_name_hint"
                     android:maxLines="1"
                     app:counterMaxLength="4"
+                    app:layout_constraintBottom_toBottomOf="@id/tvName"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/idCardLayout">
+                    app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                    app:layout_constraintTop_toTopOf="@id/tvName">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:imeOptions="actionNext"
                         android:id="@+id/etName"
-                        android:maxLines="1"
+                        style="@style/EditContentStyle"
+                        android:imeOptions="actionNext"
                         android:inputType="text"
                         android:maxLength="4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                    android:id="@+id/okPhone"
+                    style="@style/SliceTitleStyle.Ok"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/okName" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    style="@style/SliceTitleStyle.Header"
+                    android:text="预留电话"
+                    app:layout_constraintBottom_toBottomOf="@+id/okPhone"
+                    app:layout_constraintStart_toEndOf="@id/okPhone"
+                    app:layout_constraintTop_toTopOf="@+id/okPhone" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/phoneLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="输入预留电话号码"
+                    style="@style/EditLayoutStyle"
+                    android:hint="@string/text_phone_hint"
                     android:maxLines="1"
                     app:counterMaxLength="11"
+                    app:layout_constraintBottom_toBottomOf="@id/tvPhone"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/nameLayout">
+                    app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                    app:layout_constraintTop_toTopOf="@id/tvPhone">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:imeOptions="actionNext"
                         android:id="@+id/etMobile"
-                        android:maxLines="1"
+                        style="@style/EditContentStyle"
+                        android:imeOptions="actionNext"
                         android:inputType="text"
                         android:maxLength="11"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <LinearLayout
-                    android:id="@+id/bottomLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
+                <com.apm29.yjw.demo.ui.widget.IconFontTextView
+                    android:id="@+id/okVerify"
+                    style="@style/SliceTitleStyle.Ok"
+                    android:layout_marginStart="8dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/phoneLayout">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/smsLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="输入验证码"
-                        app:counterMaxLength="6"
-                        android:maxLines="1">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etSms"
-                            android:maxLines="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:digits="0123456789"
-                            android:inputType="number" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.apm29.yjw.demo.ui.widget.CounterText
-                        android:id="@+id/tvSend"
-                        android:layout_gravity="end"
-                        android:text="发送验证码"
-                        style="@style/ButtonVerifySender" />
-                </LinearLayout>
+                    app:layout_constraintTop_toBottomOf="@id/okPhone" />
 
                 <TextView
-                    android:id="@+id/tvBank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="绑卡银行"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/bankCardLayout"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/bankSpinner" />
+                    android:id="@+id/tvVerify"
+                    style="@style/SliceTitleStyle.Header"
+                    android:text="验证码"
+                    app:layout_constraintBottom_toBottomOf="@+id/okVerify"
+                    app:layout_constraintStart_toEndOf="@id/okVerify"
+                    app:layout_constraintTop_toTopOf="@+id/okVerify" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/smsLayout"
+                    style="@style/EditLayoutStyle"
+                    app:layout_constraintStart_toStartOf="@id/barrierTitle"
+                    app:layout_constraintTop_toTopOf="@id/tvVerify"
+                    app:layout_constraintBottom_toBottomOf="@id/tvVerify"
+                    app:layout_constraintEnd_toStartOf="@id/tvSend"
+                    android:hint="@string/text_verify_hint"
+                    android:maxLines="1"
+                    app:counterMaxLength="6">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etSms"
+                        android:digits="0123456789"
+                        android:inputType="number"
+                        style="@style/EditContentStyle"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.apm29.yjw.demo.ui.widget.CounterText
+                    android:id="@+id/tvSend"
+                    style="@style/ButtonVerifySender"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvVerify"
+                    android:text="发送验证码" />
+
 
                 <Button
                     android:id="@+id/btnSubmit"
-                    android:layout_width="96dp"
-                    android:layout_height="60dp"
+                    style="@style/button_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/submit"
                     app:elevation="24dp"
-                    style="@style/button_default"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bottomLayout" />
+                    app:layout_constraintTop_toBottomOf="@id/okVerify" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.cardview.widget.CardView>
 

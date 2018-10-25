@@ -6,6 +6,7 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -45,7 +46,7 @@ class ImageInfoFromFragment : BaseFragment<InformationFormViewModel>() {
             if (data.filePath == null) {
                 toEditImage(data)
             } else {
-
+                toViewImage(data.type,position)
             }
         }
 
@@ -65,6 +66,20 @@ class ImageInfoFromFragment : BaseFragment<InformationFormViewModel>() {
         }
         holder.tvDebug?.text = data.imageUrl
         holder.checkStatus?.isChecked = data.imageUrl!=null
+    }
+
+    private fun toViewImage(type: Int,position: Int) {
+        val data = when(type){
+            IMAGE_TYPE_HOUSE->mDataHouse
+            IMAGE_TYPE_COMPANY->mDataCompany
+            IMAGE_TYPE_COUPLE_ID->mDataCoupleId
+            IMAGE_TYPE_ID->mDataId
+            IMAGE_TYPE_REGISTER_ACCOUNT->mDataRegisterAccount
+            IMAGE_TYPE_PROOF->mDataProof
+            IMAGE_TYPE_MARRIAGE->mDataMarriage
+            else-> null
+        }
+        navigateErrorHandled(R.id.photoViewFragment,bundleOf(KEY_DATA to data , KEY_POSITION to position))
     }
 
     private fun toEditImage(data: Photo) {

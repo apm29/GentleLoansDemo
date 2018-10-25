@@ -56,6 +56,7 @@ abstract class BaseViewModel : ViewModel(), ViewModelContract.IViewModel {
 
     override fun onCleared() {
         Log.d(tag, "cleared")
+        mDisposables.clear()
     }
 
     val locationPCACodeData:MutableLiveData<List<Province>> = MutableLiveData()

@@ -175,6 +175,12 @@ dependencies {
      */
     implementation 'com.amap.api:location:4.3.0'
 
+    /**
+     * photoView
+     * @href https://github.com/chrisbanes/PhotoView
+     */
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+
 }
 repositories {
     google()

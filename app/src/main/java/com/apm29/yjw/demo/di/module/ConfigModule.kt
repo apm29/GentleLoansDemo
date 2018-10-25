@@ -6,6 +6,7 @@ import android.util.Log
 import cn.jpush.android.api.JPushInterface
 import com.apm29.yjw.demo.app.exception.UserInfoExpiredException
 import com.apm29.yjw.demo.arch.user.UserManager
+import com.apm29.yjw.demo.model.BIZ
 import com.apm29.yjw.demo.model.BaseBean
 import com.apm29.yjw.gentleloansdemo.BuildConfig
 import com.facebook.stetho.okhttp3.StethoInterceptor
@@ -92,7 +93,7 @@ class ConfigModule {
                         jsonBuilder.append("\"").append("version_code").append("\"").append(":").append("\"").append(versionCode).append("\"").append(",")
                         jsonBuilder.append("\"").append("version_name").append("\"").append(":").append("\"").append(versionName).append("\"").append(",")
 
-                        jsonBuilder.append("\"").append("biz_content").append("\"").append(":").append(bizBuilder.toString())
+                        jsonBuilder.append("\"").append(BIZ).append("\"").append(":").append(bizBuilder.toString())
                         jsonBuilder.append("}")
 
                         printRequestBody(jsonBuilder.toString())
@@ -159,8 +160,11 @@ class ConfigModule {
     private val prettyGson: Gson = GsonBuilder().setPrettyPrinting().create()
     private val jp: JsonParser = JsonParser()
     private fun printRequestBody(json: String) {
-        val jsonElement = jp.parse(json)
-        println(prettyGson.toJson(jsonElement))
+        try {
+            val jsonElement = jp.parse(json)
+            println(prettyGson.toJson(jsonElement))
+        } catch (e: Exception) {
+        }
     }
 
 
@@ -180,7 +184,7 @@ class ConfigModule {
         }
         bizBuilder.append("}")
         //只有一个biz_content的时候直接返回原String
-        return if (formBody.size() == 1 && formBody.name(0).equals("biz_content", ignoreCase = true)) {
+        return if (formBody.size() == 1 && formBody.name(0).equals(BIZ, ignoreCase = true)) {
             StringBuilder(formBody.value(0))
         } else bizBuilder
     }

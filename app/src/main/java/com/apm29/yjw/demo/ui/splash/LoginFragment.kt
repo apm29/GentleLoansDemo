@@ -57,11 +57,12 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
 
 
         val stringBuilder = SpannableStringBuilder(textService.text)
-        stringBuilder.setSpan(object : ClickableSpan() {
-            override fun onClick(widget: View) {
-                showToast("没做!")
-            }
-        },
+        stringBuilder.setSpan(
+                object : ClickableSpan() {
+                    override fun onClick(widget: View) {
+                        toService()
+                    }
+                },
                 textService.text.indexOfFirst { it == '《' },
                 textService.text.indexOfFirst { it == '》' } + 1,
                 SpannableString.SPAN_INCLUSIVE_INCLUSIVE
@@ -101,6 +102,10 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
         textInputMobile.setText(UserManager.retrieveUserMobile())
     }
 
+    private fun toService() {
+        navigateErrorHandled(R.id.serviceProtocolFragment)
+    }
+
     override fun initData(savedInstanceState: Bundle?) {
         mViewModel.smsResult.observe(this, Observer {
             //showToast(msg = it.msg)
@@ -121,7 +126,8 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
             if (it.success() && !it.isDataExpired()) {
                 it?.getDataIfNotExpired()?.let { data -> UserManager.login(data) }
                 UserManager.saveUserMobile(textInputMobile.getTextOrEmpty())
-                mViewModel.profileVerify()
+                //mViewModel.profileVerify()
+                navigateToMain()
             } else if (!it.success()) {
                 textInputLayoutPass.error = it.msg
             }
@@ -134,6 +140,22 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
         })
     }
 
+    private fun navigateToMain() {
+        val transitionName = getString(R.string.app_icon)
+        val extras = FragmentNavigatorExtras(
+                imageViewLogo to transitionName
+        )
+        ViewCompat.setTransitionName(imageViewLogo, transitionName)
+
+        navigateErrorHandled(
+                R.id.mainFragment,
+                null,
+                navOptions {
+                    clearTask = true
+                },
+                extras
+        )
+    }
 
     private fun navigateToVerify(profile: ProfileBean) {
         val transitionName = getString(R.string.app_icon)
@@ -190,7 +212,6 @@ class LoginFragment : BaseFragment<DefaultFragmentViewModel>() {
         textInputLayoutMobile.error = null
         mViewModel.sendLoginVerifySMS(textInputMobile.getTextOrEmpty())
     }
-
 
 
 }

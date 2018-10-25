@@ -3,6 +3,7 @@ package com.apm29.yjw.demo.di.component
 import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.di.scope.ActivityScope
 import com.apm29.yjw.demo.ui.dialog.ImageEditFragment
+import com.apm29.yjw.demo.ui.dialog.PhotoViewFragment
 import com.apm29.yjw.demo.ui.form.information.*
 import com.apm29.yjw.demo.ui.form.register.ApplicantInfoFragment
 import com.apm29.yjw.demo.ui.form.register.FamilyAssetsFragment
@@ -14,6 +15,7 @@ import com.apm29.yjw.demo.ui.loan.LoanRepaymentScheduleFragment
 import com.apm29.yjw.demo.ui.main.*
 import com.apm29.yjw.demo.ui.main.MainFragment
 import com.apm29.yjw.demo.ui.splash.LoginFragment
+import com.apm29.yjw.demo.ui.splash.ServiceProtocolFragment
 import com.apm29.yjw.demo.ui.splash.SplashFragment
 import com.apm29.yjw.demo.ui.verify.PreVerifyFragment
 import com.apm29.yjw.demo.ui.verify.RealNameVerifyFragment
@@ -58,4 +60,6 @@ interface DefaultFragmentComponent {
     fun inject(loanScheduleFragment: LoanRepaymentScheduleFragment)
     fun inject(loanRepaymentRecordFragment: LoanRepaymentRecordFragment)
     fun inject(pushMessageListFragment: PushMessageListFragment)
+    fun inject(serviceProtocolFragment: ServiceProtocolFragment)
+    fun inject(photoViewFragment: PhotoViewFragment)
 }

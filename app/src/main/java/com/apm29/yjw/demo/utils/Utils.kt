@@ -5,13 +5,16 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -36,6 +39,7 @@ import com.tencent.bugly.crashreport.CrashReport
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
@@ -43,6 +47,17 @@ import java.io.IOException
 import java.io.InputStreamReader
 import java.text.DecimalFormat
 
+
+fun Fragment.getColorCompat(@ColorRes color:Int):Int{
+    return requireContext().getColorCompat(color)
+}
+fun Context.getColorCompat(@ColorRes color:Int):Int{
+    return ContextCompat.getColor(this,color)
+}
+
+fun Fragment.sp2Px(sp:Float):Float{
+    return sp*this.requireContext().resources.displayMetrics.density
+}
 
 fun Fragment.findHostNavController(): NavController? {
     return ActivityManager.findHostActivity()?.findNavController(R.id.app_host_fragment)
@@ -90,6 +105,14 @@ fun <T> Observable<T>.threadAutoSwitch(): Observable<T> {
     return this.compose(getThreadSchedulers())
 }
 
+fun <T> Observable<T>.addDispose(disposables: CompositeDisposable): Observable<T> {
+    return this
+            .doOnSubscribe {
+                disposables.add(it)
+            }
+
+}
+
 /**
  * 自动错误处理的订阅方法
  */
@@ -99,13 +122,21 @@ fun <T> Observable<T>.subscribeErrorHandled(
         mLoadingData: MutableLiveData<Boolean>?,
         onNextBlock: (T) -> Unit
 ) {
-    return this.subscribe(
-            object : ErrorHandledObserver<T>(errorData, responseErrorHandler, mLoadingData) {
-                override fun onNext(t: T) {
-                    onNextBlock(t)
-                }
+    return this
+            .doOnDispose {
+                mLoadingData?.value = false
             }
-    )
+            .doOnTerminate {
+                mLoadingData?.value = false
+            }
+            .subscribe(
+                    object : ErrorHandledObserver<T>(errorData, responseErrorHandler, mLoadingData) {
+                        override fun onNext(t: T) {
+                            onNextBlock(t)
+                            //mLoadingData?.value = false
+                        }
+                    }
+            )
 }
 
 /*--------------------------------------------------------------------------------*/
@@ -279,7 +310,7 @@ val mortgageList = arrayListOf("已抵押", "未抵押")
 val genderList = arrayListOf("男", "女")
 val maritalList = arrayListOf("未婚", "已婚", "离异", "丧偶")
 val staffList = arrayListOf("事业", "企业", "公务员")
-val payTypeList = arrayListOf( "等额本息","先息后本")
+val payTypeList = arrayListOf("等额本息", "先息后本")
 
 fun TextView.setupOneOptPicker(list: ArrayList<String>, defaultSelection: Int = -1, selectedOp: ((Int, String, View) -> Unit)? = null) {
     val pickerViewOption = OptionsPickerBuilder(context, OnOptionsSelectListener { options1, _, _, _ ->
@@ -492,17 +523,19 @@ fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeig
 }
 
 //double
-val formatter= DecimalFormat("#,##0.00")
-fun Double?.toStringDot2F():String{
-    if (this == null){
+val formatter = DecimalFormat("#,##0.00")
+
+fun Double?.toStringDot2F(): String {
+    if (this == null) {
         return formatter.format(0.00f)
     }
     return formatter.format(this)
 }
-fun Double?.hasNonZeroValue():Boolean{
-    return if(this == null){
+
+fun Double?.hasNonZeroValue(): Boolean {
+    return if (this == null) {
         false
-    }else{
+    } else {
         this > 0
     }
 }

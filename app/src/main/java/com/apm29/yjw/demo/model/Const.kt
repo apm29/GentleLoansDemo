@@ -31,3 +31,8 @@ const val PAGE_SIZE = 10
 val LOAN_RECORD = "loanrecord"
 val INFO = "info"
 val INDEX = "index"
+
+const val BIZ = "biz_content"
+
+const val KEY_DATA = "data_list"
+const val KEY_POSITION = "data_position"

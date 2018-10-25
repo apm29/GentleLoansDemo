@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.apm29.yjw.demo.arch.BaseViewModel
 import com.apm29.yjw.demo.model.*
 import com.apm29.yjw.demo.model.api.UserApi
+import com.apm29.yjw.demo.utils.addDispose
 import com.apm29.yjw.demo.utils.subscribeErrorHandled
 import com.apm29.yjw.demo.utils.threadAutoSwitch
 import io.reactivex.Observable
@@ -23,7 +24,7 @@ class RegisterFormViewModel : BaseViewModel() {
         )
     }
 
-    val assetsData: MutableLiveData<Pair<List<Estate>,List<Car>>> = MutableLiveData()
+    val assetsData: MutableLiveData<Pair<List<Estate>, List<Car>>> = MutableLiveData()
 
     fun assets() {
         //mock
@@ -35,21 +36,40 @@ class RegisterFormViewModel : BaseViewModel() {
                     }
                     list
                 }
-                .delay(2000,TimeUnit.MILLISECONDS)
+                .delay(2000, TimeUnit.MILLISECONDS)
                 .threadAutoSwitch()
-                .subscribeErrorHandled(mErrorData,mErrorHandlerImpl,mLoadingData){
+                .subscribeErrorHandled(mErrorData, mErrorHandlerImpl, mLoadingData) {
                     assetsData.value = it to arrayListOf()
                 }
 
     }
 
+    val applicantInfoPostResultData:MutableLiveData<Event<BaseBean<ApplicantInfoUploadResult>>> = MutableLiveData()
     fun postApplicantInfo(personalInfo: PersonalInfo) {
         mRetrofit.create(UserApi::class.java)
                 .personalInfo(mGson.toJson(personalInfo))
                 .threadAutoSwitch()
-                .subscribeErrorHandled(mErrorData,mErrorHandlerImpl,mLoadingData){
-                    mToastData.value = Event("进件ID:${it.peekData().applicationId}")
+                .addDispose(mDisposables)
+                .subscribeErrorHandled(mErrorData, mErrorHandlerImpl, mLoadingData) {
+                    applicantInfoPostResultData.value = Event(it)
                 }
+    }
+
+
+    val assetsPostResultData: MutableLiveData<Event<BaseBean<Any>>> = MutableLiveData()
+    fun postAssetsInfo(estates: List<Estate>, cars: List<Car>) {
+        mRetrofit.create(UserApi::class.java)
+                .saveAssetsInfo(
+                        mGson.toJson(AssetsPack(
+                                estates, cars
+                        ))
+                )
+                .addDispose(mDisposables)
+                .threadAutoSwitch()
+                .subscribeErrorHandled(mErrorData, mErrorHandlerImpl, mLoadingData) {
+                    assetsPostResultData.value = Event(it)
+                }
+
     }
 
 }

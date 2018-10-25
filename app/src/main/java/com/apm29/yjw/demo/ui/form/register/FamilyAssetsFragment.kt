@@ -18,6 +18,7 @@ import com.apm29.yjw.demo.di.module.DefaultFragmentModule
 import com.apm29.yjw.demo.model.Car
 import com.apm29.yjw.demo.model.Estate
 import com.apm29.yjw.demo.ui.list.adapter.AssetsAdapter
+import com.apm29.yjw.demo.utils.findHostNavController
 import com.apm29.yjw.demo.utils.mortgageList
 import com.apm29.yjw.demo.utils.setupOneOptPicker
 import com.apm29.yjw.demo.utils.showToast
@@ -49,6 +50,7 @@ class FamilyAssetsFragment : BaseFragment<RegisterFormViewModel>() {
 
         btnSave.setOnClickListener {
             showToast("saved:\n ${estateAdapter.list.size} \n ${carAdapter.list.size}")
+            mViewModel.postAssetsInfo(estateAdapter.list,carAdapter.list)
         }
     }
 
@@ -57,6 +59,16 @@ class FamilyAssetsFragment : BaseFragment<RegisterFormViewModel>() {
 
         mViewModel.assetsData.observe(this, Observer {
             setupList(it.first,it.second)
+        })
+
+        mViewModel.assetsPostResultData.observe(this, Observer {
+            it.getContentIfNotHandled {
+                result->
+                if (result?.success() == true){
+                    findHostNavController()?.popBackStack()
+                }
+                showToast(result?.msg)
+            }
         })
     }
     private fun bindEstateOperation(holder: AssetsHolder, estate: Estate, position: Int) {

@@ -72,6 +72,16 @@ class ApplicantInfoFragment : BaseFragment<RegisterFormViewModel>() {
             setInitValues(it)
         })
 
+        mViewModel.applicantInfoPostResultData.observe(this, Observer {
+            it.getContentIfNotHandled {
+                event->
+                showToast(event?.msg)
+                if (event?.success()==true){
+                    findHostNavController()?.popBackStack()
+                }
+            }
+        })
+
     }
 
     private fun verifyInput(): Verify {

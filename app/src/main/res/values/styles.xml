@@ -68,9 +68,11 @@
     <style name="EditContentStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:inputType">text</item>
-        <item name="android:gravity">center|end</item>
+        <item name="android:gravity">center|start</item>
         <item name="android:background">@null</item>
         <item name="android:textSize">15sp</item>
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:paddingEnd">6dp</item>
         <item name="android:layout_height">@dimen/SliceEditHeight</item>
     </style>
 
@@ -84,7 +86,6 @@
         <item name="android:minHeight">@dimen/SliceEditHeight</item>
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="hintAnimationEnabled">false</item>
         <item name="android:background">@null</item>
     </style>
 
@@ -135,11 +136,12 @@
         <item name="android:layout_marginEnd">6dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">end</item>
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:gravity">start</item>
     </style>
 
     <style name="SliceContent.Picker">
-        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:gravity">center_vertical|start</item>
         <item name="android:layout_marginEnd">6dp</item>
         <item name="android:layout_marginStart">6dp</item>
         <item name="android:layout_width">0dp</item>
@@ -149,14 +151,16 @@
         <item name="android:drawableEnd">@mipmap/down_arrow</item>
         <item name="android:drawablePadding">6dp</item>
         <item name="android:paddingEnd">6dp</item>
+        <item name="android:paddingStart">6dp</item>
     </style>
 
     <style name="SliceContent.PlainText">
-        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:gravity">center_vertical|start</item>
         <item name="android:layout_marginEnd">6dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/SliceEditHeight</item>
         <item name="android:paddingEnd">6dp</item>
+        <item name="android:paddingStart">6dp</item>
     </style>
 
     <style name="SliceContent.SuffixArrow">
